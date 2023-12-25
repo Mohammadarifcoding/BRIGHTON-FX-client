@@ -5,6 +5,7 @@ import Commitment from "./Commitment/Commitment";
 import CompareCurrencies from "./CompareCurrencies/CompareCurrencies";
 import Download from "./Download/Download";
 import Features from "./Features/Features";
+import StoreFind from "./StoreFind/StoreFind";
 
 
 const Home = () => {
@@ -14,7 +15,9 @@ const Home = () => {
             <Commitment></Commitment>
             <Features></Features>
             <CompareCurrencies></CompareCurrencies>
+            <StoreFind></StoreFind>
             <Download></Download>
+            
         </div>
     );
 };
