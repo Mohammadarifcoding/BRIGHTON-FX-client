@@ -1,6 +1,7 @@
-import Container from "../../Shared/Container/Container";
+
+import Container from "../../../Shared/Container/Container";
 import FeatureCard from "./Reuse/FeatureCard";
-import FeatureSection from "./Reuse/FeatureCard";
+
 
 const Features = () => {
   const data = [{

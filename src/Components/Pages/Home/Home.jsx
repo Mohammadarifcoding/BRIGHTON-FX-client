@@ -1,6 +1,9 @@
-import Commitment from "../Commitment/Commitment";
-import Features from "../Features/Features";
+
+
 import Banner from "./Banner/Banner";
+import Commitment from "./Commitment/Commitment";
+import CompareCurrencies from "./CompareCurrencies/CompareCurrencies";
+import Features from "./Features/Features";
 
 
 const Home = () => {
@@ -9,6 +12,7 @@ const Home = () => {
             <Banner></Banner>
             <Commitment></Commitment>
             <Features></Features>
+            <CompareCurrencies></CompareCurrencies>
         </div>
     );
 };

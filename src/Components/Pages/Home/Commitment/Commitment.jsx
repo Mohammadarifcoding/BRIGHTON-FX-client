@@ -1,5 +1,5 @@
 import { MdOutlineDone } from "react-icons/md";
-import Container from "../../Shared/Container/Container";
+import Container from "../../../Shared/Container/Container";
 const Commitment = () => {
     return (
         <div className="bg-[#1E4A9A]">
