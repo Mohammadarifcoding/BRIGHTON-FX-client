@@ -4,7 +4,7 @@ import Navbar from "../Components/Shared/Navbar/Navbar";
 
 const Layout = () => {
     return (
-        <div>
+        <div className="overflow-hidden">
             <Navbar></Navbar>
             <Home></Home>
         </div>
