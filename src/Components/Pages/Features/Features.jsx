@@ -1,27 +1,43 @@
 import Container from "../../Shared/Container/Container";
+import FeatureCard from "./Reuse/FeatureCard";
+import FeatureSection from "./Reuse/FeatureCard";
 
 const Features = () => {
-  return (
-    <div className="bg-gray-100 mb-10  py-20">
-      <Container>
-        <div className="flex lg:flex-row flex-col container mx-auto items-center ">
-          <div className="">
-            <h2 className="text-[#4A54A4] lg:text-3xl font-semibold sm:text-2xl text-xl lg:text-start text-center">
-              Doorstep Currency Delivery for Travel Ease
-            </h2>
-            <p className="text-gray-800 lg:text-xl md:text-lg text-base lg:text-start text-center max-w-[600px] mt-4 lg:ml-0 lg:mr-auto mx-auto">
-              Experience effortless rate locking online for top travel exchange.
-              Convenient collection at our extensive No1 Currency network
-              throughout the UK.
-            </p>
-          </div>
+  const data = [{
+    icon : '/Images/city.png',
+    feature : [
+      'Reserve online, pay and collect in store',
+      'Enhanced web rates',
+      '0% commission'
+    ]
+  },{
+    icon : '/Images/deal.png',
+    feature : [
+      'Order online and we’ll deliver  to your door',
+      'FREE delivery on all orders £800 or more',
+      '0% commission'
+    ]
+  }]
 
-          <div className="mx-auto max-w-[400px] flex justify-center ">
-            <img className="w-full h-full flex justify-center items-center" src="/public/Images/click_sell_blue-removebg-preview.png" alt="" />
-          </div>
-        </div>
-      </Container>
-    </div>
+
+  return (
+<div>
+    {/* {
+        data?.map(item => <FeatureSection key={item.title} data={item} direction={true}></FeatureSection>)
+    } */}
+
+
+<div className={`bg-gray-100 mb-10  py-20`}>
+        <Container>
+            <div className="flex justify-center gap-20 items-center flex-wrap">
+              {
+                data.map(item => <FeatureCard key={item.icon} data={item}></FeatureCard>)
+              }
+            </div>
+        </Container>
+      </div>
+    
+</div>
   );
 };
 
