@@ -30,6 +30,7 @@ const Features = () => {
 
 <div className={`bg-gray-100 mb-10  py-20`}>
         <Container>
+          <h2 className="sm:text-2xl text-xl mb-10 text-[#1E4A9A] sm:text-start text-center font-medium">More ways to get travel Money</h2>
             <div className="flex justify-center gap-20 items-center flex-wrap">
               {
                 data.map(item => <FeatureCard key={item.icon} data={item}></FeatureCard>)
