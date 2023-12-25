@@ -23,7 +23,7 @@ const CompareCurrencies = () => {
     return (
       <div style={{
         backgroundImage:'url(/Images/currencyBg.jpg)'
-      }} className=" bg-cover bg-center min-h-[300px] mt-20 h-full w-full">
+      }} className=" bg-cover bg-center min-h-[300px]  mb-28 h-full w-full">
           <Container>
             <div className='py-20'>
             <h2 className='lg:text-3xl text-2xl text-[#1E4A9A] font-medium lg:text-start text-center'>Compare our rates</h2>
