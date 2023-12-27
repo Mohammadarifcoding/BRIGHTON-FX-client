@@ -11,3 +11,8 @@
 .bigScreen-navitem a.active{
     border-bottom: 2px solid #4A54A4;
 }
+
+.react-tabs__tab--selected{
+    color: white !important;
+    background-color: #1E4A9A !important;
+}

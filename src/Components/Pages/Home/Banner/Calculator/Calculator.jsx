@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import CalculatorTab from './CalculatorTab/CalculatorTab';
 
 
 const Calculator = () => {
@@ -20,19 +21,21 @@ const Calculator = () => {
     return (
         <div className="flex flex-col">
              <Tabs>
-    <TabList className='flex '>
+    <TabList className='flex rounded-t-lg'>
         {
-            data.map(item => <Tab  className={`text-[#1E4A9A] ${item.id == 0 ? 'rounded-tl-lg':'rounded-tr-lg'} bg-white px-9 py-5 `} key={item.id}>{item.name}</Tab>)
+            data.map((item,ind) => <Tab style={{
+                borderRadius: activeTab == ind ? '8px 0 0 0 ':'0 8px 0 0',
+            }} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  px-9 py-4 `} key={item.id}>{item.name}</Tab>)
         }
       
 
     </TabList>
 
     <TabPanel>
-      <h2>Any content 1</h2>
+      <CalculatorTab></CalculatorTab>
     </TabPanel>
     <TabPanel>
-      <h2>Any content 2</h2>
+    <CalculatorTab></CalculatorTab>
     </TabPanel>
   </Tabs>
         </div>
