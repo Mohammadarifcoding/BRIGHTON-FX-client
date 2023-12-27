@@ -13,7 +13,7 @@ const FeatureCard = ({data}) => {
   return (
       <div className='max-w-[350px] flex flex-col bg-white shadow-lg'>
 <div className='px-24 py-10 bg-[#93C94E]'>
-           <img className='w-[80px]' src={icon} alt="" />
+           <img className='w-[150px]  ' src={icon} alt="" />
         </div>
         <div className="px-4 py-3">
         <div className="flex flex-col gap-5">
