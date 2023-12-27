@@ -24,18 +24,18 @@ const Calculator = () => {
     <TabList className='flex rounded-t-lg'>
         {
             data.map((item,ind) => <Tab style={{
-                borderRadius: activeTab == ind ? '8px 0 0 0 ':'0 8px 0 0',
-            }} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  sm:px-9 sm:py-4 px-5 py-3 `} key={item.id}>{item.name}</Tab>)
+                borderRadius: 0 == ind ? ' 8px 0 0 0 ':'0 8px 0 0 ',
+            }} onClick={()=>{setActiveTab(ind)}} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  sm:px-9 sm:py-4 px-5 py-3 `} key={item.id}>{item.name}</Tab>)
         }
       
 
     </TabList>
 
     <TabPanel>
-      <CalculatorTab></CalculatorTab>
+      <CalculatorTab item={0}></CalculatorTab>
     </TabPanel>
     <TabPanel>
-    <CalculatorTab></CalculatorTab>
+    <CalculatorTab item={1}></CalculatorTab>
     </TabPanel>
   </Tabs>
         </div>
