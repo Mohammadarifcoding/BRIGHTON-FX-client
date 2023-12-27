@@ -19,13 +19,13 @@ const Calculator = () => {
 
 
     return (
-        <div className="flex flex-col">
-             <Tabs>
+        <div className="flex flex-col max-w-[350px]">
+             <Tabs >
     <TabList className='flex rounded-t-lg'>
         {
             data.map((item,ind) => <Tab style={{
                 borderRadius: activeTab == ind ? '8px 0 0 0 ':'0 8px 0 0',
-            }} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  px-9 py-4 `} key={item.id}>{item.name}</Tab>)
+            }} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  sm:px-9 sm:py-4 px-5 py-3 `} key={item.id}>{item.name}</Tab>)
         }
       
 
