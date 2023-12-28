@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import CalculatorTab from './CalculatorTab/CalculatorTab';
+import CalculatorTabTwo from './CalculatorTab/CalculatorTabTwo';
 
 
 const Calculator = () => {
@@ -35,7 +36,7 @@ const Calculator = () => {
       <CalculatorTab item={0}></CalculatorTab>
     </TabPanel>
     <TabPanel>
-    <CalculatorTab item={1}></CalculatorTab>
+    <CalculatorTabTwo></CalculatorTabTwo>
     </TabPanel>
   </Tabs>
         </div>
