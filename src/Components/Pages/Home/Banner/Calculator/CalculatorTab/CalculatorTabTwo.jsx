@@ -5,28 +5,53 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const CalculatorTabTwo = () => {
+  // let curenc?.info?.rate = 53
   const [currencyData, setCurrencyData] = useState({
     value: "BDT",
     label: "Bangladeshi Taka",
   });
 
-  const [youSell,setYouSell] = useState('')
+  const [youSell,setYouSell] = useState(0)
 
   
   const {data:curenc} = useQuery({
     queryKey:['currrency',currencyData.value],
     queryFn:async()=>{
-     const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=USD&from=${currencyData.value}&amount=1`,{
+     const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=USD&amount=1`,{
         headers:
         {
-          apikey:'KmKJ3ijUubXdO1syZqfFF7FdMofXWM2u'
+          apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
         }
       })
       return fetchData.data
     }
   })
 
-  console.log(curenc?.info?.rate)
+  // console.log(curenc?.info?.rate || 53)
+
+  const [buyCurrency,setBuyCurrency] = useState(0)
+
+  // useEffect(()=>{
+   
+  //     setBuyCurrency(Math.round(curenc?.info?.rate * youSell))
+   
+    
+  // },[youSell])
+
+  
+
+ const handleSellamountChange =(e)=>{
+          console.log(e.target.value)
+          
+          setBuyCurrency(e.target.value)
+          setYouSell((e.target.value/curenc?.info?.rate).toFixed(2))
+ }
+
+ const handleyouBuyamountCurrency=(e)=>{
+  console.log(e.target.value)
+  setYouSell(e.target.value)
+  setBuyCurrency((curenc?.info?.rate * e.target.value).toFixed(2))
+ }
 
 
 
@@ -52,8 +77,11 @@ const CalculatorTabTwo = () => {
                 {currencyData.value}
               </h2>
               <input
+              onChange={handleSellamountChange}
+              value={buyCurrency}
                 placeholder="0.0000"
                 type="number"
+                min="0"
                 className="border sm:max-w-[95px] w-full  px-3 focus:outline-none "
               />
             </div>
@@ -68,16 +96,25 @@ const CalculatorTabTwo = () => {
               USD
               </h2>
               <input
+              onChange={handleyouBuyamountCurrency}
+              value={youSell}
                 placeholder="0.0000"
                 type="number"
+                min="0"
                 className="border sm:max-w-[95px] w-full  px-3 focus:outline-none "
               />
             </div>
           </div>
         </div>
       </div>
-
-     
+      <div className="mt-5 text-center font-semibold">
+        <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
+        <h2 className="mt-3 text-lg">1 USD = {(curenc?.info?.rate ?? 1).toFixed(3)} {currencyData.value}</h2>
+        <p className="text-[12px] font-normal mt-2">Online rate only - rates in branch will differ</p>
+      </div>
+      <div className="flex mt-3">
+          <button className="btn w-full">Sell Money</button>
+     </div>
     </div>
   );
 };
