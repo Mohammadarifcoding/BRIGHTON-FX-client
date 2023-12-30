@@ -1,5 +1,6 @@
 
 
+import Accordin from "./Accordin/Accordin";
 import Banner from "./Banner/Banner";
 import Commitment from "./Commitment/Commitment";
 import CompareCurrencies from "./CompareCurrencies/CompareCurrencies";
@@ -15,7 +16,8 @@ const Home = () => {
             <Commitment></Commitment>
             <Features></Features>
             <StoreFind></StoreFind>
-            <CompareCurrencies></CompareCurrencies>           
+            <CompareCurrencies></CompareCurrencies> 
+            <Accordin></Accordin>          
             <Download></Download>
             
         </div>
