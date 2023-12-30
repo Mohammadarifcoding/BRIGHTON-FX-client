@@ -1,28 +1,32 @@
 import Select from "react-select";
 import currency from "../../../../../../../public/Data/Currency";
+import React from 'react';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const CalculatorTab = () => {
-  // let curenc?.info?.rate = 53
+  let NowAmount = 53
   const [currencyData, setCurrencyData] = useState({
     value: "BDT",
     label: "Bangladeshi Taka",
   });
-    const {data:curenc} = useQuery({
-    queryKey:['currrency',currencyData.value],
-    queryFn:async()=>{
-     const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=USD&amount=1`,{
-        headers:
-        {
-          apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
-        }
-      })
-      return fetchData.data
-    }
-  })
-  console.log(curenc?.info?.rate)
+  //   const {data:curenc} = useQuery({
+  //   queryKey:['currrency',currencyData.value],
+  //   queryFn:async()=>{
+  //    const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=USD&amount=1`,{
+  //       headers:
+  //       {
+  //         apikey:'Y4iiOILEHR2RSoNxWq5O8w0NjWRXP5iU'
+  //       }
+  //     })
+  //     return fetchData.data
+  //   }
+  // })
+  console.log(NowAmount)
 
 
   const [youSell,setYouSell] = useState(0)
@@ -41,13 +45,13 @@ const CalculatorTab = () => {
   //   }
   // })
 
-  // console.log(curenc?.info?.rate || 53)
+  // console.log(NowAmount || 53)
 
   const [buyCurrency,setBuyCurrency] = useState(0)
 
   // useEffect(()=>{
    
-  //     setBuyCurrency(Math.round(curenc?.info?.rate * youSell))
+  //     setBuyCurrency(Math.round(NowAmount * youSell))
    
     
   // },[youSell])
@@ -58,13 +62,47 @@ const CalculatorTab = () => {
           console.log(e.target.value)
           
           setBuyCurrency(e.target.value)
-          setYouSell((e.target.value/curenc?.info?.rate).toFixed(2))
+          setYouSell((e.target.value/(NowAmount * 1.025)).toFixed(2))
  }
 
  const handleyouBuyamountCurrency=(e)=>{
   console.log(e.target.value)
   setYouSell(e.target.value)
-  setBuyCurrency((curenc?.info?.rate * e.target.value).toFixed(2))
+  setBuyCurrency((NowAmount * 1.025* e.target.value).toFixed(2))
+ }
+
+ const handleBuying = ()=>{
+  const currencyMy = youSell
+  const currencyTake = buyCurrency
+  const currentFull = {currencyMy,currencyTake}
+  if(currencyMy <= 0 ){
+    return toast('Please give correct amount')
+  }
+  if(currencyTake <= 0){
+   return toast('Please give correct amount')
+  }
+ 
+  const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+  if(localStorageData){
+    if(localStorageData?.length >= 4){
+      return toast('Please clear your cart')
+    }
+    
+    const totalData = [...localStorageData , currentFull]
+    localStorage.setItem('purchase',JSON.stringify(totalData))
+    setYouSell(0)
+    setBuyCurrency(0)
+  }
+  else{
+    const totalData = [currentFull]
+    console.log(totalData)
+    localStorage.setItem('purchase',JSON.stringify(totalData))
+    setYouSell(0)
+    setBuyCurrency(0)
+  }
+
+ 
+  
  }
 
   return (
@@ -123,12 +161,13 @@ const CalculatorTab = () => {
 
       <div className="mt-5 text-center font-semibold">
         <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
-        <h2 className="mt-3 text-lg">1 USD = {(curenc?.info?.rate ?? 1).toFixed(3)} {currencyData.value}</h2>
+        <h2 className="mt-3 text-lg">1 USD = {((NowAmount ?? 1)* 1.025).toFixed(3)} {currencyData.value}</h2>
         <p className="text-[12px] font-normal mt-2">Online rate only - rates in branch will differ</p>
       </div>
-     <div className="flex mt-3">
+     <div onClick={handleBuying} className="flex mt-3">
           <button className="btn w-full">Buy Money</button>
      </div>
+   <ToastContainer></ToastContainer>
     </div>
   );
 };

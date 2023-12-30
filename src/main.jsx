@@ -9,18 +9,10 @@ import {
 import Layout from './Layout/Layout';
 import Home from './Components/Pages/Home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import router from './Components/Route/Route';
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element:<Layout></Layout>,
-    children:[{
-      path:'/',
-      element:<Home></Home>
-    }]
-  },
-]);
+
 
 
 const queryClient = new QueryClient()
