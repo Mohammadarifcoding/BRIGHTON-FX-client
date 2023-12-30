@@ -3,9 +3,12 @@ import currency from "../../../../../../../public/Data/Currency";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CalculatorTabTwo = () => {
   let NowAmount = 53
+  const nav = useNavigate()
   const [currencyData, setCurrencyData] = useState({
     value: "BDT",
     label: "Bangladeshi Taka",
@@ -51,6 +54,45 @@ const CalculatorTabTwo = () => {
   console.log(e.target.value)
   setYouSell(e.target.value)
   setBuyCurrency(((NowAmount * 1.025)* e.target.value).toFixed(2))
+ }
+
+ const handleSelling = ()=>{
+  const currencyMy = youSell
+  const currencyTake = buyCurrency
+  const currentFull = {currencyMy,currencyTake,currencyTakecurrent:'USD',currencyMycurrent:currencyData.value}
+  if(currencyMy <= 0 ){
+    nav('/purchase')
+    return toast('Please give correct amount')
+  }
+  if(currencyTake <= 0){
+    nav('/purchase')
+   return toast('Please give correct amount')
+  }
+ 
+  const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+  if(localStorageData){
+    if(localStorageData?.length >= 4){
+      nav('/purchase')
+      return toast('Please clear your cart')
+    }
+    
+    const totalData = [...localStorageData , currentFull]
+    localStorage.setItem('purchase',JSON.stringify(totalData))
+    setYouSell(0)
+    setBuyCurrency(0)
+    nav('/purchase')
+  }
+  else{
+    const totalData = [currentFull]
+    console.log(totalData)
+    localStorage.setItem('purchase',JSON.stringify(totalData))
+    setYouSell(0)
+    setBuyCurrency(0)
+    nav('/purchase')
+  }
+
+ 
+  
  }
 
 
@@ -113,7 +155,7 @@ const CalculatorTabTwo = () => {
         <p className="text-[12px] font-normal mt-2">Online rate only - rates in branch will differ</p>
       </div>
       <div className="flex mt-3">
-          <button className="btn w-full">Sell Money</button>
+          <button onClick={handleSelling} className="btn w-full">Sell Money</button>
      </div>
     </div>
   );

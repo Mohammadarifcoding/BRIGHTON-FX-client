@@ -6,10 +6,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CalculatorTab = () => {
   let NowAmount = 53
+  const nav = useNavigate()
   const [currencyData, setCurrencyData] = useState({
     value: "BDT",
     label: "Bangladeshi Taka",
@@ -74,17 +77,20 @@ const CalculatorTab = () => {
  const handleBuying = ()=>{
   const currencyMy = youSell
   const currencyTake = buyCurrency
-  const currentFull = {currencyMy,currencyTake}
+  const currentFull = {currencyMy,currencyTake,currencyMycurrent:'USD',currencyTakecurrent:currencyData.value}
   if(currencyMy <= 0 ){
+    nav('/purchase')
     return toast('Please give correct amount')
   }
   if(currencyTake <= 0){
+    nav('/purchase')
    return toast('Please give correct amount')
   }
- 
+   
   const localStorageData = JSON.parse(localStorage.getItem('purchase'))
   if(localStorageData){
     if(localStorageData?.length >= 4){
+      nav('/purchase')
       return toast('Please clear your cart')
     }
     
@@ -92,6 +98,7 @@ const CalculatorTab = () => {
     localStorage.setItem('purchase',JSON.stringify(totalData))
     setYouSell(0)
     setBuyCurrency(0)
+    nav('/purchase')
   }
   else{
     const totalData = [currentFull]
@@ -99,6 +106,7 @@ const CalculatorTab = () => {
     localStorage.setItem('purchase',JSON.stringify(totalData))
     setYouSell(0)
     setBuyCurrency(0)
+    nav('/purchase')
   }
 
  
