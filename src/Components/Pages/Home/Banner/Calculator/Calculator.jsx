@@ -20,7 +20,7 @@ const Calculator = () => {
 
 
     return (
-        <div className="flex flex-col max-w-[350px]">
+        <div className="flex flex-col ">
              <Tabs >
     <TabList className='flex rounded-t-lg'>
         {

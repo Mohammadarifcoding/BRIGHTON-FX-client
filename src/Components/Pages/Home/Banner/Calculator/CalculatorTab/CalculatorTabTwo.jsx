@@ -10,8 +10,8 @@ const CalculatorTabTwo = () => {
   // let curenc?.info?.rate = 53
   const nav = useNavigate()
   const [currencyData, setCurrencyData] = useState({
-    value: "BDT",
-    label: "Bangladeshi Taka",
+    value:'AED',
+    label:'United Arab Emirates Dirham'
   });
 
   const [youSell,setYouSell] = useState(0)
@@ -98,7 +98,7 @@ const CalculatorTabTwo = () => {
 
 
   return (
-    <div className="bg-white px-7 py-5">
+    <div className="bg-white px-7 py-5 rounded-b-xl">
       <label className="text-[14px] " htmlFor="Currency">
         Select Currency
       </label>
@@ -152,7 +152,7 @@ const CalculatorTabTwo = () => {
       <div className="mt-5 text-center font-semibold">
         <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
         <h2 className="mt-3 text-lg">1 USD = {((curenc?.info?.rate ?? 1)*1.025).toFixed(3)} {currencyData.value}</h2>
-        <p className="text-[12px] font-normal mt-2">Online rate only - rates in branch will differ</p>
+        
       </div>
       <div className="flex mt-3">
           <button onClick={handleSelling} className="btn w-full">Sell Money</button>

@@ -1,13 +1,15 @@
 import { FaFacebookF, FaInstagram, FaMapLocationDot, FaPhoneVolume, FaXTwitter } from "react-icons/fa6";
 import { IoIosMail } from "react-icons/io";
 import { TiSocialLinkedin } from "react-icons/ti";
+import Container from "../Container/Container";
 
 const Footer = () => {
     return (
         <div>
         {
 <footer className="bg-gray-800 text-white  pt-24 mt-24">
- <div className="container mx-auto ">
+    <Container>
+  <div className="container mx-auto ">
    <div className="flex flex-wrap justify-between">
      <div className="w-full md:w-1/2 lg:w-1/4 mb-4 md:mb-0">
        <h2 className="text-2xl font-bold mb-3">CORPORATE</h2>
@@ -107,7 +109,9 @@ const Footer = () => {
    </div>
    
    </div>
- </div>
+ </div>      
+    </Container>
+ 
 </footer>
 }
 

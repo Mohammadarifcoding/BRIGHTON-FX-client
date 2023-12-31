@@ -14,8 +14,8 @@ const CalculatorTab = () => {
   // let curenc?.info?.rate = 53
   const nav = useNavigate()
   const [currencyData, setCurrencyData] = useState({
-    value: "BDT",
-    label: "Bangladeshi Taka",
+    value:'AED',
+    label:'United Arab Emirates Dirham'
   });
     const {data:curenc} = useQuery({
     queryKey:['currrency',currencyData.value],
@@ -115,7 +115,7 @@ const CalculatorTab = () => {
  }
 
   return (
-    <div className="bg-white px-7 py-5">
+    <div className="bg-white px-7 py-5 max-w-[350px] rounded-b-xl">
       <label className="text-[14px] " htmlFor="Currency">
         Select Currency
       </label>
@@ -124,7 +124,7 @@ const CalculatorTab = () => {
           setCurrencyData(e);
         }}
         value={currencyData}
-        className="text-[12px] mt-4"
+        className="text-[12px] mt-4 w-full max-w-[350px]"
         options={currency}
       />
        <div className="flex sm:flex-row flex-col justify-between">
@@ -171,7 +171,7 @@ const CalculatorTab = () => {
       <div className="mt-5 text-center font-semibold">
         <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
         <h2 className="mt-3 text-lg">1 USD = {((curenc?.info?.rate ?? 1)* 1.025).toFixed(3)} {currencyData.value}</h2>
-        <p className="text-[12px] font-normal mt-2">Online rate only - rates in branch will differ</p>
+       
       </div>
      <div onClick={handleBuying} className="flex mt-3">
           <button className="btn w-full">Buy Money</button>
