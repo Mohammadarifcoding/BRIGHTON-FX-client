@@ -18,7 +18,7 @@ const CurrencyChart = () => {
           <h2 className="font-semibold gap-3 text-white text-xl">
             Enter a currency name
           </h2>
-          <div className="max-w-[400px] w-full md:mt-0 mt-4">
+          <div className="max-w-[400px]  w-full md:mt-0 mt-4">
             <input
               placeholder="Enter currency name"
               type="text"
