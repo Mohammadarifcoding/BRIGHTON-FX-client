@@ -1,5 +1,6 @@
 
 
+import CurrencyChart from "../../Shared/CurrencyChart/CurrencyChart";
 import Accordin from "./Accordin/Accordin";
 import Banner from "./Banner/Banner";
 import Commitment from "./Commitment/Commitment";
@@ -14,6 +15,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Commitment></Commitment>
+            <CurrencyChart></CurrencyChart>
             <Features></Features>
             <StoreFind></StoreFind>
             <CompareCurrencies></CompareCurrencies> 
