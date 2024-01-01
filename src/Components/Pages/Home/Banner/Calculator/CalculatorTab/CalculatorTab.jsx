@@ -35,30 +35,11 @@ const CalculatorTab = () => {
 
   const [youSell,setYouSell] = useState(0)
 
-  
-  // const {data:curenc} = useQuery({
-  //   queryKey:['currrency',currencyData.value],
-  //   queryFn:async()=>{
-  //    const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=USD&amount=1`,{
-  //       headers:
-  //       {
-  //         apikey:'KmKJ3ijUubXdO1syZqfFF7FdMofXWM2u'
-  //       }
-  //     })
-  //     return fetchData.data
-  //   }
-  // })
 
-  // console.log(curenc?.info?.rate || 53)
 
   const [buyCurrency,setBuyCurrency] = useState(0)
 
-  // useEffect(()=>{
-   
-  //     setBuyCurrency(Math.round(curenc?.info?.rate * youSell))
-   
-    
-  // },[youSell])
+
 
   
 

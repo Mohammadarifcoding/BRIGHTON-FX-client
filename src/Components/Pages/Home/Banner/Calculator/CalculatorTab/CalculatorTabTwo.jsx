@@ -31,16 +31,7 @@ const CalculatorTabTwo = () => {
     }
   })
 
-  // console.log(curenc?.info?.rate || 53)
-
   const [buyCurrency,setBuyCurrency] = useState(0)
-
-  // useEffect(()=>{
-   
-  //     setBuyCurrency(Math.round(curenc?.info?.rate * youSell))
-   
-    
-  // },[youSell])
 
   
 

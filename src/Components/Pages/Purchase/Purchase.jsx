@@ -3,6 +3,7 @@ import Container from "../../Shared/Container/Container";
 import { IoIosArrowForward } from "react-icons/io";
 import currency from "../../../../public/Data/Currency";
 import OrderSummary from "./OrderSummary/OrderSummary";
+import AddProduct from "./AddProduct/AddProduct";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
@@ -102,51 +103,7 @@ const Purchase = () => {
 
         {/* Add Currency */}
 
-        <div className=" lg:mt-20 mt-14">
-          <div className="">
-            <h2 className="text-[#4A53A4]  font-medium sm:text-2xl text-2xl  ">
-              Add Currency{" "}
-              <span className="text-gray-400"> (maximum 4 currency)</span>
-            </h2>
-            <div className="flex items-center  flex-col md:flex-row mt-10 gap-10">
-              <div className=" md:w-1/2 w-full">
-                <h2 className="text-gray-500 text-lg">Total money</h2>
-                <input
-                  type="text"
-                  className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500"
-                />
-              </div>
-              <div className=" md:w-1/2 w-full">
-                <h2 className="text-gray-500 text-lg">Select Currency</h2>
-
-                <select className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
-                  {currency.map((item) => (
-                    <option value={item.value}>{item.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div className=" md:w-1/2 w-full">
-                <h2 className="text-gray-500 text-lg">FX Amount</h2>
-                <input
-                  type="text"
-                  className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500"
-                />
-              </div>
-              <div className=" md:w-1/2 w-full">
-                <h2 className="text-gray-500 text-lg">Rate</h2>
-                <input
-                  type="text"
-                  className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500"
-                />
-              </div>
-              <div className=" lg:mt-8 flex lg:justify-center justify-end">
-                <button className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
-                  Add <span> + </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AddProduct></AddProduct>
       </div>
     </Container>
   );
