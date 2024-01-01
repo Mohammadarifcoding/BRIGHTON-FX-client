@@ -1,7 +1,7 @@
 import Select from "react-select";
 import currency from "../../../../../../../public/Data/Currency";
 import React from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ const CalculatorTab = () => {
     const {data:curenc} = useQuery({
     queryKey:['currrency',currencyData.value],
     queryFn:async()=>{
-     const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=USD&amount=1`,{
+     const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`,{
         headers:
         {
           apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
@@ -78,7 +78,7 @@ const CalculatorTab = () => {
  const handleBuying = ()=>{
   const currencyMy = youSell
   const currencyTake = buyCurrency
-  const currentFull = {currencyMy,currencyTake,currencyMycurrent:'USD',currencyTakecurrent:currencyData.value}
+  const currentFull = {currencyMy,currencyTake,currencyMycurrent:'GBP',currencyTakecurrent:currencyData.value,Id:uuidv4(),Rate:curenc?.info?.rate}
   if(currencyMy <= 0 ){
     nav('/purchase')
     return toast('Please give correct amount')
@@ -133,7 +133,7 @@ const CalculatorTab = () => {
             <h2 className="text-sm">I have</h2>
             <div className="flex  text-[12px] mt-2">
               <h2 className="px-3 bg-gray-200 py-2 rounded-l-lg">
-                USD
+              GBP
               </h2>
               <input
                 onChange={handleyouBuyamountCurrency}
@@ -170,7 +170,7 @@ const CalculatorTab = () => {
 
       <div className="mt-5 text-center font-semibold">
         <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
-        <h2 className="mt-3 text-lg">1 USD = {((curenc?.info?.rate ?? 1)* 1.025).toFixed(3)} {currencyData.value}</h2>
+        <h2 className="mt-3 text-lg">1 GBP = {((curenc?.info?.rate ?? 1)* 1.025).toFixed(3)} {currencyData.value}</h2>
        
       </div>
      <div onClick={handleBuying} className="flex mt-3">

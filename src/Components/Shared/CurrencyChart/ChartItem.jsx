@@ -8,7 +8,7 @@ const ChartItem = ({item}) => {
     const {data:curenc} = useQuery({
         queryKey:[`currrency${item?.value}`],
         queryFn:async()=>{
-         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=USD&amount=1`,{
+         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`,{
             headers:
             {
               apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'

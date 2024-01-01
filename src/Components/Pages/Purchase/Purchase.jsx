@@ -2,6 +2,7 @@ import { useState } from "react";
 import Container from "../../Shared/Container/Container";
 import { IoIosArrowForward } from "react-icons/io";
 import currency from "../../../../public/Data/Currency";
+import OrderSummary from "./OrderSummary/OrderSummary";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
@@ -63,29 +64,29 @@ const Purchase = () => {
         </div>
 
         {/* Order Summary */}
-       {purchaseData?.length && <div className=" lg:mt-32 mt-14">
+       {/* {purchaseData?.length && <div className=" lg:mt-32 mt-14">
           <div className="">
             <h2 className="text-[#4A53A4]  font-medium sm:text-2xl text-2xl  ">
               Order Summary{" "}
             </h2>
             <div className="flex items-center  flex-col  mt-10 gap-3">
               {purchaseData?.map((item) => (
-                <div key={item} className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2  bg-gray-200 items-center w-full justify-between gap-6 p-3">
+                <div onClick={(id)=>{handleDelete(item.id)}} key={item} className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2  bg-gray-200 items-center w-full justify-between gap-6 p-3">
                   <div className="flex gap-5 items-center ">
                     <h2 className="px-3 bg-gray-500 text-white py-2 rounded-md">
-                      {currencyData.value}
+                    {item.currencyMycurrent}
                     </h2>
-                    <h2 className="text-lg">24000.99 BDT</h2>
+                    <h2 className="text-lg">{item.currencyMy} {item.currencyMycurrent}</h2>
                   </div>
                   <div className="text-lg text-center">
-                    <h2>Rate 1.9534</h2>
+                    <h2>Rate {item.Rate}</h2>
                   </div>
 
                   <div className="flex gap-5 items-center lg:justify-center ">
                     <h2 className="px-3 bg-gray-500 text-white py-2 rounded-md">
-                      {"USD"}
+                    {item.currencyTakecurrent}
                     </h2>
-                    <h2 className="text-l">24000.99 USD</h2>
+                    <h2 className="text-l">{item.currencyTake} {item.currencyTakecurrent}</h2>
                   </div>
                   <div className="text-lg text-end">
                     <button className="btn btn-error text-white">Remove</button>
@@ -95,7 +96,9 @@ const Purchase = () => {
             </div>
           </div>
         </div>}
-        
+         */}
+
+         <OrderSummary purchaseData={purchaseData}></OrderSummary>
 
         {/* Add Currency */}
 
