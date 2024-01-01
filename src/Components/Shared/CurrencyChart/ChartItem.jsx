@@ -29,14 +29,14 @@ const ChartItem = ({item}) => {
         </div>
 
         <div className="flex  lg:gap-10 gap-6 xl:gap-20">
-          <div className="flex  gap-4 lg:flex-row flex-col">
-            <h2 className="text-xl w-[80px]">{(curenc?.info?.rate * 1.025).toFixed(3)}</h2>
+          <div className="flex  gap-4 lg:flex-row flex-col lg:items-center">
+            <h2 className="text-xl w-fit">{(curenc?.info?.rate * 1.025).toFixed(3)}</h2>
             <button className="bg-[#93C94E] hover:bg-[#6c923a] hover:text-white text-xl px-3 py-2 rounded-lg flex items-center gap-2">
               CLICK & COLLECT <IoIosArrowForward></IoIosArrowForward>{" "}
             </button>
           </div>
-          <div className="flex  gap-4 lg:flex-row flex-col ">
-            <h2 className="text-xl w-[80px]">{curenc?.info?.rate.toFixed(3)}</h2>
+          <div className="flex  gap-4 lg:flex-row flex-col lg:items-center ">
+            <h2 className="text-xl w-[100px] lg:text-end">{curenc?.info?.rate.toFixed(3)}</h2>
             <div className='flex justify-end'>
             <button className="bg-[#93C94E] hover:bg-[#6c923a] hover:text-white text-xl px-3 py-2 rounded-lg flex items-center gap-2">
               CLICK & SELL <IoIosArrowForward></IoIosArrowForward>{" "}

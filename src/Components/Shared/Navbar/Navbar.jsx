@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../Container/Container";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
@@ -15,16 +15,19 @@ const Navbar = () => {
     <div className=" bg-[#93C94E] relative">
       <Container>
         <div className="flex justify-between py-3 container mx-auto items-center">
-          <div className="sm:max-w-[300px] max-w-[150px] ">
+          <Link to={'/'}>
+          <div  className="sm:max-w-[300px] max-w-[150px] ">
             <img className="w-full h-full" src="/Images/logo.png" alt="" />
           </div>
+          </Link>
+         
 
           <div className="lg:flex hidden gap-[12px] list-none lg:text-sm md:text-base xl:text-base text-base  bigScreen-navitem items-center">
-             <NavLink to={'/'} className=' pb-2'><li>Send Money </li></NavLink>
+             <NavLink to={'/sendmony'} className=' pb-2'><li>Send Money </li></NavLink>
              <NavLink to={'/exchangeRates'} className=' pb-2'><li>Exchange Rates </li></NavLink>
              <NavLink to={'/travleMoney'} className=' pb-2'><li>Travel Money </li></NavLink>
-             <NavLink to={'/termsCondition'} className=' pb-2'><li>Terms & Condition </li></NavLink>
-             <NavLink to={'/contactUs'} className=' pb-2'><li>Contact Us </li></NavLink>
+             <NavLink to={'/termsCoditition'} className=' pb-2'><li>Terms & Condition </li></NavLink>
+             <NavLink to={'/contact'} className=' pb-2'><li>Contact Us </li></NavLink>
              <button className="bg-[#4A54A4] hover:bg-[#32396d] px-5 py-3 rounded-xl text-white">Sign In</button>
           </div>
 
@@ -49,11 +52,11 @@ const Navbar = () => {
                      </div>
 
                      <div className="flex flex-col list-none gap-4 mt-4 text-white">
-                     <NavLink to={'/'} className=' pb-2 px-4 border-b border-white'><li>Send Money </li></NavLink>
+                     <NavLink to={'/sendmony'} className=' pb-2 px-4 border-b border-white'><li>Send Money </li></NavLink>
              <NavLink to={'/exchangeRates'} className=' pb-2 px-4 border-b border-white' ><li>Exchange Rates </li></NavLink>
              <NavLink to={'/travleMoney'} className=' pb-2 px-4 border-b border-white'><li>Travel Money </li></NavLink>
-             <NavLink to={'/termsCondition'} className=' pb-2 px-4 border-b border-white'><li>Terms & Condition </li></NavLink>
-             <NavLink to={'/contactUs'} className=' pb-2 px-4 border-b border-white'><li>Contact Us </li></NavLink>
+             <NavLink to={'/termsCoditition'} className=' pb-2 px-4 border-b border-white'><li>Terms & Condition </li></NavLink>
+             <NavLink to={'/contact'} className=' pb-2 px-4 border-b border-white'><li>Contact Us </li></NavLink>
              
                      </div>
                 </div>

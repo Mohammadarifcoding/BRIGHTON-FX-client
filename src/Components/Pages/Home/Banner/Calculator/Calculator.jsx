@@ -22,13 +22,13 @@ const Calculator = () => {
     return (
         <div className="flex flex-col ">
              <Tabs >
-    <TabList className='flex rounded-t-lg'>
+    <TabList className='flex rounded-t-lg '>
         {
             data.map((item,ind) => <Tab style={{
                 borderRadius: 0 == ind ? ' 8px 0 0 0 ':'0 8px 0 0 ',
-            }} onClick={()=>{setActiveTab(ind)}} className={`bg-white text-[#1E4A9A] border-none outline-none  rounded-tl-lg  sm:px-9 sm:py-4 px-5 py-3 `} key={item.id}>{item.name}</Tab>)
+            }} onClick={()=>{setActiveTab(ind)}} className={`bg-white flex items-center  text-[#1E4A9A] border-none outline-none  rounded-tl-lg  sm:px-5 text-center justify-center sm:py-4 px-5 py-3 w-[50%] `} key={item.id}>{item.name}</Tab>)
         }
-      
+
 
     </TabList>
 

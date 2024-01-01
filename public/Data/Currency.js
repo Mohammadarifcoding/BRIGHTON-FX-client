@@ -61,10 +61,6 @@ const currency = [
     label: 'Dominican Peso'
 },
 {
-    value: 'EUR',
-    label: 'Euro'
-},
-{
     value: 'FJD',
     label: 'Fijian Dollar'
 },
