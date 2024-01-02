@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import currency from "../../../../public/Data/Currency";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import AddProduct from "./AddProduct/AddProduct";
+import CheckingPoint from "./CheckingPoint/CheckingPoint";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
@@ -104,6 +105,14 @@ const Purchase = () => {
         {/* Add Currency */}
 
         <AddProduct></AddProduct>
+        <ul className="flex flex-col mt-10 list-disc ml-6">
+           <li>Lorem ipsum dolor sit amet consectetur.</li>
+           <li>Lorem ipsum dolor sit amet consectetur.</li>
+           <li>Lorem ipsum dolor sit amet consectetur.</li>
+        </ul>
+
+
+        <CheckingPoint></CheckingPoint>
       </div>
     </Container>
   );

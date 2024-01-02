@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import currency from "../../../../../public/Data/Currency";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -13,17 +14,16 @@ const AddProduct = () => {
 
     const nav = useNavigate()
     
-    const [currencyData, setCurrencyData] = useState({
-        value: 'TWD'
-    });
+    const [currencyData, setCurrencyData] = useState('TWD');
   
     const [youSell,setYouSell] = useState(0)
   
-    
+    const [Type,setType] = useState('Sell')
+
     const {data:curenc,refetch} = useQuery({
       queryKey:['currrency',currencyData.value],
       queryFn:async()=>{
-       const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`,{
+       const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
           headers:
           {
             apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
@@ -54,51 +54,95 @@ const AddProduct = () => {
     setBuyCurrency(((curenc?.info?.rate * 1.025)* e.target.value).toFixed(2))
    }
   
-//    const handleSelling = ()=>{
-//     const currencyMy = youSell
-//     const currencyTake = buyCurrency
-//     const currentFull = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData.value,Id:uuidv4(),Rate:curenc?.info?.rate}
-//     if(currencyMy <= 0 ){
-//       nav('/purchase')
-//       return toast('Please give correct amount')
-//     }
-//     if(currencyTake <= 0){
-//       nav('/purchase')
-//      return toast('Please give correct amount')
-//     }
-   
-//     const localStorageData = JSON.parse(localStorage.getItem('purchase'))
-//     if(localStorageData){
-//       if(localStorageData?.length >= 4){
-//         nav('/purchase')
-//         return toast('Please clear your cart')
-//       }
+   const handleAdding = ()=>{
+    let value = {}
+   if(youSell <= 0 ){
+     
+      return toast('Please give correct amount')
+    }
+    if(buyCurrency <= 0){
+     
+     return toast('Please give correct amount')
+    }
+    if(Type == 'Sell'){
+       const currencyMy = youSell
+    const currencyTake = buyCurrency
+    value = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData,Id:uuidv4(),Rate:curenc?.info?.rate}
+    }
+    else if(Type == 'Order'){
+      const currencyMy = buyCurrency
+    const currencyTake = youSell
+    value = {currencyMy,currencyTake,currencyTakecurrent:currencyData,currencyMycurrent:'GBP',Id:uuidv4(),Rate:curenc?.info?.rate}
+    }
+    
+
+    
+    console.log(value)
+
+
+    const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+    if(localStorageData){
+      if(localStorageData?.length >= 4){
+        return toast('Please clear your cart')
+      }
       
-//       const totalData = [...localStorageData , currentFull]
-//       localStorage.setItem('purchase',JSON.stringify(totalData))
-//       setYouSell(0)
-//       setBuyCurrency(0)
-//       nav('/purchase')
-//     }
-//     else{
-//       const totalData = [currentFull]
-//       console.log(totalData)
-//       localStorage.setItem('purchase',JSON.stringify(totalData))
-//       setYouSell(0)
-//       setBuyCurrency(0)
-//       nav('/purchase')
-//     }
+      const totalData = [...localStorageData , value]
+      localStorage.setItem('purchase',JSON.stringify(totalData))
+      setYouSell(0)
+      setBuyCurrency(0)
+    }
+    else{
+      const totalData = [value]
+      console.log(totalData)
+      localStorage.setItem('purchase',JSON.stringify(totalData))
+      setYouSell(0)
+      setBuyCurrency(0)
+    }
+
+    // const currencyMy = youSell
+    // const currencyTake = buyCurrency
+    // const currentFull = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData.value,Id:uuidv4(),Rate:curenc?.info?.rate}
+    // if(currencyMy <= 0 ){
+    //   nav('/purchase')
+    //   return toast('Please give correct amount')
+    // }
+    // if(currencyTake <= 0){
+    //   nav('/purchase')
+    //  return toast('Please give correct amount')
+    // }
+   
+    // const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+    // if(localStorageData){
+    //   if(localStorageData?.length >= 4){
+    //     nav('/purchase')
+    //     return toast('Please clear your cart')
+    //   }
+      
+    //   const totalData = [...localStorageData , currentFull]
+    //   localStorage.setItem('purchase',JSON.stringify(totalData))
+    //   setYouSell(0)
+    //   setBuyCurrency(0)
+    //   nav('/purchase')
+    // }
+    // else{
+    //   const totalData = [currentFull]
+    //   console.log(totalData)
+    //   localStorage.setItem('purchase',JSON.stringify(totalData))
+    //   setYouSell(0)
+    //   setBuyCurrency(0)
+    //   nav('/purchase')
+    // }
   
    
    
     
-//    }
+   }
 
 
 const ChangeCurrencyData = (e)=>{
       refetch()
     console.log(e.target.value)
-    setCurrencyData({value: e.target.value})
+    setCurrencyData(e.target.value)
 }
 
     
@@ -148,7 +192,7 @@ const ChangeCurrencyData = (e)=>{
             <div className="  w-full">
               <h2 className="text-gray-500 text-lg">What to do</h2>
 
-              <select className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
+              <select value={Type} onChange={(e)=>{setType(e.target.value)}} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
                 
                   <option value='Sell'>Sell</option>
                   <option value='Order'>Order</option>
@@ -164,12 +208,13 @@ const ChangeCurrencyData = (e)=>{
               />
             </div>
             <div className=" mt-5 flex sm:justify-start justify-end">
-              <button  className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
+              <button onClick={handleAdding} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
                 Add <span> + </span>
               </button>
             </div>
           </div>
         </div>
+        <ToastContainer></ToastContainer>
       </div>
     );
 };
