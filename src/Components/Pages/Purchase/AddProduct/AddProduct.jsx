@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const AddProduct = () => {
+const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem}) => {
 
     const nav = useNavigate()
     
@@ -21,7 +21,7 @@ const AddProduct = () => {
     const [Type,setType] = useState('Sell')
 
     const {data:curenc,refetch} = useQuery({
-      queryKey:['currrency',currencyData.value],
+      queryKey:['currrency',currencyData],
       queryFn:async()=>{
        const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
           headers:
@@ -88,6 +88,8 @@ const AddProduct = () => {
       
       const totalData = [...localStorageData , value]
       localStorage.setItem('purchase',JSON.stringify(totalData))
+     setAllTheItem([...allTheitem,value])
+      console.log([...purchaseData,value])
       setYouSell(0)
       setBuyCurrency(0)
     }
@@ -95,46 +97,13 @@ const AddProduct = () => {
       const totalData = [value]
       console.log(totalData)
       localStorage.setItem('purchase',JSON.stringify(totalData))
+      setAllTheItem([value])
+      console.log([value])
       setYouSell(0)
       setBuyCurrency(0)
     }
 
-    // const currencyMy = youSell
-    // const currencyTake = buyCurrency
-    // const currentFull = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData.value,Id:uuidv4(),Rate:curenc?.info?.rate}
-    // if(currencyMy <= 0 ){
-    //   nav('/purchase')
-    //   return toast('Please give correct amount')
-    // }
-    // if(currencyTake <= 0){
-    //   nav('/purchase')
-    //  return toast('Please give correct amount')
-    // }
-   
-    // const localStorageData = JSON.parse(localStorage.getItem('purchase'))
-    // if(localStorageData){
-    //   if(localStorageData?.length >= 4){
-    //     nav('/purchase')
-    //     return toast('Please clear your cart')
-    //   }
-      
-    //   const totalData = [...localStorageData , currentFull]
-    //   localStorage.setItem('purchase',JSON.stringify(totalData))
-    //   setYouSell(0)
-    //   setBuyCurrency(0)
-    //   nav('/purchase')
-    // }
-    // else{
-    //   const totalData = [currentFull]
-    //   console.log(totalData)
-    //   localStorage.setItem('purchase',JSON.stringify(totalData))
-    //   setYouSell(0)
-    //   setBuyCurrency(0)
-    //   nav('/purchase')
-    // }
-  
-   
-   
+ 
     
    }
 

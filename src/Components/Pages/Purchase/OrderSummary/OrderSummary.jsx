@@ -2,14 +2,16 @@ import { useState } from "react";
 import OrderItem from "./OrderItem";
 
 
-const OrderSummary = ({purchaseData}) => {
+const OrderSummary = ({purchaseData,setAllTheItem,allTheitem}) => {
 
-    const [allTheitem,setAllTheItem] = useState(purchaseData)
+
 
 
     const handleDelete = (id)=>{
         const previousData = JSON.parse(localStorage.getItem('purchase'))
-        const newData = previousData.filter(item => item.id !== id)
+        
+        const newData = previousData.filter(item => item.Id != id)
+        console.log(newData)
         setAllTheItem(newData)
         localStorage.setItem('purchase',JSON.stringify(newData))
      }

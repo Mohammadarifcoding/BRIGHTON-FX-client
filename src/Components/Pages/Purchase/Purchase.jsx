@@ -10,6 +10,7 @@ const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
     JSON.parse(localStorage.getItem("purchase"))
   );
+  const [allTheitem,setAllTheItem] = useState(purchaseData)
   const [currencyData, setCurrencyData] = useState({
     value: "BDT",
     label: "Bangladeshi Taka",
@@ -100,11 +101,11 @@ const Purchase = () => {
         </div>}
          */}
 
-         <OrderSummary purchaseData={purchaseData}></OrderSummary>
+         <OrderSummary allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData}></OrderSummary>
 
         {/* Add Currency */}
 
-        <AddProduct></AddProduct>
+        <AddProduct allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
         <ul className="flex flex-col mt-10 list-disc ml-6">
            <li>Lorem ipsum dolor sit amet consectetur.</li>
            <li>Lorem ipsum dolor sit amet consectetur.</li>
