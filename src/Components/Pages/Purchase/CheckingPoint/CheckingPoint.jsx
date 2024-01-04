@@ -1,14 +1,18 @@
 import { useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from 'uuid';
 import { IoIosCheckbox } from "react-icons/io";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md"
+import UseAxious from "../../../../Hook/UseAxious";
+import { Link } from "react-router-dom";
 
 
 const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
   
     const [address , setAddress] = useState('location')
-
+    const Axious = UseAxious()
+  const [Order,setlastOrder] = useState({})
     const [selected,setSelected] = useState(false)
 
     
@@ -31,7 +35,8 @@ const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
 
    const getFinishedOrder = (e)=>{
     e.preventDefault()
-      const First_Name = e.target.FirstName.value
+    try{
+const First_Name = e.target.FirstName.value
       const Last_Name = e.target.LastName.value
       const Email = e.target.Email.value
       const Confrim_Email = e.target.ConfromEmail.value
@@ -44,13 +49,28 @@ const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
         return toast('Please select the rules')
       }
      const UserInformation = {
+      Order_Id: uuidv4(),
       Name :First_Name + ' '+Last_Name,
       Email:Email,
       Phone_Number : Phone_Number,
       Orders : JSON.parse(localStorage.getItem('purchase'))
      }
-     console.log(UserInformation)
-     setNextForm(3)
+     
+     Axious.post('/Order',UserInformation)
+     .then(res =>{
+      console.log(UserInformation)
+      setlastOrder(UserInformation)
+      localStorage.clear('purchase')
+      console.log(res.data)
+      setNextForm(3)
+     })
+    }
+    catch{
+      setNextForm(1)
+      return toast('Something went wrong')
+    }
+      
+     
     }
 
 
@@ -108,7 +128,33 @@ const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
       }
       {
         nextFrom == 3 ? <>
-        f
+        <div className="bg-gray-100 py-10  px-6 ">
+         <h2 className="md:text-4xl text-3xl text-center font-medium flex justify-center items-center gap-3"> <img className="w-10 md:block hidden" src="/Images/check-mark.png" alt="" />Your Order Confirmation</h2>
+        <div className="flex md:flex-row flex-col items-start">
+          <div className="mt-20 flex-1 gap-3 flex flex-col  ">
+            <h2 className="mb-4 sm:text-2xl text-xl flex items-center gap-2 font-semibold">Personal Information <img className="w-6" src="/Images/contract.png" alt="" /></h2>
+            <h2 className="sm:text-xl  "> <span className="font-medium">Name</span>:  Mohammad Arif</h2>
+            <h2 className="sm:text-xl "> <span className="font-medium">Email</span>: nabirasek@gmail.com</h2>
+            <h2 className="sm:text-xl "> <span className="font-medium">Phone</span>: +8801860496257</h2>
+          </div>
+          <div className="mt-20 flex-1 gap-3 flex flex-col  ">
+            <h2 className="mb-4 sm:text-2xl text-xl flex items-center gap-2 font-semibold">Order Information <img className="w-6" src="/Images/contract.png" alt="" /></h2>
+
+            <h2 className="sm:text-xl"> <span className="font-semibold">Order Id </span>: {Order?.Order_Id}</h2>
+            {
+              Order?.Orders?.map(item => <h2 className="sm:text-xl  ">You Give <span className="font-semibold">: {item?.currencyMy} {item?.currencyMycurrent}</span>  >>  You get  <span className="font-semibold">: {item?.currencyTake} {item?.currencyTakecurrent} </span>(Rate {(item?.Rate).toFixed(2)} )</h2>)
+            }                    
+          </div>
+          </div>
+
+          <div className="flex justify-center mt-20">
+            <Link to='/'>
+            <button className="btn bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white">Got To Home</button>
+            </Link>
+            
+          </div>
+      
+        </div>
         </>:''
       } 
       <ToastContainer></ToastContainer>

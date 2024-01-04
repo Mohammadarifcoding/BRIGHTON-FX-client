@@ -1,9 +1,11 @@
-import React from 'react';
+import TcContent from "./TcContent/TcContent";
+import TcHeader from "./TcHeader/TcHeader";
 
 const TermsCodition = () => {
     return (
         <div>
-            TermsCondition
+           <TcHeader></TcHeader>
+           <TcContent></TcContent>
         </div>
     );
 };

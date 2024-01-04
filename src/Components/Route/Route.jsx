@@ -6,6 +6,7 @@ import TermsCodition from "../Pages/TermsCondition/TermsCodition";
 import Contact from "../Pages/Contact/Contact";
 import SendMoney from "../Pages/SendMoney/SendMoney";
 import TravelMoney from "../Pages/TravelMoney/TravelMoney";
+import ExchangeRates from "../Pages/ExchangeRates/ExchangeRates";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
        {
         path:'/travleMoney',
         element:<TravelMoney></TravelMoney>
+       },
+       {
+        path:'/exchangeRates',
+        element:<ExchangeRates></ExchangeRates>
        }
     
     ]
