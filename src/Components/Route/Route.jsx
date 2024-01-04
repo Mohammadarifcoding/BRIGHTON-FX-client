@@ -7,6 +7,8 @@ import Contact from "../Pages/Contact/Contact";
 import SendMoney from "../Pages/SendMoney/SendMoney";
 import TravelMoney from "../Pages/TravelMoney/TravelMoney";
 import ExchangeRates from "../Pages/ExchangeRates/ExchangeRates";
+import DashBoardLayout from "../Dashboard/DashboardLayout/DashBoardLayout";
+import CurrencyPage from "../Dashboard/Pages/CurrencyPage/CurrencyPage";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +45,16 @@ const router = createBrowserRouter([
     
     ]
     },
+    {
+      path:'/dashboard',
+      element:<DashBoardLayout></DashBoardLayout>,
+      children:[
+        {
+          path:'Currency',
+          element:<CurrencyPage></CurrencyPage>
+        }
+      ]
+    }
   ]);
 
   export default router

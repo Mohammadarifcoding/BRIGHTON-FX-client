@@ -28,7 +28,10 @@ const Navbar = () => {
              <NavLink to={'/travleMoney'} className=' pb-2'><li>Travel Money </li></NavLink>
              <NavLink to={'/termsCoditition'} className=' pb-2'><li>Terms & Condition </li></NavLink>
              <NavLink to={'/contact'} className=' pb-2'><li>Contact Us </li></NavLink>
+             <Link to={'/dashboard/Currency'}>
              <button className="bg-[#4A54A4] hover:bg-[#32396d] px-5 py-3 rounded-xl text-white">Sign In</button>
+             </Link>
+             
           </div>
 
           <div className="lg:hidden block" >
