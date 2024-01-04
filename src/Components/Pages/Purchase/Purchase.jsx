@@ -1,16 +1,19 @@
 import { useState } from "react";
 import Container from "../../Shared/Container/Container";
 import { IoIosArrowForward } from "react-icons/io";
-import currency from "../../../../public/Data/Currency";
+
 import OrderSummary from "./OrderSummary/OrderSummary";
 import AddProduct from "./AddProduct/AddProduct";
 import CheckingPoint from "./CheckingPoint/CheckingPoint";
 import Process from "./Process/Process";
+import UseCurrency from "../../../Hook/UseCurrency";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
     JSON.parse(localStorage.getItem("purchase"))
   );
+
+  const [currency,refetchCurrency] = UseCurrency()
 
   const [nextFrom,setNextForm] = useState(1)
 

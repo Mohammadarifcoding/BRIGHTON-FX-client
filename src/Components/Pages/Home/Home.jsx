@@ -1,5 +1,6 @@
 
 
+import UseCurrency from "../../../Hook/UseCurrency";
 import CurrencyChart from "../../Shared/CurrencyChart/CurrencyChart";
 import Accordin from "./Accordin/Accordin";
 import Banner from "./Banner/Banner";
@@ -11,11 +12,12 @@ import StoreFind from "./StoreFind/StoreFind";
 
 
 const Home = () => {
+    const [currency,refetchCurrency] = UseCurrency()
     return (
         <div>
             <Banner></Banner>
             <Commitment></Commitment>
-            <CurrencyChart></CurrencyChart>
+            <CurrencyChart currency={currency}></CurrencyChart>
             <Features></Features>
             <StoreFind></StoreFind>
             <CompareCurrencies></CompareCurrencies> 

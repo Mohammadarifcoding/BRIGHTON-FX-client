@@ -1,15 +1,17 @@
 import Select from "react-select";
-import currency from "../../../../../../../public/Data/Currency";
+
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import UseCurrency from "../../../../../../Hook/UseCurrency";
 
 const CalculatorTabTwo = () => {
   // let curenc?.info?.rate = 53
   const nav = useNavigate()
+  const [currency,refetchCurrency] = UseCurrency()
   const [currencyData, setCurrencyData] = useState({
     value:'AED',
     label:'United Arab Emirates Dirham'

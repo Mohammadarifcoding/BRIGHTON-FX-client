@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Container from "../Container/Container";
 import { IoIosArrowForward } from "react-icons/io";
-import currency from "../../../../public/Data/Currency";
+
 import ChartItem from "./ChartItem";
 import CurrencyChartMobile from "./CurrenchChartMobile/CurrencyChartMobile";
 
-const CurrencyChart = () => {
+const CurrencyChart = ({currency}) => {
     const [inputField,setInputField] = useState('')
     const [showAll,setShowAll] = useState(false)
-    const [fullData,setFullData] = useState(currency)
+    const [fullData,setFullData] = useState([...currency])
 
     const searchchange = (e)=>{
         setInputField(e.target.value)
-        const getNewData = fullData.filter(item => item.value.includes(inputField.toUpperCase()))
+        const getNewData = fullData?.filter(item => item.value.includes(inputField.toUpperCase()))
         setFullData(getNewData)
 
     }
@@ -22,7 +22,7 @@ const CurrencyChart = () => {
         setFullData(currency)
      }
  
-    },[inputField])
+    },[inputField,currency])
   return (
     <Container>
       <div className="my-32">
@@ -46,8 +46,8 @@ const CurrencyChart = () => {
         <div className="md:flex hidden flex-col border ">
             {
                 showAll ? 
-                fullData.map((item,ind) => <ChartItem key={ind} value={ind+1} item={item}></ChartItem>) : 
-                fullData.slice(0,12).map((item,ind) => <ChartItem key={ind} value={ind+1} item={item}></ChartItem>)
+                fullData?.map((item,ind) => <ChartItem key={ind} value={ind+1} item={item}></ChartItem>) : 
+                fullData?.slice(0,12).map((item,ind) => <ChartItem key={ind} value={ind+1} item={item}></ChartItem>)
             }
             
       

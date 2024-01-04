@@ -5,15 +5,15 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import currency from "../../../../../public/Data/Currency";
 import 'react-toastify/dist/ReactToastify.css';
+import UseCurrency from "../../../../Hook/UseCurrency";
 
 
 
 const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem}) => {
 
     const nav = useNavigate()
-    
+    const [currency,refetchCurrency] = UseCurrency()
     const [currencyData, setCurrencyData] = useState('TWD');
   
     const [youSell,setYouSell] = useState(0)
