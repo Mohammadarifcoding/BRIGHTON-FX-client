@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiousInstace = axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL:'https://brighton-fx-server.vercel.app'
 })
 
 const UseAxious = () => {

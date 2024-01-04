@@ -4,7 +4,7 @@ import ContactHero from "./ContactHero/ContactHero";
 
 const Contact = () => {
     return (
-        <div>
+        <div className="md:flex-row flex-col">
            <ContactHero></ContactHero>
            <ContactForm></ContactForm>
         </div>

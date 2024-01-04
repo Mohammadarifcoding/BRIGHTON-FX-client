@@ -27,7 +27,7 @@ const CurrencyChart = ({currency}) => {
     <Container>
       <div className="my-32">
         <h2 className="text-[#1E4A9A] lg:text-6xl sm:text-2xl text-xl  font-semibold lg:text-start text-center">
-          Find your nearest store
+          Find your Currency
         </h2>
         <div className="flex md:items-center justify-between mt-10 bg-[#333333] md:flex-row flex-col px-4 py-5">
           <h2 className="font-semibold gap-3 text-white sm:text-xl text-sm">

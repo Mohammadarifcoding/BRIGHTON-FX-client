@@ -50,9 +50,10 @@ const First_Name = e.target.FirstName.value
       }
      const UserInformation = {
       Order_Id: uuidv4(),
-      Name :First_Name + ' '+Last_Name,
+      Name :First_Name +' '+Last_Name,
       Email:Email,
       Phone_Number : Phone_Number,
+      Address: address,
       Orders : JSON.parse(localStorage.getItem('purchase'))
      }
      
@@ -86,8 +87,8 @@ const First_Name = e.target.FirstName.value
 
       <select value={address} onChange={(e)=>{setAddress(e.target.value)}} className=" mt-5 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
         <option value="location">Select locaiton</option>
-        <option value="Hall building ,Mirpur-10,Dhaka Bangladesh">Hall building ,Mirpur-10,Dhaka Bangladesh</option>
-        <option value="Soil building ,Mirpur-10,Dhaka Bangladesh">Soil building ,Mirpur-10,Dhaka Bangladesh</option>
+        <option value="123 QUEENS ROAD BRIGHTON  BN1 3WB Number: 01273030708">123 QUEENS ROAD BRIGHTON  BN1 3WB Number: 01273030708</option>
+        <option value="35 CHAPEL RD WORTHING BN11 1EG">35 CHAPEL RD WORTHING BN11 1EG</option>
       </select>
 
       <div className=" mt-5 flex  justify-end">
@@ -133,14 +134,16 @@ const First_Name = e.target.FirstName.value
         <div className="flex md:flex-row flex-col items-start">
           <div className="mt-20 flex-1 gap-3 flex flex-col  ">
             <h2 className="mb-4 sm:text-2xl text-xl flex items-center gap-2 font-semibold">Personal Information <img className="w-6" src="/Images/contract.png" alt="" /></h2>
-            <h2 className="sm:text-xl  "> <span className="font-medium">Name</span>:  Mohammad Arif</h2>
-            <h2 className="sm:text-xl "> <span className="font-medium">Email</span>: nabirasek@gmail.com</h2>
-            <h2 className="sm:text-xl "> <span className="font-medium">Phone</span>: +8801860496257</h2>
+            <h2 className="sm:text-xl  "> <span className="font-medium">Name</span>:  {Order?.Name}</h2>
+            <h2 className="sm:text-xl "> <span className="font-medium">Email</span>: {Order?.Email}</h2>
+            <h2 className="sm:text-xl "> <span className="font-medium">Phone</span>: {Order?.Phone_Number}</h2>
           </div>
           <div className="mt-20 flex-1 gap-3 flex flex-col  ">
             <h2 className="mb-4 sm:text-2xl text-xl flex items-center gap-2 font-semibold">Order Information <img className="w-6" src="/Images/contract.png" alt="" /></h2>
+            
 
             <h2 className="sm:text-xl"> <span className="font-semibold">Order Id </span>: {Order?.Order_Id}</h2>
+            <h2 className="sm:text-xl my-2"> <span className="font-semibold">Checking Point </span>: {Order?.Address}</h2>
             {
               Order?.Orders?.map(item => <h2 className="sm:text-xl  ">You Give <span className="font-semibold">: {item?.currencyMy} {item?.currencyMycurrent}</span>  >>  You get  <span className="font-semibold">: {item?.currencyTake} {item?.currencyTakecurrent} </span>(Rate {(item?.Rate).toFixed(2)} )</h2>)
             }                    

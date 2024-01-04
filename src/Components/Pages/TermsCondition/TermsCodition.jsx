@@ -3,7 +3,7 @@ import TcHeader from "./TcHeader/TcHeader";
 
 const TermsCodition = () => {
     return (
-        <div>
+        <div className="xl:px-0 px-4">
            <TcHeader></TcHeader>
            <TcContent></TcContent>
         </div>

@@ -21,17 +21,17 @@ const ContacthtmlForm = () => {
 
                         <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                             <div className="lg:w-1/2 px-6">
-                                <h2 className="title-font font-bold text-gray-900 tracking-widest text-xl">Worthing FX Office</h2>
-                                <p className="mt-1">
+                                <h2 className="title-font font-bold text-gray-900 tracking-widest md:text-xl sm:text-lg text-base">Worthing FX Office</h2>
+                                <p className="mt-1 md:text-base text-sm">
                                     37 Burnt Oak Broadway,
 
                                     Edgware, Middlesex
                                     London
                                     HA8 5JZ</p>
                             </div>
-                            <div className="lg:w-1/2 px-6">
-                                <h2 className="title-font font-bold text-gray-900 tracking-widest text-xl">BRIGHTON FX</h2>
-                                <p className="mt-1">
+                            <div className="lg:w-1/2 w-full px-6 mt-6">
+                                <h2 className="title-font font-bold text-gray-900 tracking-widest md:text-xl sm:text-lg text-base">BRIGHTON FX</h2>
+                                <p className="mt-1 md:text-base text-sm">
                                     37 Burnt Oak Broadway,
 
                                     Edgware, Middlesex
@@ -40,9 +40,9 @@ const ContacthtmlForm = () => {
                             </div>
                             <div className="lg:w-1/2 px-6 mt-8 lg:mt-0">
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-small">EMAIL</h2>
-                                <a className="text-indigo-500 leading-relaxed">info@worthingfxexpress.co.uk</a>
+                                <a className="text-indigo-500 leading-relaxed md:text-base text-sm">info@worthingfxexpress.co.uk</a>
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-small mt-4">PHONE</h2>
-                                <p className="leading-relaxed">123-456-7890</p>
+                                <p className="leading-relaxed md:text-base text-sm">123-456-7890</p>
                             </div>
                         </div>
                     </div>

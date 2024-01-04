@@ -42,9 +42,9 @@ const Purchase = () => {
         { nextFrom == 1 ? <>
           <AddProduct allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
         <ul className="flex flex-col mt-10 list-disc ml-6">
-           <li>Lorem ipsum dolor sit amet consectetur.</li>
-           <li>Lorem ipsum dolor sit amet consectetur.</li>
-           <li>Lorem ipsum dolor sit amet consectetur.</li>
+           <li>We Believe in trust of our customer</li>
+           <li>We give best suppor for our reliable customers</li>
+           <li>Our vision is to make the currency swap easier</li>
         </ul>
         </>  :''
       

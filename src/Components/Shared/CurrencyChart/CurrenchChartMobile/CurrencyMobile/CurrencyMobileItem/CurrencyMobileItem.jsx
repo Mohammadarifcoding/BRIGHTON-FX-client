@@ -2,8 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const CurrencyMobileItem = ({item,num}) => {
+
+  const nav = useNavigate()
+  
     const {data:curenc} = useQuery({
         queryKey:[`currrency${item?.value}`],
         queryFn:async()=>{
@@ -35,13 +39,13 @@ const CurrencyMobileItem = ({item,num}) => {
             {
                  num == 0 ?  <div className="flex  gap-2 lg:flex-row flex-col lg:items-center">
                 
-                 <button className="bg-[#93C94E] text-sm hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2">
+                 <button onClick={()=>{nav('/purchase')}} className="bg-[#93C94E] text-sm hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2">
                    CLICK & COLLECT <IoIosArrowForward></IoIosArrowForward>{" "}
                  </button>
                </div> : <div className="flex  gap-2 lg:flex-row flex-col lg:items-center ">
            
-            <div className='flex justify-end'>
-            <button className="bg-[#93C94E] text-sm flex-nowrap  hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2">
+            <div  className='flex justify-end'>
+            <button onClick={()=>{nav('/purchase')}} className="bg-[#93C94E] text-sm flex-nowrap  hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2">
               CLICK & SELL <IoIosArrowForward></IoIosArrowForward>{" "}
             </button>
             </div>
