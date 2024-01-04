@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
-const CurrencyItemTable = ({item}) => {
+const CurrencyItemTable = ({item,upsellRate}) => {
    const [FetchData ,setFetchData] = useState(false)
    useEffect(()=>{
         if(item.value != undefined){
@@ -36,7 +36,7 @@ const CurrencyItemTable = ({item}) => {
         </td>
         <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">
           {/* Calculate the increased sell price */}
-         {(currency?.info?.rate * 1.025)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
+         {(currency?.info?.rate * upsellRate?.Upsell)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
         </td>
         <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">{(currency?.info?.rate)?.toFixed(3)} GBP</td>
       </tr>

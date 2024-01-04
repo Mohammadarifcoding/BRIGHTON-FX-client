@@ -11,7 +11,7 @@ const calculateIncreasedSellPrice = (originalPrice, percentageIncrease) => {
     return (originalPrice * increaseFactor).toFixed(2);
   };
 
-const CurrencyTable = ({currency}) => {
+const CurrencyTable = ({currency,upsellRate}) => {
 
    const Axious = UseAxious()
    
@@ -46,7 +46,7 @@ const CurrencyTable = ({currency}) => {
             </thead>
             <tbody>
               {/* Sample data row */}
-              {currency?.map((item) => (<CurrencyItemTable key={item.value} item={item}></CurrencyItemTable>))}
+              {currency?.map((item) => (<CurrencyItemTable upsellRate={upsellRate} key={item.value} item={item}></CurrencyItemTable>))}
               {/* Add more rows here based on your data */}
             </tbody>
           </table>
