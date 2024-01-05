@@ -16,3 +16,17 @@
     color: white !important;
     background-color: #1E4A9A !important;
 }
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Apply the animation to the rotating icon */
+  .rotating-icon {
+    animation: rotate 2s linear infinite; /* Adjust duration or animation properties as needed */
+  }

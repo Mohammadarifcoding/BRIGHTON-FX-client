@@ -9,6 +9,7 @@ import TravelMoney from "../Pages/TravelMoney/TravelMoney";
 import ExchangeRates from "../Pages/ExchangeRates/ExchangeRates";
 import DashBoardLayout from "../Dashboard/DashboardLayout/DashBoardLayout";
 import CurrencyPage from "../Dashboard/Pages/CurrencyPage/CurrencyPage";
+import AddCurrency from "../Dashboard/Pages/AddCurrency/AddCurrency";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         {
           path:'Currency',
           element:<CurrencyPage></CurrencyPage>
+        },
+        {
+          path:'addCurrency',
+          element:<AddCurrency></AddCurrency>
         }
       ]
     }

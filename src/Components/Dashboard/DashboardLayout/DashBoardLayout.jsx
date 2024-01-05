@@ -24,10 +24,13 @@ const DashBoardLayout = () => {
                 <div className='px-[20px] mt-16 dashboarItem'>
                     <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
                     <NavLink to='/dashboard/Currency'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
                     </NavLink>
                     <NavLink to='/dashboard/Currency'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/addCurrency'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Add Currency</button>
                     </NavLink>
               
                      <div className="divider divide  text-white">OR</div>
@@ -82,11 +85,14 @@ const DashBoardLayout = () => {
             >
                 <div className='px-[20px] mt-16 dashboarItem'>
                 <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
+                <NavLink to='/dashboard/Currency'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
+                    </NavLink>
                     <NavLink to='/dashboard/Currency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>
                     </NavLink>
-                    <NavLink to='/dashboard/Currency'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
+                    <NavLink to='/dashboard/addCurrency'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Add Currency</button>
                     </NavLink>
               
                      <div className="divider divide  text-white">OR</div>
