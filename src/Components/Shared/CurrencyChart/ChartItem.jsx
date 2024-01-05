@@ -4,11 +4,15 @@ import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import UseAxious from '../../../Hook/UseAxious';
+import UseUpsell from '../../../Hook/UseUpsell';
 
 const ChartItem = ({item}) => {
     const nav = useNavigate()   
 
    const Axious = UseAxious()
+   const [upsellValue,refetchUpsell] = UseUpsell()
+
+  console.log(upsellValue)
 
     const {data:curenc} = useQuery({
         queryKey:[`currrency${item?.value}`],
@@ -23,13 +27,7 @@ const ChartItem = ({item}) => {
         }
       })
 
-      const {data:upsellRate = {} , refetch:upsellRefeth}=useQuery({
-        queryKey:['upselling'],
-        queryFn:async()=>{
-          const result = await Axious.get('/upsell')
-          return result.data
-        }
-      })
+     
       
   console.log(curenc?.info?.rate)
     return (
@@ -43,7 +41,7 @@ const ChartItem = ({item}) => {
 
         <div className="flex  lg:gap-10 gap-6 xl:gap-20">
           <div className="flex  gap-4 lg:flex-row flex-col lg:items-center">
-            <h2 className="text-xl w-fit">{(curenc?.info?.rate * upsellRate?.Upsell).toFixed(3)}</h2>
+            <h2 className="text-xl w-fit">{(curenc?.info?.rate * upsellValue).toFixed(3)}</h2>
             <button onClick={()=>{nav('/purchase')}} className="bg-[#93C94E] hover:bg-[#6c923a] hover:text-white text-xl px-3 py-2 rounded-lg flex items-center gap-2">
               CLICK & COLLECT <IoIosArrowForward></IoIosArrowForward>{" "}
             </button>

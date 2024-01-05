@@ -4,12 +4,24 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import ChartItem from "./ChartItem";
 import CurrencyChartMobile from "./CurrenchChartMobile/CurrencyChartMobile";
+import { useQuery } from "@tanstack/react-query";
+import UseAxious from "../../../Hook/UseAxious";
 
 const CurrencyChart = ({currency}) => {
     const [inputField,setInputField] = useState('')
     const [showAll,setShowAll] = useState(false)
+    const Axious = UseAxious()
     const [fullData,setFullData] = useState([...currency])
+    const {data:upsellRate = {} , refetch:upsellRefeth}=useQuery({
+      queryKey:['upselling'],
+      queryFn:async()=>{
+        const result = await Axious.get('/upsell')
+        return result.data
+      }
+    })
+ 
 
+    
     const searchchange = (e)=>{
         setInputField(e.target.value)
         const getNewData = fullData?.filter(item => item.value.includes(inputField.toUpperCase()))
@@ -54,7 +66,7 @@ const CurrencyChart = ({currency}) => {
         </div>
         <div className="md:hidden block">
             {
-                showAll ? <CurrencyChartMobile data={fullData}></CurrencyChartMobile>:<CurrencyChartMobile data={fullData.slice(0,12)}></CurrencyChartMobile>
+                showAll ? <CurrencyChartMobile  data={fullData}></CurrencyChartMobile>:<CurrencyChartMobile data={fullData.slice(0,12)}></CurrencyChartMobile>
             }
                
         </div>

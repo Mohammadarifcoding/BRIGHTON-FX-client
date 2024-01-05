@@ -3,6 +3,7 @@ import CurrencyTable from "./CurrencyTable/CurrencyTable";
 import UseCurrency from "../../../../Hook/UseCurrency";
 import { useQuery } from "@tanstack/react-query";
 import UseAxious from "../../../../Hook/UseAxious";
+import UseUpsell from "../../../../Hook/UseUpsell";
 
 
 const CurrencyPage = () => {
@@ -13,13 +14,9 @@ const CurrencyPage = () => {
         setPercentageIncrease(parseFloat(event.target.value));
       };
 
-      const {data:upsellRate = {} , refetch:upsellRefeth}=useQuery({
-        queryKey:['upselling'],
-        queryFn:async()=>{
-          const result = await Axious.get('/upsell')
-          return result.data
-        }
-      })
+      const [upsellValue,refetchUpsell] = UseUpsell()
+
+  console.log(upsellValue)
 
       const handleApply =()=>{
          const newPercentage =  1 + percentageIncrease / 100
@@ -27,11 +24,11 @@ const CurrencyPage = () => {
             Axious.get(`/upsellUpdate/${newPercentage}`)
             .then(res => {
                 console.log(res.data)
-                upsellRefeth()
+                refetchUpsell()
             })
       }
 
-    console.log(upsellRate)
+    
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col">
         <header className="bg-gray-800 py-4">
@@ -54,7 +51,7 @@ const CurrencyPage = () => {
             />
             <button onClick={handleApply} className="bg-white text-slate-900 text-sm px-3 py-2 rounded-lg hover:bg-gray-300">Apply</button>
           </div>
-          <CurrencyTable  upsellRate={upsellRate} currency={currency} ></CurrencyTable>
+          <CurrencyTable   currency={currency} ></CurrencyTable>
           </div>
         </main>
         <footer className="bg-gray-800 py-4 text-center">

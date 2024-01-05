@@ -3,10 +3,20 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import CalculatorTab from './CalculatorTab/CalculatorTab';
 import CalculatorTabTwo from './CalculatorTab/CalculatorTabTwo';
+import { useQuery } from '@tanstack/react-query';
+import UseAxious from '../../../../../Hook/UseAxious';
 
 
 const Calculator = () => {
     const [activeTab,setActiveTab] =  useState(0)
+    const Axious = UseAxious()
+    const {data:upsellRate = {} , refetch:upsellRefeth}=useQuery({
+        queryKey:['upselling'],
+        queryFn:async()=>{
+          const result = await Axious.get('/upsell')
+          return result.data
+        }
+      })
    const data = [
     {
         id:0,
@@ -36,7 +46,7 @@ const Calculator = () => {
       <CalculatorTab item={0}></CalculatorTab>
     </TabPanel>
     <TabPanel>
-    <CalculatorTabTwo ></CalculatorTabTwo>
+    <CalculatorTabTwo  ></CalculatorTabTwo>
     </TabPanel>
   </Tabs>
         </div>

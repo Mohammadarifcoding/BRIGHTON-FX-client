@@ -14,6 +14,7 @@ const CurrencyChartMobile = ({data}) => {
         }
        ]
     console.log(data)
+
     return (
         <div className='flex flex-col'>
              <Tabs>
@@ -24,10 +25,10 @@ const CurrencyChartMobile = ({data}) => {
     </TabList>
 
     <TabPanel>
-      <CurrencyMobile data={data} num={0}></CurrencyMobile>
+      <CurrencyMobile  data={data} num={0}></CurrencyMobile>
     </TabPanel>
     <TabPanel>
-    <CurrencyMobile data={data} num={1}></CurrencyMobile>
+    <CurrencyMobile  data={data} num={1}></CurrencyMobile>
     </TabPanel>
   </Tabs> 
         </div>

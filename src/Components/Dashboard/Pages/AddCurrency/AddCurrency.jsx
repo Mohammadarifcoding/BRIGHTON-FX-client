@@ -1,11 +1,16 @@
+import axios from "axios";
 import { useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
+import UseAxious from "../../../../Hook/UseAxious";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCurrency = () => {
     const [currencyName, setCurrencyName] = useState('');
   const [countryName, setCountryName] = useState('');
   const [checking,setChecking] = useState(false)
  const [checkingLoading,setCheckingLoading] = useState(false)
+ const Axious = UseAxious()
   const handleCurrencyNameChange = (e) => {
     setCurrencyName(e.target.value);
   };
@@ -15,16 +20,42 @@ const AddCurrency = () => {
   };
 
   const handleCheck = () => {
+    setCheckingLoading(true)
     // Logic for checking currency or country validity
     // This function can validate the currency or country
     // For example, you can check if the entered currency or country is valid
-    
+    axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyName}&from=GBP&amount=1`,{
+        headers:
+        {
+          apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
+        }
+      })
+      .then(res => {
+        if(res.data?.info?.rate){
+        setChecking(true)
+        }
+      })
+    setCheckingLoading(false)
 
   };
 
   const handleAdd = () => {
     // Logic for adding the currency to the system
     // This function can add the currency and country to your data structure or database
+  Axious.post('/AddCurrency',{label : countryName , value : currencyName})
+  .then(res => {
+    console.log(res.data)
+    toast(`Added ${currencyName} currency `);
+    setCountryName('')
+    setCurrencyName('')
+
+  })
+  .catch(err =>{
+     toast(err.message)
+  })
+  
+
+    
   };
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col">

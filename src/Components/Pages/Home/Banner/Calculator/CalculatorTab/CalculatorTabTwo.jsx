@@ -41,13 +41,13 @@ const CalculatorTabTwo = () => {
           console.log(e.target.value)
           
           setBuyCurrency(e.target.value)
-          setYouSell((e.target.value/(curenc?.info?.rate * 1.025)).toFixed(2))
+          setYouSell((e.target.value/curenc?.info?.rate).toFixed(2))
  }
 
  const handleyouBuyamountCurrency=(e)=>{
   console.log(e.target.value)
   setYouSell(e.target.value)
-  setBuyCurrency(((curenc?.info?.rate * 1.025)* e.target.value).toFixed(2))
+  setBuyCurrency(((curenc?.info?.rate)* e.target.value).toFixed(2))
  }
 
  const handleSelling = ()=>{
@@ -145,7 +145,7 @@ const CalculatorTabTwo = () => {
       </div>
       <div className="mt-5 text-center font-semibold">
         <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
-        <h2 className="mt-3 text-lg">1 GBP = {((curenc?.info?.rate ?? 1)*1.025).toFixed(3)} {currencyData.value}</h2>
+        <h2 className="mt-3 text-lg">1 GBP = {(curenc?.info?.rate ?? 1).toFixed(3)} {currencyData.value}</h2>
         
       </div>
       <div className="flex mt-3">
