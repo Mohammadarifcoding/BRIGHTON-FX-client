@@ -10,6 +10,8 @@ import ExchangeRates from "../Pages/ExchangeRates/ExchangeRates";
 import DashBoardLayout from "../Dashboard/DashboardLayout/DashBoardLayout";
 import CurrencyPage from "../Dashboard/Pages/CurrencyPage/CurrencyPage";
 import AddCurrency from "../Dashboard/Pages/AddCurrency/AddCurrency";
+import Orders from "../Dashboard/Pages/Orders/Orders";
+import OrderDetails from "../Dashboard/Pages/OrderDetails/OrderDetails";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,15 @@ const router = createBrowserRouter([
         {
           path:'addCurrency',
           element:<AddCurrency></AddCurrency>
+        },
+        {
+          path:'manageOrders',
+          element:<Orders></Orders>
+        },
+        {
+          path:'orderDetails/:id',
+          element:<OrderDetails></OrderDetails>,
+          loader:({params})=> fetch(`https://brighton-fx-server.vercel.app/details/${params.id}`)
         }
       ]
     }

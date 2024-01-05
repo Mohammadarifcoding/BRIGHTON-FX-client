@@ -54,7 +54,8 @@ const First_Name = e.target.FirstName.value
       Email:Email,
       Phone_Number : Phone_Number,
       Address: address,
-      Orders : JSON.parse(localStorage.getItem('purchase'))
+      Orders : JSON.parse(localStorage.getItem('purchase')),
+      Status:'Pending'
      }
      
      Axious.post('/Order',UserInformation)
