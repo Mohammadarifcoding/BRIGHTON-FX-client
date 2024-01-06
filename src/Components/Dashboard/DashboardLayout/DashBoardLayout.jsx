@@ -24,7 +24,10 @@ const DashBoardLayout = () => {
                 <div className='px-[20px] mt-16 dashboarItem'>
                     <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
                     <NavLink to='/dashboard/manageOrders'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'> Pending Orders</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/activeOrders'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Order</button>
                     </NavLink>
                     <NavLink to='/dashboard/Currency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>
@@ -86,7 +89,10 @@ const DashBoardLayout = () => {
                 <div className='px-[20px] mt-16 dashboarItem'>
                 <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
                 <NavLink to='/dashboard/manageOrders'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Orders</button>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Pending Orders</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/activeOrders'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Orders</button>
                     </NavLink>
                     <NavLink to='/dashboard/Currency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>

@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import UseCurrency from "../../../../Hook/UseCurrency";
+import UseUpsell from './../../../../Hook/UseUpsell';
 
 
 
@@ -15,9 +16,10 @@ const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem}) =>
     const nav = useNavigate()
     const [currency,refetchCurrency] = UseCurrency()
     const [currencyData, setCurrencyData] = useState('TWD');
-  
+    const [upsellValue,refetchUpsell] = UseUpsell()
+    const [upsellRateUse,setUpsellRateUse] = useState(1)
     const [youSell,setYouSell] = useState(0)
-  
+    
     const [Type,setType] = useState('Sell')
 
     const {data:curenc,refetch} = useQuery({
@@ -116,6 +118,17 @@ const ChangeCurrencyData = (e)=>{
 
     
 
+const ChangeTheWay = (e)=>{
+  if(e.target.value == 'Sell'){
+    setUpsellRateUse(1)
+  }
+  else if(e.target.value == 'Order'){
+    setUpsellRateUse(upsellValue)
+  }
+  setType(e.target.value)
+
+}
+
 
 
 
@@ -161,7 +174,7 @@ const ChangeCurrencyData = (e)=>{
             <div className="  w-full">
               <h2 className="text-gray-500 text-lg">What to do</h2>
 
-              <select value={Type} onChange={(e)=>{setType(e.target.value)}} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
+              <select value={Type} onChange={ChangeTheWay} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
                 
                   <option value='Sell'>Sell</option>
                   <option value='Order'>Order</option>
@@ -171,7 +184,7 @@ const ChangeCurrencyData = (e)=>{
             <div className="  w-full">
               <h2 className="text-gray-500 text-lg">Rate</h2>
               <input
-              value={curenc?.info?.rate || 0}
+              value={((curenc?.info?.rate || 0) * upsellRateUse).toFixed(3)}
                 type="text"
                 className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500"
               />

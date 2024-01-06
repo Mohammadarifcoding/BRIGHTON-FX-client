@@ -4,6 +4,12 @@ import { Link, useLoaderData } from "react-router-dom";
 const OrderDetails = () => {
     const Data = useLoaderData()
     console.log(Data)
+    
+
+   const goback =()=>{
+    window.history.back()
+   }
+
     return (
         <div className="bg-gray-900  min-h-screen flex flex-col">
         <header className="bg-gray-800 py-4">
@@ -49,9 +55,9 @@ const OrderDetails = () => {
               </div>
             </div>
             <div className="flex justify-center mt-20">
-              <Link to='/dashboard/manageOrders'>
-                <button className="btn bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white">Go Back</button>
-              </Link>
+              
+                <button onClick={goback} className="btn bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white">Go Back</button>
+              
             </div>
           </div>
         </main>
