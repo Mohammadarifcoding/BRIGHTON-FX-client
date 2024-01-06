@@ -11,7 +11,7 @@ const Download = () => {
                     <p className='text-gray-800 mt-4 sm:text-base text-sm max-w-[500px]'>Our online channels (Mobile APP and Web Portal) makes it convenient to send money abroad.</p>
                     <div className='flex gap-5 mt-6 flex-wrap'>
                         <img className='max-w-[150px] max-h-[80px]' src="/Images/app-store.png" alt="" />
-                        <img className='max-w-[150px] max-h-[80px]' src="/public/Images/google-play-store.png" alt="" />
+                        <img className='max-w-[150px] max-h-[80px]' src="/Images/google-play-store.png" alt="" />
                     </div>
             </div>
             <div className='lg:block hidden' >

@@ -60,7 +60,9 @@ const Navbar = () => {
              <NavLink to={'/travleMoney'} className=' pb-2 px-4 border-b border-white'><li>Travel Money </li></NavLink>
              <NavLink to={'/termsCoditition'} className=' pb-2 px-4 border-b border-white'><li>Terms & Condition </li></NavLink>
              <NavLink to={'/contact'} className=' pb-2 px-4 border-b border-white'><li>Contact Us </li></NavLink>
-             
+             <Link to={'/dashboard/Currency'} className="block border-b border-white">
+             <button className="bg-[#4A54A4] hover:bg-[#32396d]  px-4 pb-2  text-white">Sign In</button>
+             </Link>
                      </div>
                 </div>
             </Drawer>
