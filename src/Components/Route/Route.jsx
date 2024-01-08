@@ -13,6 +13,9 @@ import AddCurrency from "../Dashboard/Pages/AddCurrency/AddCurrency";
 import Orders from "../Dashboard/Pages/Orders/Orders";
 import OrderDetails from "../Dashboard/Pages/OrderDetails/OrderDetails";
 import DoneOrders from "../Dashboard/Pages/Orders/DoneOrders";
+import PrivateProvider from "../Providers/PrivateProvider";
+import SecureBox from "../../SecureBox/SecureBox";
+import UpdateCurrency from "../Dashboard/Pages/UpdateCurrency/UpdateCurrency";
 
 const router = createBrowserRouter([
     {
@@ -45,13 +48,14 @@ const router = createBrowserRouter([
        {
         path:'/exchangeRates',
         element:<ExchangeRates></ExchangeRates>
-       }
+       },
+      
     
     ]
     },
     {
       path:'/dashboard',
-      element:<DashBoardLayout></DashBoardLayout>,
+      element:<PrivateProvider><DashBoardLayout></DashBoardLayout></PrivateProvider>,
       children:[
         {
           path:'Currency',
@@ -74,8 +78,17 @@ const router = createBrowserRouter([
           path:'activeOrders',
           element:<DoneOrders></DoneOrders>
         },
+        {
+          path:'update/:currency',
+          element:<UpdateCurrency></UpdateCurrency>
+        }
+        
       ]
-    }
+    },
+    {
+      path:'/box',
+      element:<SecureBox></SecureBox>
+     }
   ]);
 
   export default router

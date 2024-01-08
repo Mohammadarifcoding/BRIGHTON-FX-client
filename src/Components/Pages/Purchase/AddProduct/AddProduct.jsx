@@ -23,7 +23,7 @@ const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem}) =>
     const [Type,setType] = useState('Sell')
 
     const {data:curenc,refetch} = useQuery({
-      queryKey:['currrency',currencyData],
+      queryKey:[`currrency${currencyData}`,currencyData],
       queryFn:async()=>{
        const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
           headers:

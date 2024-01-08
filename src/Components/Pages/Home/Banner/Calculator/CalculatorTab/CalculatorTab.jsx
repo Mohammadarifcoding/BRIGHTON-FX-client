@@ -22,7 +22,7 @@ const CalculatorTab = () => {
     label:'United Arab Emirates Dirham'
   });
     const {data:curenc} = useQuery({
-    queryKey:['currrency',currencyData.value],
+    queryKey:[`currrency${currencyData?.value}`,currencyData.value],
     queryFn:async()=>{
      const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`,{
         headers:

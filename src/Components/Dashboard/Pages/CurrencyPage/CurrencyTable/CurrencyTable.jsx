@@ -6,19 +6,10 @@ import { useState } from "react";
 
 
 
-const calculateIncreasedSellPrice = (originalPrice, percentageIncrease) => {
-    const increaseFactor = 1 + percentageIncrease / 100;
-    return (originalPrice * increaseFactor).toFixed(2);
-  };
 
 const CurrencyTable = ({currency}) => {
 
-   const Axious = UseAxious()
-   
-   const [percentageIncrease, setPercentageIncrease] = useState(0); // State to store the percentage increase
-
-   // Function to handle change in percentage input
-
+  
 
     return (
         <div className="overflow-x-auto mt-4">
@@ -37,10 +28,16 @@ const CurrencyTable = ({currency}) => {
                   Country Name
                 </th>
                 <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
+                  Market Price
+                </th>
+                <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
                   Selling Price
                 </th>
                 <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
                   Buying Price
+                </th>
+                <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
+                  Action
                 </th>
               </tr>
             </thead>
