@@ -49,17 +49,18 @@ const UpdateCurrency = () => {
         setCheckingLoading(false);
     };
 
-    const handleAdd = () => {
+    const handleUpdate = () => {
         // Logic for adding the currency to the system
         // This function can add the currency and country to your data structure or database
-        Axious.post('/AddCurrency', { label: countryName, value: currencyName ,Sell : Sell, Buy: Buy})
+        Axious.put(`/updateCurrency/${currencyName}`, { label: countryName, value: currencyName ,Sell : Sell, Buy: Buy})
             .then((res) => {
                 console.log(res.data);
-                toast(`Added ${currencyName} currency `);
+                toast(`Updated ${currencyName} currency`);
                 setCountryName('');
                 setCurrencyName('');
+                nav('/dashboard/Currency')
                 setSell(0)
-                setBuy(0)
+                setBuy(0)              
             })
             .catch((err) => {
                 toast(err.message);
@@ -129,16 +130,16 @@ const UpdateCurrency = () => {
                             )}
 
                             {checking ? (
-                                <button onClick={handleAdd} className={`  bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300`}>
-                                    Add
+                                <button onClick={handleUpdate} className={`  bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300`}>
+                                    Update
                                 </button>
                             ) : (
                                 <button
                                     disabled
-                                    onClick={handleAdd}
+                                    onClick={handleUpdate}
                                     className={` disabled:bg-green-700 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300`}
                                 >
-                                    Add
+                                    Update
                                 </button>
                             )}
                         </div>
