@@ -4,14 +4,18 @@ import { FaRegCheckCircle } from 'react-icons/fa';
 import UseAxious from '../../../../Hook/UseAxious';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateCurrency = () => {
-    const [currencyName, setCurrencyName] = useState('');
-    const [countryName, setCountryName] = useState('');
+    const CurrecnyDataFrom = useLoaderData()
+    console.log(CurrecnyDataFrom)
+    // const buyDataString = parseFloat(CurrecnyDataFrom?.Buy)
+    // const sellDataString = parseFloat(CurrecnyDataFrom?.Sell)
+    const [currencyName, setCurrencyName] = useState(CurrecnyDataFrom?.value);
+    const [countryName, setCountryName] = useState(CurrecnyDataFrom?.label);
     const [checking, setChecking] = useState(false);
-    const [Sell,setSell] = useState(0)
-    const [Buy,setBuy] = useState(0)
+    const [Sell,setSell] = useState(parseFloat(CurrecnyDataFrom?.Sell))
+    const [Buy,setBuy] = useState(parseFloat(CurrecnyDataFrom?.Buy))
     const [checkingLoading, setCheckingLoading] = useState(false);
     const Axious = UseAxious();
     const nav = useNavigate()
@@ -86,13 +90,14 @@ const UpdateCurrency = () => {
                         />
                         <input
                             type="number"
+                            defaultValue={Buy}
                             onChange={(e)=>{setBuy(e.target.value)}}
                             placeholder="Sell Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
                         <input
                             type="number"
-                            
+                            defaultValue={Sell}
                             onChange={(e)=>{setSell(e.target.value)}}
                             placeholder="Buy Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"

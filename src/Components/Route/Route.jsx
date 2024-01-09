@@ -80,7 +80,8 @@ const router = createBrowserRouter([
         },
         {
           path:'update/:currency',
-          element:<UpdateCurrency></UpdateCurrency>
+          element:<UpdateCurrency></UpdateCurrency>,
+          loader:({params})=> fetch(`https://brighton-fx-server.vercel.app/singleCurrency/${params.currency}`)
         }
         
       ]
