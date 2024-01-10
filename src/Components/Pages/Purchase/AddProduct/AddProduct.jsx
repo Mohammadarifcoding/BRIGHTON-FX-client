@@ -1,117 +1,117 @@
 
-// import { useEffect, useState } from "react";
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
-// import { v4 as uuidv4 } from 'uuid';
-// import { ToastContainer, toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
-// import 'react-toastify/dist/ReactToastify.css';
-// import UseCurrency from "../../../../Hook/UseCurrency";
-// import CurrencyInput from "./CurrencyInput";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import UseCurrency from "../../../../Hook/UseCurrency";
+import CurrencyInput from "./CurrencyInput";
 
 
 
-// const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem,currencyParams}) => {
-//     const nav = useNavigate()
-//     const [currency,refetchCurrency] = UseCurrency()
+const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem,currencyParams}) => {
+    const nav = useNavigate()
+    const [currency,refetchCurrency] = UseCurrency()
     
-//     const [currencyData, setCurrencyData] = useState('TWD');
-//     useEffect(()=>{
-//       const newCurrency = currency.find(item => item.value == currencyParams)
-//       setCurrencyData(newCurrency.value)
-//     },[])
-//     const [upsellRateUse,setUpsellRateUse] = useState(1)
-//     const [youSell,setYouSell] = useState(0)
+    const [currencyData, setCurrencyData] = useState('TWD');
+    useEffect(()=>{
+      const newCurrency = currency.find(item => item.value == currencyParams)
+      setCurrencyData(newCurrency.value)
+    },[])
+    const [upsellRateUse,setUpsellRateUse] = useState(1)
+    const [youSell,setYouSell] = useState(0)
     
-//     const [Type,setType] = useState('Sell')
+    const [Type,setType] = useState('Sell')
 
-//     const {data:curenc,refetch} = useQuery({
-//       queryKey:[`currrency${currencyData}`,currencyData],
-//       queryFn:async()=>{
-//        const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
-//           headers:
-//           {
-//             apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
-//           }
-//         })
-//         return fetchData.data
-//       }
-//     })
+    const {data:curenc,refetch} = useQuery({
+      queryKey:[`currrency${currencyData}`,currencyData],
+      queryFn:async()=>{
+       const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
+          headers:
+          {
+            apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
+          }
+        })
+        return fetchData.data
+      }
+    })
 
 
 
 
   
-//     const [buyCurrency,setBuyCurrency] = useState(0)
+    const [buyCurrency,setBuyCurrency] = useState(0)
   
     
   
-//    const handleSellamountChange = (e)=>{
+   const handleSellamountChange = (e)=>{
           
-//             const CurrencySelected = currency?.find( item => item.value == currencyData )
-//             console.log(CurrencySelected)
+            const CurrencySelected = currency?.find( item => item.value == currencyData )
+            console.log(CurrencySelected)
         
-//             setBuyCurrency(e.target.value)
-//             setYouSell((e.target.value/(curenc?.info?.rate * CurrencySelected.Buy)).toFixed(2))
-//    }
+            setBuyCurrency(e.target.value)
+            setYouSell((e.target.value/(curenc?.info?.rate * CurrencySelected.Buy)).toFixed(2))
+   }
   
-//    const handleyouBuyamountCurrency=(e)=>{
+   const handleyouBuyamountCurrency=(e)=>{
 
-//     const CurrencySelected = currency?.find(item => item.value == currencyData )
-//     console.log(CurrencySelected.Sell)
+    const CurrencySelected = currency?.find(item => item.value == currencyData )
+    console.log(CurrencySelected.Sell)
 
-//     setYouSell(e.target.value)
-//     setBuyCurrency(((curenc?.info?.rate * CurrencySelected.Sell)* e.target.value).toFixed(2))
-//    }
+    setYouSell(e.target.value)
+    setBuyCurrency(((curenc?.info?.rate * CurrencySelected.Sell)* e.target.value).toFixed(2))
+   }
   
-//    const handleAdding = ()=>{
-//     let value = {}
-//    if(youSell <= 0 ){
+   const handleAdding = ()=>{
+    let value = {}
+   if(youSell <= 0 ){
      
-//       return toast('Please give correct amount')
-//     }
-//     if(buyCurrency <= 0){
+      return toast('Please give correct amount')
+    }
+    if(buyCurrency <= 0){
      
-//      return toast('Please give correct amount')
-//     }
-//     if(Type == 'Sell'){
-//        const currencyMy = youSell
-//     const currencyTake = buyCurrency
-//     value = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData,Id:uuidv4(),Rate:curenc?.info?.rate}
-//     }
-//     else if(Type == 'Order'){
-//       const currencyMy = buyCurrency
-//     const currencyTake = youSell
-//     value = {currencyMy,currencyTake,currencyTakecurrent:currencyData,currencyMycurrent:'GBP',Id:uuidv4(),Rate:curenc?.info?.rate}
-//     }
+     return toast('Please give correct amount')
+    }
+    if(Type == 'Sell'){
+       const currencyMy = youSell
+    const currencyTake = buyCurrency
+    value = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData,Id:uuidv4(),Rate:curenc?.info?.rate}
+    }
+    else if(Type == 'Order'){
+      const currencyMy = buyCurrency
+    const currencyTake = youSell
+    value = {currencyMy,currencyTake,currencyTakecurrent:currencyData,currencyMycurrent:'GBP',Id:uuidv4(),Rate:curenc?.info?.rate}
+    }
     
 
 
 
 
-//     const localStorageData = JSON.parse(localStorage.getItem('purchase'))
-//     if(localStorageData){
-//       if(localStorageData?.length >= 4){
-//         return toast('Please clear your cart')
-//       }
+    const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+    if(localStorageData){
+      if(localStorageData?.length >= 4){
+        return toast('Please clear your cart')
+      }
       
-//       const totalData = [...localStorageData , value]
-//       localStorage.setItem('purchase',JSON.stringify(totalData))
-//      setAllTheItem([...allTheitem,value])
-//       setYouSell(0)
-//       setBuyCurrency(0)
-//     }
-//     else{
-//       const totalData = [value]
-//       localStorage.setItem('purchase',JSON.stringify(totalData))
-//       setAllTheItem([value])
-//       setYouSell(0)
-//       setBuyCurrency(0)
-//     }
+      const totalData = [...localStorageData , value]
+      localStorage.setItem('purchase',JSON.stringify(totalData))
+     setAllTheItem([...allTheitem,value])
+      setYouSell(0)
+      setBuyCurrency(0)
+    }
+    else{
+      const totalData = [value]
+      localStorage.setItem('purchase',JSON.stringify(totalData))
+      setAllTheItem([value])
+      setYouSell(0)
+      setBuyCurrency(0)
+    }
 
  
     
-//    }
+   }
 
 
 const ChangeCurrencyData = (e)=>{
