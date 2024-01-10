@@ -11,7 +11,7 @@ const OrderSummary = ({purchaseData,setAllTheItem,allTheitem}) => {
         const previousData = JSON.parse(localStorage.getItem('purchase'))
         
         const newData = previousData.filter(item => item.Id != id)
-        console.log(newData)
+    
         setAllTheItem(newData)
         localStorage.setItem('purchase',JSON.stringify(newData))
      }

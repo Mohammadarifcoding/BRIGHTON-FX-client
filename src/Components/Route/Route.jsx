@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element:<Home></Home>
       },
       {
-        path:'/purchase',
+        path:'/purchase/:currencyParams',
         element:<Purchase></Purchase>
       },
       {

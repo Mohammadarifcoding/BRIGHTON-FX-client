@@ -60,10 +60,10 @@ const First_Name = e.target.FirstName.value
      
      Axious.post('/Order',UserInformation)
      .then(res =>{
-      console.log(UserInformation)
+
       setlastOrder(UserInformation)
       localStorage.clear('purchase')
-      console.log(res.data)
+
       setNextForm(3)
      })
     }

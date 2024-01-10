@@ -3,15 +3,15 @@ import axios from 'axios';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
-import UseUpsell from '../../../../../../Hook/UseUpsell';
+
 
 const CurrencyMobileItem = ({item,num}) => {
 
   const nav = useNavigate()
 
-  const [upsellValue,refetchUpsell] = UseUpsell()
+ 
 
-  console.log(upsellValue)
+ 
   
     const {data:curenc} = useQuery({
         queryKey:[`currrency${item?.value}`],
@@ -29,7 +29,7 @@ const CurrencyMobileItem = ({item,num}) => {
 
 
       
-  console.log(curenc?.info?.rate)
+
     return (
         <div className={` bg-gray-100 justify-between items-center px-3 flex  py-5`}>
         <div className="flex gap-3 items-center">
@@ -37,10 +37,10 @@ const CurrencyMobileItem = ({item,num}) => {
         
           <h2 className=" text-sm xl:block hidden">{item?.label}-{item?.value}</h2>
           <div className='flex flex-col'>
-          <h2 className=" xl:hidden  text-sm">{item?.label.slice(0,10)}...</h2>
+          <h2 className=" xl:hidden  text-sm">{item?.label?.slice(0,10)}...</h2>
           {
-            num == 0 ? <h2 className=" w-[100px] lg:text-end">{(curenc?.info?.rate * upsellValue).toFixed(3) }</h2> 
-            : <h2 className=" w-[100px] lg:text-end">{curenc?.info?.rate.toFixed(3)}</h2>
+            num == 0 ? <h2 className=" w-[100px] lg:text-end">{(curenc?.info?.rate * item?.Sell).toFixed(3) }</h2> 
+            : <h2 className=" w-[100px] lg:text-end">{(curenc?.info?.rate * item?.Buy).toFixed(3) }</h2>
           }
           
           </div>

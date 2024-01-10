@@ -4,7 +4,6 @@ import UseAxious from "../../../../Hook/UseAxious";
 
 const Orders = () => {
     const [pendingOrders,RefetchPendingOrder] = PendingOrder()
-    console.log(pendingOrders)
     const Axious = UseAxious()
     
       const handleAcceptOrder = (orderId) => {
@@ -12,7 +11,6 @@ const Orders = () => {
         // This function can update the order status or perform other actions
           Axious.get(`/pendingToAceept/${orderId}`)
           .then(res => {
-            console.log(res.data)
             RefetchPendingOrder()
           })
       };

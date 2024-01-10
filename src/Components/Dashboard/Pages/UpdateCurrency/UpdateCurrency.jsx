@@ -8,7 +8,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateCurrency = () => {
     const CurrecnyDataFrom = useLoaderData()
-    console.log(CurrecnyDataFrom)
+
     // const buyDataString = parseFloat(CurrecnyDataFrom?.Buy)
     // const sellDataString = parseFloat(CurrecnyDataFrom?.Sell)
     const [currencyName, setCurrencyName] = useState(CurrecnyDataFrom?.value);
@@ -54,7 +54,7 @@ const UpdateCurrency = () => {
         // This function can add the currency and country to your data structure or database
         Axious.put(`/updateCurrency/${currencyName}`, { label: countryName, value: currencyName ,Sell : Sell, Buy: Buy})
             .then((res) => {
-                console.log(res.data);
+  
                 toast(`Updated ${currencyName} currency`);
                 setCountryName('');
                 setCurrencyName('');
@@ -73,7 +73,7 @@ const UpdateCurrency = () => {
             </header>
             <main className="flex-1 p-6 mt-20">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-medium mb-6">Add New Currency</h2>
+                    <h2 className="text-2xl font-medium mb-6">Update Currency</h2>
                     <div className="flex flex-col gap-4">
                         <input
                             type="text"

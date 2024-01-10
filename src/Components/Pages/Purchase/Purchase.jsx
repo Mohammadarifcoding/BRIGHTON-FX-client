@@ -7,11 +7,14 @@ import AddProduct from "./AddProduct/AddProduct";
 import CheckingPoint from "./CheckingPoint/CheckingPoint";
 import Process from "./Process/Process";
 import UseCurrency from "../../../Hook/UseCurrency";
+import { useParams } from "react-router-dom";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
     JSON.parse(localStorage.getItem("purchase"))
   );
+  const {currencyParams} = useParams()
+  
 
   const [currency,refetchCurrency] = UseCurrency()
 
@@ -40,7 +43,7 @@ const Purchase = () => {
 
         {/* Add Currency */}
         { nextFrom == 1 ? <>
-          <AddProduct allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
+          <AddProduct currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
         <ul className="flex flex-col mt-10 list-disc ml-6">
            <li>We Believe in trust of our customer</li>
            <li>We give best suppor for our reliable customers</li>

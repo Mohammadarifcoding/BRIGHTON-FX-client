@@ -10,15 +10,8 @@ import UseAxious from "../../../Hook/UseAxious";
 const CurrencyChart = ({currency}) => {
     const [inputField,setInputField] = useState('')
     const [showAll,setShowAll] = useState(false)
-    const Axious = UseAxious()
     const [fullData,setFullData] = useState([...currency])
-    const {data:upsellRate = {} , refetch:upsellRefeth}=useQuery({
-      queryKey:['upselling'],
-      queryFn:async()=>{
-        const result = await Axious.get('/upsell')
-        return result.data
-      }
-    })
+   
  
 
     

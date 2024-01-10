@@ -13,7 +13,7 @@ const CurrencyChartMobile = ({data}) => {
             name:'Click & Sell'
         }
        ]
-    console.log(data)
+
 
     return (
         <div className='flex flex-col'>

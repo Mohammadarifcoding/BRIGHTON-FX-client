@@ -3,8 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const OrderDetails = () => {
     const Data = useLoaderData()
-    console.log(Data)
-    
+
 
    const goback =()=>{
     window.history.back()

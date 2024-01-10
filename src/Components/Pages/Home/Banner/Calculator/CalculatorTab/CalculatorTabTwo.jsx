@@ -38,14 +38,14 @@ const CalculatorTabTwo = () => {
   
 
  const handleSellamountChange =(e)=>{
-          console.log(e.target.value)
+
           
           setBuyCurrency(e.target.value)
           setYouSell((e.target.value/curenc?.info?.rate).toFixed(2))
  }
 
  const handleyouBuyamountCurrency=(e)=>{
-  console.log(e.target.value)
+
   setYouSell(e.target.value)
   setBuyCurrency(((curenc?.info?.rate)* e.target.value).toFixed(2))
  }
@@ -78,7 +78,7 @@ const CalculatorTabTwo = () => {
   }
   else{
     const totalData = [currentFull]
-    console.log(totalData)
+
     localStorage.setItem('purchase',JSON.stringify(totalData))
     setYouSell(0)
     setBuyCurrency(0)

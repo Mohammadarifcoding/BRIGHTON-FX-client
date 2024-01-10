@@ -1,118 +1,121 @@
 
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
-import UseCurrency from "../../../../Hook/UseCurrency";
-import UseUpsell from './../../../../Hook/UseUpsell';
+// import { useEffect, useState } from "react";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
+// import { v4 as uuidv4 } from 'uuid';
+// import { ToastContainer, toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
+// import 'react-toastify/dist/ReactToastify.css';
+// import UseCurrency from "../../../../Hook/UseCurrency";
+// import CurrencyInput from "./CurrencyInput";
 
 
 
-const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem}) => {
-
-    const nav = useNavigate()
-    const [currency,refetchCurrency] = UseCurrency()
-    const [currencyData, setCurrencyData] = useState('TWD');
-    const [upsellValue,refetchUpsell] = UseUpsell()
-    const [upsellRateUse,setUpsellRateUse] = useState(1)
-    const [youSell,setYouSell] = useState(0)
+// const AddProduct = ({setPurchaseeData,purchaseData,allTheitem,setAllTheItem,currencyParams}) => {
+//     const nav = useNavigate()
+//     const [currency,refetchCurrency] = UseCurrency()
     
-    const [Type,setType] = useState('Sell')
+//     const [currencyData, setCurrencyData] = useState('TWD');
+//     useEffect(()=>{
+//       const newCurrency = currency.find(item => item.value == currencyParams)
+//       setCurrencyData(newCurrency.value)
+//     },[])
+//     const [upsellRateUse,setUpsellRateUse] = useState(1)
+//     const [youSell,setYouSell] = useState(0)
+    
+//     const [Type,setType] = useState('Sell')
 
-    const {data:curenc,refetch} = useQuery({
-      queryKey:[`currrency${currencyData}`,currencyData],
-      queryFn:async()=>{
-       const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
-          headers:
-          {
-            apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
-          }
-        })
-        return fetchData.data
-      }
-    })
+//     const {data:curenc,refetch} = useQuery({
+//       queryKey:[`currrency${currencyData}`,currencyData],
+//       queryFn:async()=>{
+//        const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`,{
+//           headers:
+//           {
+//             apikey:'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
+//           }
+//         })
+//         return fetchData.data
+//       }
+//     })
 
 
 
 
   
-    const [buyCurrency,setBuyCurrency] = useState(0)
+//     const [buyCurrency,setBuyCurrency] = useState(0)
   
     
   
-   const handleSellamountChange =(e)=>{
-            console.log(e.target.value)
-            
-            setBuyCurrency(e.target.value)
-            setYouSell((e.target.value/(curenc?.info?.rate * 1.025)).toFixed(2))
-   }
+//    const handleSellamountChange = (e)=>{
+          
+//             const CurrencySelected = currency?.find( item => item.value == currencyData )
+//             console.log(CurrencySelected)
+        
+//             setBuyCurrency(e.target.value)
+//             setYouSell((e.target.value/(curenc?.info?.rate * CurrencySelected.Buy)).toFixed(2))
+//    }
   
-   const handleyouBuyamountCurrency=(e)=>{
-    console.log(e.target.value)
-    setYouSell(e.target.value)
-    setBuyCurrency(((curenc?.info?.rate * 1.025)* e.target.value).toFixed(2))
-   }
+//    const handleyouBuyamountCurrency=(e)=>{
+
+//     const CurrencySelected = currency?.find(item => item.value == currencyData )
+//     console.log(CurrencySelected.Sell)
+
+//     setYouSell(e.target.value)
+//     setBuyCurrency(((curenc?.info?.rate * CurrencySelected.Sell)* e.target.value).toFixed(2))
+//    }
   
-   const handleAdding = ()=>{
-    let value = {}
-   if(youSell <= 0 ){
+//    const handleAdding = ()=>{
+//     let value = {}
+//    if(youSell <= 0 ){
      
-      return toast('Please give correct amount')
-    }
-    if(buyCurrency <= 0){
+//       return toast('Please give correct amount')
+//     }
+//     if(buyCurrency <= 0){
      
-     return toast('Please give correct amount')
-    }
-    if(Type == 'Sell'){
-       const currencyMy = youSell
-    const currencyTake = buyCurrency
-    value = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData,Id:uuidv4(),Rate:curenc?.info?.rate}
-    }
-    else if(Type == 'Order'){
-      const currencyMy = buyCurrency
-    const currencyTake = youSell
-    value = {currencyMy,currencyTake,currencyTakecurrent:currencyData,currencyMycurrent:'GBP',Id:uuidv4(),Rate:curenc?.info?.rate}
-    }
+//      return toast('Please give correct amount')
+//     }
+//     if(Type == 'Sell'){
+//        const currencyMy = youSell
+//     const currencyTake = buyCurrency
+//     value = {currencyMy,currencyTake,currencyTakecurrent:'GBP',currencyMycurrent:currencyData,Id:uuidv4(),Rate:curenc?.info?.rate}
+//     }
+//     else if(Type == 'Order'){
+//       const currencyMy = buyCurrency
+//     const currencyTake = youSell
+//     value = {currencyMy,currencyTake,currencyTakecurrent:currencyData,currencyMycurrent:'GBP',Id:uuidv4(),Rate:curenc?.info?.rate}
+//     }
     
 
-    
-    console.log(value)
 
 
-    const localStorageData = JSON.parse(localStorage.getItem('purchase'))
-    if(localStorageData){
-      if(localStorageData?.length >= 4){
-        return toast('Please clear your cart')
-      }
+
+//     const localStorageData = JSON.parse(localStorage.getItem('purchase'))
+//     if(localStorageData){
+//       if(localStorageData?.length >= 4){
+//         return toast('Please clear your cart')
+//       }
       
-      const totalData = [...localStorageData , value]
-      localStorage.setItem('purchase',JSON.stringify(totalData))
-     setAllTheItem([...allTheitem,value])
-      console.log([...purchaseData,value])
-      setYouSell(0)
-      setBuyCurrency(0)
-    }
-    else{
-      const totalData = [value]
-      console.log(totalData)
-      localStorage.setItem('purchase',JSON.stringify(totalData))
-      setAllTheItem([value])
-      console.log([value])
-      setYouSell(0)
-      setBuyCurrency(0)
-    }
+//       const totalData = [...localStorageData , value]
+//       localStorage.setItem('purchase',JSON.stringify(totalData))
+//      setAllTheItem([...allTheitem,value])
+//       setYouSell(0)
+//       setBuyCurrency(0)
+//     }
+//     else{
+//       const totalData = [value]
+//       localStorage.setItem('purchase',JSON.stringify(totalData))
+//       setAllTheItem([value])
+//       setYouSell(0)
+//       setBuyCurrency(0)
+//     }
 
  
     
-   }
+//    }
 
 
 const ChangeCurrencyData = (e)=>{
       refetch()
-    console.log(e.target.value)
     setCurrencyData(e.target.value)
 }
 
@@ -158,7 +161,7 @@ const ChangeTheWay = (e)=>{
                onChange={ChangeCurrencyData} 
               className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
                 {currency.map((item) => (
-                  <option value={item.value}>{item.label}</option>
+                  <CurrencyInput currency={item}></CurrencyInput>
                 ))}
               </select>
             </div>

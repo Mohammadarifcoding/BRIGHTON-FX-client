@@ -20,10 +20,9 @@ const SecureBox = () => {
 
   const handleAccess = () => {
     // Implement authentication logic here
-    console.log('Username:', userName);
-    console.log('Password:', userPassword);
+
     if(userName == 'brightonfx' && userPassword =='Acess123'){
-        console.log(AdminAcess)
+      
         nav(from, { replace: true });
         setAdminAcess(true)
         return

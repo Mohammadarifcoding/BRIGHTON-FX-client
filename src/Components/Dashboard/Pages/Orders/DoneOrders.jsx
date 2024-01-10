@@ -6,7 +6,6 @@ import UseAcceptedOrder from "../../../../Hook/UseAcceptedOrder";
 
 const DoneOrders = () => {
     const [AcceptedOrder,RefetchAcceptedOrder] = UseAcceptedOrder()
-    console.log(AcceptedOrder)
     const Axious = UseAxious()
     
       const handleAcceptOrder = (orderId) => {
@@ -14,7 +13,6 @@ const DoneOrders = () => {
         // This function can update the order status or perform other actions
           Axious.get(`/pendingToAceept/${orderId}`)
           .then(res => {
-            console.log(res.data)
             RefetchAcceptedOrder()
           })
       };

@@ -8,7 +8,6 @@ const CurrencyItemTable = ({ item }) => {
     const [FetchData, setFetchData] = useState(false);
     const [upsellValue, refetchUpsell] = UseUpsell();
 
-    console.log(upsellValue);
     useEffect(() => {
         if (item.value != undefined) {
             setFetchData(true);
@@ -28,7 +27,7 @@ const CurrencyItemTable = ({ item }) => {
         }
     });
 
-    console.log(upsellValue);
+
 
     const SellValue = item?.Sell / 100 + 1;
     const BuyValue = item?.Buy / 100 + 1;

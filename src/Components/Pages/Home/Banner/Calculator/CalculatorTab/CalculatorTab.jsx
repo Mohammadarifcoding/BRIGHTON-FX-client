@@ -33,8 +33,6 @@ const CalculatorTab = () => {
       return fetchData.data
     }
   })
-  console.log(curenc)
-  console.log(curenc?.info?.rate)
 
 
   const [youSell,setYouSell] = useState(0)
@@ -65,18 +63,18 @@ const CalculatorTab = () => {
   const currencyTake = buyCurrency
   const currentFull = {currencyMy,currencyTake,currencyMycurrent:'GBP',currencyTakecurrent:currencyData.value,Id:uuidv4(),Rate:curenc?.info?.rate}
   if(currencyMy <= 0 ){
-    nav('/purchase')
+    nav(`/purchase/${currencyData.value}`)
     return toast('Please give correct amount')
   }
   if(currencyTake <= 0){
-    nav('/purchase')
+    nav(`/purchase/${currencyData.value}`)
    return toast('Please give correct amount')
   }
    
   const localStorageData = JSON.parse(localStorage.getItem('purchase'))
   if(localStorageData){
     if(localStorageData?.length >= 4){
-      nav('/purchase')
+      nav(`/purchase/${currencyData.value}`)
       return toast('Please clear your cart')
     }
     
@@ -84,15 +82,15 @@ const CalculatorTab = () => {
     localStorage.setItem('purchase',JSON.stringify(totalData))
     setYouSell(0)
     setBuyCurrency(0)
-    nav('/purchase')
+    nav(`/purchase/${currencyData.value}`)
   }
   else{
     const totalData = [currentFull]
-    console.log(totalData)
+
     localStorage.setItem('purchase',JSON.stringify(totalData))
     setYouSell(0)
     setBuyCurrency(0)
-    nav('/purchase')
+    nav(`/purchase/${currencyData.value}`)
   }
 
  

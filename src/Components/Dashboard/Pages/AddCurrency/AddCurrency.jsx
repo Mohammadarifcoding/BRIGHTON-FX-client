@@ -50,7 +50,6 @@ const AddCurrency = () => {
         // This function can add the currency and country to your data structure or database
         Axious.post('/AddCurrency', { label: countryName, value: currencyName ,Sell : Sell, Buy: Buy})
             .then((res) => {
-                console.log(res.data);
                 toast(`Added ${currencyName} currency `);
                 setCountryName('');
                 setCurrencyName('');

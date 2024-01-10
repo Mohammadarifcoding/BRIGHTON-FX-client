@@ -6,7 +6,7 @@ const PrivateProvider = ({children}) => {
   const {AdminAcess,setAdminAcess} = useContext(AuthContext)
   const lo = useLocation()
 
-  console.log(AdminAcess)
+
  if(AdminAcess){
     return children
  }
