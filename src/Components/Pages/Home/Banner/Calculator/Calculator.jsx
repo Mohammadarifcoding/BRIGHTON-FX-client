@@ -46,7 +46,7 @@ const Calculator = () => {
       <CalculatorTab item={0}></CalculatorTab>
     </TabPanel>
     <TabPanel>
-    <CalculatorTabTwo  ></CalculatorTabTwo>
+    <CalculatorTabTwo   ></CalculatorTabTwo>
     </TabPanel>
   </Tabs>
         </div>
