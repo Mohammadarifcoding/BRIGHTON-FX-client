@@ -2,7 +2,7 @@ import Select from 'react-select';
 
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,7 +16,7 @@ const CalculatorTabTwo = () => {
         value: 'AED',
         label: 'United Arab Emirates Dirham'
     });
-
+    const [upsell,setUpsell] = useState(0)
     const [youSell, setYouSell] = useState(0);
 
     const { data: curenc } = useQuery({
@@ -33,14 +33,20 @@ const CalculatorTabTwo = () => {
 
     const [buyCurrency, setBuyCurrency] = useState(0);
 
+    useEffect(()=>{
+        const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
+        setUpsell(parseFloat(CurrentCurrencySelected.Buy))
+
+  },[currencyData,currency])
+
     const handleSellamountChange = (e) => {
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / curenc?.info?.rate).toFixed(2));
+        setYouSell((e.target.value / (curenc?.info?.rate * (1 + (upsell / 100)))).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
         setYouSell(e.target.value);
-        setBuyCurrency((curenc?.info?.rate * e.target.value).toFixed(2));
+        setBuyCurrency((curenc?.info?.rate * (1 + (upsell / 100)) * e.target.value).toFixed(2));
     };
 
     const handleSelling = () => {
@@ -129,7 +135,7 @@ const CalculatorTabTwo = () => {
             <div className="mt-5 text-center font-semibold">
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
                 <h2 className="mt-3 text-lg">
-                    1 GBP = {(curenc?.info?.rate ?? 1).toFixed(3)} {currencyData.value}
+                    1 GBP = {((curenc?.info?.rate ?? 1) * (1 + (upsell / 100))).toFixed(2)} {currencyData.value}
                 </h2>
             </div>
             <div className="flex mt-3">

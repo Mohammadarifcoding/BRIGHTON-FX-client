@@ -19,7 +19,7 @@ const CalculatorTab = () => {
         value: 'AED',
         label: 'United Arab Emirates Dirham'
     });
-    const [upsell,setUpsell] = useState(0)
+    
     const [upbuy,setupbuy] = useState(0)
 
     const { data: curenc } = useQuery({
