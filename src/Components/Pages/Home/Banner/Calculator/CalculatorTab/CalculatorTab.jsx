@@ -22,7 +22,7 @@ const CalculatorTab = () => {
     
     const [upbuy,setupbuy] = useState(0)
 
-    const { data: curenc } = useQuery({
+    const { data: curenc , isLoading:notgettingCurrency } = useQuery({
         queryKey: [`currrency${currencyData?.value}`, currencyData.value],
         queryFn: async () => {
             const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
@@ -43,13 +43,12 @@ const CalculatorTab = () => {
 
     useEffect(()=>{
           const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
-          setupbuy(parseFloat(CurrentCurrencySelected.Sell))
+          setupbuy(parseFloat(CurrentCurrencySelected?.Sell))
 
     },[currencyData,currency])
 
     const handleSellamountChange = (e) => {
         console.log(e.target.value);
-        const findCurrencyCurrency = currency.find( item => currencyData.value == item.value)
  
         setBuyCurrency(e.target.value);
         setYouSell((e.target.value / (curenc?.info?.rate * (1 + (upbuy / 100)))).toFixed(2));
@@ -57,8 +56,7 @@ const CalculatorTab = () => {
 
     const handleyouBuyamountCurrency = (e) => {
         console.log(e.target.value);
-        setYouSell(e.target.value);
-        const findCurrencyCurrency = currency.find( item => currencyData.value == item.value)
+        setYouSell(e.target.value)
         setBuyCurrency((curenc?.info?.rate * (1 + (upbuy / 100)) * e.target.value).toFixed(2));
     };
 
@@ -148,8 +146,12 @@ const CalculatorTab = () => {
 
             <div className="mt-5 text-center font-semibold">
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
+
                 <h2 className="mt-3 text-lg">
-                    1 GBP = {((curenc?.info?.rate ?? 1) * (1 + (upbuy / 100))).toFixed(2)} {currencyData.value}
+                    {!notgettingCurrency ?
+                     <>1 GBP = {((curenc?.info?.rate ?? 1) * (1 + (upbuy / 100))).toFixed(2)} {currencyData.value}</>:
+                     <><div className="w-10 h-10 mx-auto animate-[spin_1s_linear_infinite] rounded-full border-4 border-r-transparent border-l-transparent border-sky-400"></div></> }
+
                 </h2>
             </div>
             <div onClick={handleBuying} className="flex mt-3">

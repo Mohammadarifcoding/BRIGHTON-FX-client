@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import UseAxious from '../../../Hook/UseAxious';
 
 const ChartItem = ({ item }) => {
     const nav = useNavigate();
+    const Axious = UseAxious()
 
-    const { data: curenc } = useQuery({
+    const { data: curenc, isLoading:NotGettingCurrency } = useQuery({
         queryKey: [`currrency${item?.value}`],
         queryFn: async () => {
             const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
@@ -18,6 +20,15 @@ const ChartItem = ({ item }) => {
             return fetchData.data;
         }
     });
+
+    useEffect(()=>{
+       if(!NotGettingCurrency){
+          Axious.put(`/UpdateCurrencyPrice/${item?.value}`,{Rate : curenc?.info?.rate})
+          .then(res =>{
+            console.log(res.data)
+          })
+       }
+    },[NotGettingCurrency])
 
     return (
         <div className={` bg-gray-100 justify-between items-center px-3 flex  py-5`}>
