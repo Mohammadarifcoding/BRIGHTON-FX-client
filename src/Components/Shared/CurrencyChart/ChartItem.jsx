@@ -27,7 +27,7 @@ const ChartItem = ({ item }) => {
                     <h2 className="text-xl w-fit">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
                     <button
                         onClick={() => {
-                            nav('/purchase');
+                            nav(`/purchase/${item?.value}`);
                         }}
                         className="bg-[#93C94E] hover:bg-[#6c923a] hover:text-white text-xl px-3 py-2 rounded-lg flex items-center gap-2"
                     >
@@ -39,7 +39,7 @@ const ChartItem = ({ item }) => {
                     <div className="flex justify-end">
                         <button
                             onClick={() => {
-                                nav('/purchase');
+                                nav(`/purchase/${item?.value}`);
                             }}
                             className="bg-[#93C94E] hover:bg-[#6c923a] hover:text-white text-xl px-3 py-2 rounded-lg flex items-center gap-2"
                         >

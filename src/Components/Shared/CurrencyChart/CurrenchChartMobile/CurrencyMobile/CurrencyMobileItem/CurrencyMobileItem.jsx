@@ -42,7 +42,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                     <div className="flex  gap-2 lg:flex-row flex-col lg:items-center">
                         <button
                             onClick={() => {
-                                nav('/purchase');
+                                nav(`/purchase/${item?.value}`);
                             }}
                             className="bg-[#93C94E] text-sm hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                         >
@@ -54,7 +54,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
-                                    nav('/purchase');
+                                    nav(`/purchase/${item?.value}`);
                                 }}
                                 className="bg-[#93C94E] text-sm flex-nowrap  hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                             >
