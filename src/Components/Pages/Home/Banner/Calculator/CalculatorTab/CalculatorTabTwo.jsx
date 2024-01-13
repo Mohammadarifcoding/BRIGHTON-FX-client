@@ -16,22 +16,29 @@ const CalculatorTabTwo = () => {
         value: 'AED',
         label: 'United Arab Emirates Dirham'
     });
+    const [Rate,setRate] = useState(0)
     const [upsell,setUpsell] = useState(0)
     const [youSell, setYouSell] = useState(0);
 
-    const { data: curenc } = useQuery({
-        queryKey: [`currrency${currencyData?.value}`, currencyData.value],
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
+    // const { data: curenc } = useQuery({
+    //     queryKey: [`currrency${currencyData?.value}`, currencyData.value],
+    //     queryFn: async () => {
+    //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
+    //             headers: {
+    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //             }
+    //         });
+    //         return fetchData.data;
+    //     }
+    // });
 
     const [buyCurrency, setBuyCurrency] = useState(0);
+
+    useEffect(()=>{
+        setRate(0)
+        const findCurrency = currency.find(item => item.value == currencyData.value)
+        setRate(parseFloat(findCurrency.Rate))
+    },[currency,currencyData])
 
     useEffect(()=>{
         const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
@@ -41,18 +48,18 @@ const CalculatorTabTwo = () => {
 
     const handleSellamountChange = (e) => {
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (curenc?.info?.rate * (1 + (upsell / 100)))).toFixed(2));
+        setYouSell((e.target.value / (Rate * (1 + (upsell / 100)))).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
         setYouSell(e.target.value);
-        setBuyCurrency((curenc?.info?.rate * (1 + (upsell / 100)) * e.target.value).toFixed(2));
+        setBuyCurrency((Rate * (1 + (upsell / 100)) * e.target.value).toFixed(2));
     };
 
     const handleSelling = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: curenc?.info?.rate };
+        const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: Rate };
         if (currencyMy <= 0) {
             nav('/purchase');
             return toast('Please give correct amount');
@@ -135,7 +142,7 @@ const CalculatorTabTwo = () => {
             <div className="mt-5 text-center font-semibold">
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
                 <h2 className="mt-3 text-lg">
-                    1 GBP = {((curenc?.info?.rate ?? 1) * (1 + (upsell / 100))).toFixed(2)} {currencyData.value}
+                    1 GBP = {((Rate ?? 1) * (1 + (upsell / 100))).toFixed(2)} {currencyData.value}
                 </h2>
             </div>
             <div className="flex mt-3">

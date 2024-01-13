@@ -7,28 +7,7 @@ import UseAxious from '../../../Hook/UseAxious';
 
 const ChartItem = ({ item }) => {
     const nav = useNavigate();
-    const Axious = UseAxious()
 
-    const { data: curenc, isLoading:NotGettingCurrency } = useQuery({
-        queryKey: [`currrency${item?.value}`],
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
-
-    useEffect(()=>{
-       if(!NotGettingCurrency){
-          Axious.put(`/UpdateCurrencyPrice/${item?.value}`,{Rate : curenc?.info?.rate})
-          .then(res =>{
-            console.log(res.data)
-          })
-       }
-    },[NotGettingCurrency])
 
     return (
         <div className={` bg-gray-100 justify-between items-center px-3 flex  py-5`}>
@@ -45,7 +24,7 @@ const ChartItem = ({ item }) => {
 
             <div className="flex  lg:gap-10 gap-6 xl:gap-20">
                 <div className="flex  gap-4 lg:flex-row flex-col lg:items-center">
-                    <h2 className="text-xl w-fit">{(curenc?.info?.rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
+                    <h2 className="text-xl w-fit">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
                     <button
                         onClick={() => {
                             nav('/purchase');
@@ -56,7 +35,7 @@ const ChartItem = ({ item }) => {
                     </button>
                 </div>
                 <div className="flex  gap-4 lg:flex-row flex-col lg:items-center ">
-                    <h2 className="text-xl w-[100px] lg:text-end">{(curenc?.info?.rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
+                    <h2 className="text-xl w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
                     <div className="flex justify-end">
                         <button
                             onClick={() => {

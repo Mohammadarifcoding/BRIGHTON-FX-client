@@ -14,18 +14,18 @@ const CurrencyItemTable = ({ item }) => {
         }
     }, [item]);
 
-    const { data: currency } = useQuery({
-        queryKey: [`currrency${item?.value}`],
-        enabled: FetchData,
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item?.value}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
+    // const { data: currency } = useQuery({
+    //     queryKey: [`currrency${item?.value}`],
+    //     enabled: FetchData,
+    //     queryFn: async () => {
+    //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item?.value}&from=GBP&amount=1`, {
+    //             headers: {
+    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //             }
+    //         });
+    //         return fetchData.data;
+    //     }
+    // });
 
     const SellValue = item?.Sell / 100 + 1;
     const BuyValue = item?.Buy / 100 + 1;
@@ -36,14 +36,14 @@ const CurrencyItemTable = ({ item }) => {
             <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px] text-start">{item?.label} -></td>
             <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">
                 {/* Calculate the increased sell price */}
-                {currency?.info?.rate?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
+                {item?.Rate?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
             </td>
             <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">
                 {/* Calculate the increased sell price */}
-                {(currency?.info?.rate * SellValue)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
+                {(item?.Rate * SellValue)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
             </td>
 
-            <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">{(currency?.info?.rate * BuyValue)?.toFixed(3)} GBP</td>
+            <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">{(item?.Rate * BuyValue)?.toFixed(3)} GBP</td>
 
             <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">
                 <Link to={`/dashboard/update/${item?.value}`}>

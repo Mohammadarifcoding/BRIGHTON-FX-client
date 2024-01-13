@@ -7,17 +7,17 @@ import { useNavigate } from 'react-router-dom';
 const CurrencyMobileItem = ({ item, num }) => {
     const nav = useNavigate();
 
-    const { data: curenc } = useQuery({
-        queryKey: [`currrency${item?.value}`],
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
+    // const { data: curenc } = useQuery({
+    //     queryKey: [`currrency${item?.value}`],
+    //     queryFn: async () => {
+    //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
+    //             headers: {
+    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //             }
+    //         });
+    //         return fetchData.data;
+    //     }
+    // });
 
     return (
         <div className={` bg-gray-100 justify-between items-center px-3 flex  py-5`}>
@@ -30,9 +30,9 @@ const CurrencyMobileItem = ({ item, num }) => {
                 <div className="flex flex-col">
                     <h2 className=" xl:hidden  text-sm">{item?.label?.slice(0, 10)}...</h2>
                     {num == 0 ? (
-                        <h2 className=" w-[100px] lg:text-end">{(curenc?.info?.rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
+                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
                     ) : (
-                        <h2 className=" w-[100px] lg:text-end">{(curenc?.info?.rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
+                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
                     )}
                 </div>
             </div>

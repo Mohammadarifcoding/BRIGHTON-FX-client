@@ -17,31 +17,54 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         const newCurrency = currency.find((item) => item.value == currencyParams);
         setCurrencyData(newCurrency.value);
     }, []);
-    const [upsellRateUse, setUpsellRateUse] = useState(1);
+   
     const [youSell, setYouSell] = useState(0);
+    const [Rate,setRate] = useState(1)
 
     const [Type, setType] = useState('Sell');
+    const [upvalue,setUpvalue] = useState(1)
 
-    const { data: curenc, refetch } = useQuery({
-        queryKey: [`currrency${currencyData}`, currencyData],
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
+    // const { data: curenc, refetch } = useQuery({
+    //     queryKey: [`currrency${currencyData}`, currencyData],
+    //     queryFn: async () => {
+    //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`, {
+    //             headers: {
+    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //             }
+    //         });
+    //         return fetchData.data;
+    //     }
+    // });
 
     const [buyCurrency, setBuyCurrency] = useState(0);
+
+
+     useEffect(()=>{
+        const findCurrency = currency.find(item => item.value == currencyData)
+        if(Type == 'Sell'){
+            setUpvalue(parseFloat(findCurrency.Buy))
+        }
+        else if(Type == 'Buy'){
+            setUpvalue(parseFloat(findCurrency.Sell))
+        }
+       
+     },[Type,currencyData,currency])
+
+    useEffect(()=>{
+        setRate(0)
+        const findCurrency = currency.find(item => item.value == currencyData)
+        setRate(parseFloat(findCurrency.Rate))
+    },[currency,currencyData])
+
+
+
 
     const handleSellamountChange = (e) => {
         const CurrencySelected = currency?.find((item) => item.value == currencyData);
         console.log(CurrencySelected);
 
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (curenc?.info?.rate * CurrencySelected.Buy)).toFixed(2));
+        setYouSell((e.target.value / (Rate * CurrencySelected.Buy)).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
@@ -49,7 +72,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         console.log(CurrencySelected.Sell);
 
         setYouSell(e.target.value);
-        setBuyCurrency((curenc?.info?.rate * CurrencySelected.Sell * e.target.value).toFixed(2));
+        setBuyCurrency((Rate * CurrencySelected.Sell * e.target.value).toFixed(2));
     };
 
     const handleAdding = () => {
@@ -63,11 +86,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         if (Type == 'Sell') {
             const currencyMy = youSell;
             const currencyTake = buyCurrency;
-            value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: curenc?.info?.rate };
+            value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: Rate };
         } else if (Type == 'Order') {
             const currencyMy = buyCurrency;
             const currencyTake = youSell;
-            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: curenc?.info?.rate };
+            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: Rate };
         }
 
         const localStorageData = JSON.parse(localStorage.getItem('purchase'));
@@ -91,18 +114,10 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     };
 
     const ChangeCurrencyData = (e) => {
-        refetch();
         setCurrencyData(e.target.value);
     };
 
-    const ChangeTheWay = (e) => {
-        if (e.target.value == 'Sell') {
-            setUpsellRateUse(1);
-        } else if (e.target.value == 'Order') {
-            setUpsellRateUse(upsellValue);
-        }
-        setType(e.target.value);
-    };
+
 
     return (
         <div className=" lg:mt-20 mt-14">
@@ -131,14 +146,14 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">What to do</h2>
 
-                        <select value={Type} onChange={ChangeTheWay} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
+                        <select value={Type} onChange={(e)=>{setType(e.target.value)}} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
                             <option value="Sell">Sell</option>
                             <option value="Order">Order</option>
                         </select>
                     </div>
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">Rate</h2>
-                        <input value={((curenc?.info?.rate || 0) * upsellRateUse).toFixed(3)} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
+                        <input value={((Rate || 1) * (1 + (upvalue / 100))).toFixed(3)} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className=" mt-5 flex sm:justify-start justify-end">
                         <button onClick={handleAdding} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">

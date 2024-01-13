@@ -14,7 +14,8 @@ const CalculatorTab = () => {
     // let curenc?.info?.rate = 53
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
-
+    const [Rate,setRate] = useState(0)
+ 
     const [currencyData, setCurrencyData] = useState({
         value: 'AED',
         label: 'United Arab Emirates Dirham'
@@ -22,24 +23,28 @@ const CalculatorTab = () => {
     
     const [upbuy,setupbuy] = useState(0)
 
-    const { data: curenc , isLoading:notgettingCurrency } = useQuery({
-        queryKey: [`currrency${currencyData?.value}`, currencyData.value],
-        queryFn: async () => {
-            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
-                headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
-                }
-            });
-            return fetchData.data;
-        }
-    });
+    // const { data: curenc , isLoading:notgettingCurrency } = useQuery({
+    //     queryKey: [`currrency${currencyData?.value}`, currencyData.value],
+    //     queryFn: async () => {
+    //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
+    //             headers: {
+    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //             }
+    //         });
+    //         return fetchData.data;
+    //     }
+    // });
     
     const [youSell, setYouSell] = useState(0);
 
     const [buyCurrency, setBuyCurrency] = useState(0);
 
 
-
+    useEffect(()=>{
+        setRate(0)
+        const findCurrency = currency.find(item => item.value == currencyData?.value)
+        setRate(parseFloat(findCurrency?.Rate))
+    },[currency,currencyData])
 
     useEffect(()=>{
           const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
@@ -51,19 +56,19 @@ const CalculatorTab = () => {
         console.log(e.target.value);
  
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (curenc?.info?.rate * (1 + (upbuy / 100)))).toFixed(2));
+        setYouSell((e.target.value / (Rate * (1 + (upbuy / 100)))).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
         console.log(e.target.value);
         setYouSell(e.target.value)
-        setBuyCurrency((curenc?.info?.rate * (1 + (upbuy / 100)) * e.target.value).toFixed(2));
+        setBuyCurrency((Rate * (1 + (upbuy / 100)) * e.target.value).toFixed(2));
     };
 
     const handleBuying = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy, currencyTake, currencyMycurrent: 'GBP', currencyTakecurrent: currencyData.value, Id: uuidv4(), Rate: curenc?.info?.rate };
+        const currentFull = { currencyMy, currencyTake, currencyMycurrent: 'GBP', currencyTakecurrent: currencyData.value, Id: uuidv4(), Rate: Rate };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}`);
             return toast('Please give correct amount');
@@ -148,9 +153,9 @@ const CalculatorTab = () => {
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
 
                 <h2 className="mt-3 text-lg">
-                    {!notgettingCurrency ?
-                     <>1 GBP = {((curenc?.info?.rate ?? 1) * (1 + (upbuy / 100))).toFixed(2)} {currencyData.value}</>:
-                     <><div className="w-10 h-10 mx-auto animate-[spin_1s_linear_infinite] rounded-full border-4 border-r-transparent border-l-transparent border-sky-400"></div></> }
+                    {Rate == 0 ?
+                     <><div className="w-10 h-10 mx-auto animate-[spin_1s_linear_infinite] rounded-full border-4 border-r-transparent border-l-transparent border-sky-400"></div></> :
+                     <>1 GBP = {((Rate ?? 1) * (1 + (upbuy / 100))).toFixed(2)} {currencyData.value}</>}
 
                 </h2>
             </div>
