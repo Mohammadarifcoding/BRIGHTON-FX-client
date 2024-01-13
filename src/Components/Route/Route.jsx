@@ -16,6 +16,7 @@ import DoneOrders from "../Dashboard/Pages/Orders/DoneOrders";
 import PrivateProvider from "../Providers/PrivateProvider";
 import SecureBox from "../../SecureBox/SecureBox";
 import UpdateCurrency from "../Dashboard/Pages/UpdateCurrency/UpdateCurrency";
+import SignUp from "../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         path:'/exchangeRates',
         element:<ExchangeRates></ExchangeRates>
        },
+       {
+        path:'/signUp',
+        element:<SignUp></SignUp>
+       }
       
     
     ]
