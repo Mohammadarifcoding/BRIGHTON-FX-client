@@ -3,10 +3,12 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import UseAxious from '../../../Hook/UseAxious';
 
 const SignUp = () => {
     const { Google, OUT, creatUser } = useContext(AuthContext);
     const nav = useNavigate();
+    const Axious = UseAxious()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,8 +25,19 @@ const SignUp = () => {
         creatUser(email, password)
             .then((res) => {
                 console.log(res.user);
-                nav('/');
-                toast('User logged in');
+                Axious.post('/user',{email: res?.user?.email,role:'user'})
+                .then(res =>{
+                 console.log(res.data)
+                 nav('/');
+                 toast('User logged in');
+                })
+                .catch(error => {
+                 console.log(error)
+                 OUT()
+                 .then()
+                 .catch()
+                 toast('Something went wrong')
+                })
             })
             .catch((res) => {
                 console.log(res.error);
@@ -36,8 +49,19 @@ const SignUp = () => {
         Google()
             .then((res) => {
                 console.log(res.user);
-                nav('/');
-                toast('User logged in');
+                Axious.post('/user',{email: res?.user?.email,role:'user'})
+                .then(res =>{
+                 console.log(res.data)
+                 nav('/');
+                 toast('User logged in');
+                })
+                .catch(error => {
+                 console.log(error)
+                 OUT()
+                 .then()
+                 .catch()
+                 toast('Something went wrong')
+                })
             })
             .catch((res) => {
                 console.log(res.error);
