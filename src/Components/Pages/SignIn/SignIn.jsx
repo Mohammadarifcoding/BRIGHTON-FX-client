@@ -4,8 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-    const { Google, OUT, creatUser } = useContext(AuthContext);
+const SignIn = () => {
+    const { Google, In, creatUser } = useContext(AuthContext);
     const nav = useNavigate();
 
     const handleSubmit = (e) => {
@@ -20,7 +20,7 @@ const SignUp = () => {
             toast('Enter a password');
             return;
         }
-        creatUser(email, password)
+        In(email, password)
             .then((res) => {
                 console.log(res.user);
                 nav('/');
@@ -28,7 +28,7 @@ const SignUp = () => {
             })
             .catch((res) => {
                 console.log(res.error);
-                toast('Something went wrong');
+                toast("The password doesn't match");
             });
     };
 
@@ -50,7 +50,7 @@ const SignUp = () => {
             <div className="border text-card-foreground w-full max-w-md px-4 py-8 m-3 bg-white rounded-lg shadow-md ">
                 <form onSubmit={handleSubmit} data-v0-t="card">
                     <div className="flex flex-col space-y-1.5 p-6">
-                        <h3 className="tracking-tight text-3xl text-center font-bold text-gray-900 ">Welcome You!</h3>
+                        <h3 className="tracking-tight text-3xl text-center font-bold text-gray-900 ">Welcome back!</h3>
                         <p className="text-sm text-center text-gray-500 ">We are happy to see you here. Thanks for coming</p>
                     </div>
                     <div className="p-6 space-y-4">
@@ -103,4 +103,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignIn;

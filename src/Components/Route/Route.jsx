@@ -17,6 +17,7 @@ import SignUp from '../Pages/SignUp/SignUp';
 import TermsCodition from '../Pages/TermsCondition/TermsCodition';
 import TravelMoney from '../Pages/TravelMoney/TravelMoney';
 import PrivateProvider from '../Provider/PrivateProvider';
+import SignIn from '../Pages/SignIn/SignIn';
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: '/signUp',
                 element: <SignUp></SignUp>
+            },
+            {
+                path:'/signIn',
+                element:<SignIn></SignIn>
             }
         ]
     },
