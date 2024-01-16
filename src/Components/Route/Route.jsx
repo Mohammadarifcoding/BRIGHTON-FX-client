@@ -16,8 +16,10 @@ import SendMoney from '../Pages/SendMoney/SendMoney';
 import SignUp from '../Pages/SignUp/SignUp';
 import TermsCodition from '../Pages/TermsCondition/TermsCodition';
 import TravelMoney from '../Pages/TravelMoney/TravelMoney';
-import PrivateProvider from '../Provider/PrivateProvider';
+
 import SignIn from '../Pages/SignIn/SignIn';
+import PrivateProvider from './../../Provider/PrivateProvider';
+
 
 const router = createBrowserRouter([
     {
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/purchase/:currencyParams',
+                path: '/purchase/:currencyParams/:currentWay',
                 element: <Purchase></Purchase>
             },
             {
@@ -66,7 +68,7 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: (
 
-                <DashBoardLayout></DashBoardLayout>
+                <PrivateProvider><DashBoardLayout></DashBoardLayout></PrivateProvider>
 
         ),
         children: [

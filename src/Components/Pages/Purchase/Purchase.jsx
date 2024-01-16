@@ -13,7 +13,7 @@ const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
     JSON.parse(localStorage.getItem("purchase"))
   );
-  const {currencyParams} = useParams()
+  const {currencyParams,currentWay} = useParams()
   
 
   const [currency,refetchCurrency] = UseCurrency()
@@ -22,17 +22,17 @@ const Purchase = () => {
 
   const [address,setAddressSelected] = useState('')
   const [allTheitem,setAllTheItem] = useState(purchaseData)
-  const [currencyData, setCurrencyData] = useState({
-    value: "BDT",
-    label: "Bangladeshi Taka",
-  });
+ 
  
 
   return (
     <Container>
       <div className="lg:mt-20 mt-10 pb-40">
         <h2 className="lg:text-3xl text-2xl font-medium md:text-start text-center">
-          Order and sell money
+          {
+            currentWay == 'Sell' ? <>Sell money</>:<>Order money</>
+          }
+          
         </h2>
       
         <Process no={nextFrom}></Process>
@@ -43,7 +43,7 @@ const Purchase = () => {
 
         {/* Add Currency */}
         { nextFrom == 1 ? <>
-          <AddProduct currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
+          <AddProduct currentWay={currentWay} currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
         <ul className="flex flex-col mt-10 list-disc ml-6">
            <li>We Believe in trust of our customer</li>
            <li>We give best suppor for our reliable customers</li>

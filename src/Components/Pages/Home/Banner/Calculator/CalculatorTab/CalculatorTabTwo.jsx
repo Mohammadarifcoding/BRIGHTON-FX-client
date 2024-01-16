@@ -61,18 +61,18 @@ const CalculatorTabTwo = () => {
         const currencyTake = buyCurrency;
         const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: Rate };
         if (currencyMy <= 0) {
-            nav('/purchase');
+            nav(`/purchase/${currencyData.value}/Order`);
             return toast('Please give correct amount');
         }
         if (currencyTake <= 0) {
-            nav('/purchase');
+            nav(`/purchase/${currencyData.value}/Order`);
             return toast('Please give correct amount');
         }
 
         const localStorageData = JSON.parse(localStorage.getItem('purchase'));
         if (localStorageData) {
             if (localStorageData?.length >= 4) {
-                nav('/purchase');
+                nav(`/purchase/${currencyData.value}/Order`);
                 return toast('Please clear your cart');
             }
 
@@ -80,14 +80,14 @@ const CalculatorTabTwo = () => {
             localStorage.setItem('purchase', JSON.stringify(totalData));
             setYouSell(0);
             setBuyCurrency(0);
-            nav('/purchase');
+            nav(`/purchase/${currencyData.value}/Order`);
         } else {
             const totalData = [currentFull];
 
             localStorage.setItem('purchase', JSON.stringify(totalData));
             setYouSell(0);
             setBuyCurrency(0);
-            nav('/purchase');
+            nav(`/purchase/${currencyData.value}/Order`);
         }
     };
 

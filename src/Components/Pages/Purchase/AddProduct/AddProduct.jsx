@@ -8,11 +8,12 @@ import { v4 as uuidv4 } from 'uuid';
 import UseCurrency from '../../../../Hook/UseCurrency';
 import CurrencyInput from './CurrencyInput';
 
-const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem, currencyParams }) => {
+const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem, currencyParams,currentWay }) => {
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
 
     const [currencyData, setCurrencyData] = useState('TWD');
+    console.log(currentWay)
     useEffect(() => {
         const newCurrency = currency.find((item) => item.value == currencyParams);
         setCurrencyData(newCurrency.value);
@@ -21,7 +22,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     const [youSell, setYouSell] = useState(0);
     const [Rate,setRate] = useState(1)
 
-    const [Type, setType] = useState('Sell');
+    const [Type, setType] = useState(currentWay);
     const [upvalue,setUpvalue] = useState(1)
 
     // const { data: curenc, refetch } = useQuery({
@@ -44,7 +45,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         if(Type == 'Sell'){
             setUpvalue(parseFloat(findCurrency.Buy))
         }
-        else if(Type == 'Buy'){
+        else if(Type == 'Order'){
             setUpvalue(parseFloat(findCurrency.Sell))
         }
        
@@ -125,7 +126,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                 <h2 className="text-[#4A53A4]  font-medium sm:text-2xl text-2xl  ">
                     Add Currency <span className="text-gray-400"> (maximum 4 currency)</span>
                 </h2>
-                <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10">
+                <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10">
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">Total money</h2>
                         <input onChange={handleyouBuyamountCurrency} value={youSell} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
@@ -143,7 +144,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                         <h2 className="text-gray-500 text-lg">FX Amount</h2>
                         <input type="text" onChange={handleSellamountChange} value={buyCurrency} className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
-                    <div className="  w-full">
+                    <div className=" hidden w-full">
                         <h2 className="text-gray-500 text-lg">What to do</h2>
 
                         <select value={Type} onChange={(e)=>{setType(e.target.value)}} className=" mt-2 border-gray-500 w-full border px-2 py-2 rounded-lg outline-gray-500">
