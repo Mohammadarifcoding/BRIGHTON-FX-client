@@ -1,18 +1,47 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UseUpsell from '../../../../../Hook/UseUpsell';
+import { AuthContext } from '../../../../../Provider/AuthProvider';
+import UseAxious from '../../../../../Hook/UseAxious';
 
 const CurrencyItemTable = ({ item }) => {
+    const {UpdateCurrencyData,SetUpdateCurrencyData} = useContext(AuthContext)
     const [FetchData, setFetchData] = useState(false);
     const [upsellValue, refetchUpsell] = UseUpsell();
+    const Axious = UseAxious()
 
     useEffect(() => {
         if (item.value != undefined) {
             setFetchData(true);
         }
     }, [item]);
+
+        const { data: curenc, isLoading:NotGettingCurrency } = useQuery({
+        queryKey: [`currrency${item?.value}`],
+        enabled:UpdateCurrencyData,
+        queryFn: async () => {
+            const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
+                headers: {
+                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+                }
+            });
+            return fetchData.data;
+        }
+    });
+
+    useEffect(()=>{
+       if(!NotGettingCurrency){
+          Axious.put(`/UpdateCurrencyPrice/${item?.value}`,{Rate : curenc?.info?.rate})
+          .then(res =>{
+            console.log(res.data)
+          })
+       }
+    },[NotGettingCurrency,item.value,Axious,UpdateCurrencyData])
+
+
+
 
     // const { data: currency } = useQuery({
     //     queryKey: [`currrency${item?.value}`],

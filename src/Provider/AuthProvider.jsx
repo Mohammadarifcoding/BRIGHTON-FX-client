@@ -11,6 +11,8 @@ const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [UpdateCurrencyData,SetUpdateCurrencyData] = useState(false)
+
   const creatUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(Auth, email, password);
@@ -52,7 +54,7 @@ const AuthProvider = ({children}) => {
     return signInWithEmailAndPassword(Auth, email, password);
   };
 
-  const AuthInfo = { loading, user, In, update, Google, OUT, creatUser };
+  const AuthInfo = { loading, user, In, update, Google, OUT, creatUser,UpdateCurrencyData,SetUpdateCurrencyData };
 
   return (
     <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>

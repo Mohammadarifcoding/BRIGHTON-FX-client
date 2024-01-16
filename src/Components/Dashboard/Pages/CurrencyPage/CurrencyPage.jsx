@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CurrencyTable from './CurrencyTable/CurrencyTable';
 import UseCurrency from '../../../../Hook/UseCurrency';
 import { useQuery } from '@tanstack/react-query';
 import UseAxious from '../../../../Hook/UseAxious';
 import UseUpsell from '../../../../Hook/UseUpsell';
+import { AuthContext } from '../../../../Provider/AuthProvider';
 
 const CurrencyPage = () => {
     const [percentageIncrease, setPercentageIncrease] = useState(0);
+    const {UpdateCurrencyData,SetUpdateCurrencyData} = useContext(AuthContext)
     const [currency, refetchCUrrency] = UseCurrency();
     //   const Axious = UseAxious()
     //   const handlePercentageChange = (event) => {
@@ -27,6 +29,14 @@ const CurrencyPage = () => {
     //       })
     // }
 
+    const handleUpdateLatest = ()=>{
+        SetUpdateCurrencyData(true)
+        setTimeout(() => {
+            refetchCUrrency()
+            SetUpdateCurrencyData(false)
+        }, 1000);
+    }
+
     return (
         <div className="bg-gray-900 text-white min-h-screen flex w-full flex-col">
             <header className="bg-gray-800 py-4">
@@ -34,7 +44,11 @@ const CurrencyPage = () => {
             </header>
             <main className="flex-1 p-6">
                 <div className="max-w-6xl mx-auto">
+                    <div className='flex justify-between lg:flex-row flex-col items-center'>
                     <h2 className="text-2xl font-medium mb-6">Manipulate Currency</h2>
+                    <button onClick={handleUpdateLatest} className='px-4 py-2 bg-green-800 text-white rounded-md hover:duration-300 transition hover:scale-105'>Get the Latest</button>
+                    </div>
+
 
                     {/* Search Bar */}
 
