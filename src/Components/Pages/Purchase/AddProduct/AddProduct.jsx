@@ -24,6 +24,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
 
     const [Type, setType] = useState(currentWay);
     const [upvalue,setUpvalue] = useState(1)
+    console.log(upvalue)
 
     // const { data: curenc, refetch } = useQuery({
     //     queryKey: [`currrency${currencyData}`, currencyData],
@@ -43,10 +44,10 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
      useEffect(()=>{
         const findCurrency = currency.find(item => item.value == currencyData)
         if(Type == 'Sell'){
-            setUpvalue(parseFloat(findCurrency.Buy))
+            setUpvalue(parseFloat(findCurrency.Sell))
         }
         else if(Type == 'Order'){
-            setUpvalue(parseFloat(findCurrency.Sell))
+            setUpvalue(parseFloat(findCurrency.Buy))
         }
        
      },[Type,currencyData,currency])
@@ -62,18 +63,18 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
 
     const handleSellamountChange = (e) => {
         const CurrencySelected = currency?.find((item) => item.value == currencyData);
-        console.log(CurrencySelected);
-
+        console.log(CurrencySelected.Sell);
+        console.log(CurrencySelected.Buy);
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (Rate * CurrencySelected.Buy)).toFixed(2));
+        setYouSell((e.target.value * (Rate * (1 + (upvalue /  100)))).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
         const CurrencySelected = currency?.find((item) => item.value == currencyData);
         console.log(CurrencySelected.Sell);
-
+        console.log(CurrencySelected.Buy);
         setYouSell(e.target.value);
-        setBuyCurrency((Rate * CurrencySelected.Sell * e.target.value).toFixed(2));
+        setBuyCurrency(((Rate * (1 + (upvalue /  100))) * e.target.value).toFixed(2));
     };
 
     const handleAdding = () => {
@@ -154,7 +155,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                     </div>
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">Rate</h2>
-                        <input value={((Rate || 1) * (1 + (upvalue / 100))).toFixed(3)} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
+                        <input value={(Rate  * (1 + (upvalue / 100))).toFixed(2)} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className=" mt-5 flex sm:justify-start justify-end">
                         <button onClick={handleAdding} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
