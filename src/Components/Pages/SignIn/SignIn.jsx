@@ -2,13 +2,15 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import UseAxious from './../../../Hook/UseAxious';
 
 const SignIn = () => {
     const { Google, In,OUT, creatUser } = useContext(AuthContext);
     const Axious = UseAxious()
     const nav = useNavigate();
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +30,7 @@ const SignIn = () => {
                Axious.post('/user',{email: res?.user?.email,role:'user'})
                .then(res =>{
                 console.log(res.data)
-                nav('/');
+                nav(from, { replace: true })
                 toast('User logged in');
                })
                .catch(error => {
@@ -53,7 +55,7 @@ const SignIn = () => {
                 Axious.post('/user',{email: res?.user?.email,role:'user'})
                 .then(res =>{
                  console.log(res.data)
-                 nav('/');
+                 nav(from, { replace: true });
                  toast('User logged in');
                 })
                 .catch(error => {

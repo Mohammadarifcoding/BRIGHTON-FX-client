@@ -11,7 +11,7 @@ const PrivateProvider = ({children}) => {
    if(user){
     return children
    }
-   return <Navigate to="/login" state={{from: lo}} replace></Navigate>
+   return <Navigate to="/signIn" state={{from: lo}} replace></Navigate>
 };
 
 export default PrivateProvider;
