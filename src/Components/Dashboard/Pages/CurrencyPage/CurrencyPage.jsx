@@ -30,11 +30,15 @@ const CurrencyPage = () => {
     // }
 
     const handleUpdateLatest = ()=>{
+        // SetUpdateCurrencyData(true)
+        // setTimeout(() => {
+        //     refetchCUrrency()
+        //     SetUpdateCurrencyData(false)
+        // }, 1000);
         SetUpdateCurrencyData(true)
-        setTimeout(() => {
-            refetchCUrrency()
-            SetUpdateCurrencyData(false)
-        }, 1000);
+    }
+    const stopUpdateLates = ()=>{
+        SetUpdateCurrencyData(false)
     }
 
     return (
@@ -46,7 +50,13 @@ const CurrencyPage = () => {
                 <div className="max-w-6xl mx-auto">
                     <div className='flex justify-between lg:flex-row flex-col items-center'>
                     <h2 className="text-2xl font-medium mb-6">Manipulate Currency</h2>
-                    <button onClick={handleUpdateLatest} className='px-4 py-2 bg-green-800 text-white rounded-md hover:duration-300 transition hover:scale-105'>Get the Latest</button>
+                    {
+                        UpdateCurrencyData ? 
+                        <button onClick={stopUpdateLates} className='px-4 py-2 bg-green-800 text-white rounded-md hover:duration-300 transition hover:scale-105'>Stop the Latest</button> :
+                        <button onClick={handleUpdateLatest} className='px-4 py-2 bg-green-800 text-white rounded-md hover:duration-300 transition hover:scale-105'>Get the Latest</button> 
+                       
+                    }
+                    
                     </div>
 
 
