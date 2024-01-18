@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAxious from '../../../Hook/UseAxious';
 
 const SignUp = () => {
@@ -122,6 +122,7 @@ const SignUp = () => {
                         Continue with Google
                     </button>
                 </div>
+                <h2 className='text-center mt-6'>Already User here ? <Link className='text-blue-600' to={'/signin'}>Sign In</Link></h2>
             </div>
 
             <ToastContainer></ToastContainer>

@@ -23,6 +23,9 @@ const DashBoardLayout = () => {
 
                 <div className='px-[20px] mt-16 dashboarItem'>
                     <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
+                    <NavLink to='/dashboard/Statics'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Statics</button>
+                    </NavLink>
                     <NavLink to='/dashboard/manageOrders'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'> Pending Orders</button>
                     </NavLink>
@@ -34,6 +37,9 @@ const DashBoardLayout = () => {
                     </NavLink>
                     <NavLink to='/dashboard/addCurrency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Add Currency</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/Users'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Users</button>
                     </NavLink>
               
                      <div className="divider divide  text-white">OR</div>
@@ -88,6 +94,9 @@ const DashBoardLayout = () => {
             >
                 <div className='px-[20px] mt-16 dashboarItem'>
                 <h2 className='text-white text-center text-xl mb-10'>DashBoard</h2>
+                <NavLink to='/dashboard/Statics'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Statics</button>
+                    </NavLink>
                 <NavLink to='/dashboard/manageOrders'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Pending Orders</button>
                     </NavLink>
@@ -99,6 +108,9 @@ const DashBoardLayout = () => {
                     </NavLink>
                     <NavLink to='/dashboard/addCurrency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Add Currency</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/Users'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Users</button>
                     </NavLink>
               
                      <div className="divider divide  text-white">OR</div>

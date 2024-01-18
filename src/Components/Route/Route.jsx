@@ -19,6 +19,8 @@ import TravelMoney from '../Pages/TravelMoney/TravelMoney';
 
 import SignIn from '../Pages/SignIn/SignIn';
 import PrivateProvider from './../../Provider/PrivateProvider';
+import UserRole from '../Dashboard/Pages/User Role/UserRole';
+import Statics from '../Dashboard/Pages/Statics/Statics';
 
 
 const router = createBrowserRouter([
@@ -97,6 +99,14 @@ const router = createBrowserRouter([
                 path: 'update/:currency',
                 element: <UpdateCurrency></UpdateCurrency>,
                 loader: ({ params }) => fetch(`https://brighton-fx-server.vercel.app/singleCurrency/${params.currency}`)
+            },
+            {
+                path:'Users',
+                element:<UserRole></UserRole>
+            },
+            {
+                path:'Statics',
+                element:<Statics></Statics>
             }
         ]
     },

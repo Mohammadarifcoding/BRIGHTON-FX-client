@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAxious from './../../../Hook/UseAxious';
 
 const SignIn = () => {
@@ -123,6 +123,7 @@ const SignIn = () => {
                         Continue with Google
                     </button>
                 </div>
+                <h2 className='text-center mt-6'>New User here ? <Link className='text-blue-600' to={'/signup'}>Sign Up</Link></h2>
             </div>
 
             <ToastContainer></ToastContainer>

@@ -11,6 +11,7 @@ const AddCurrency = () => {
     const [countryName, setCountryName] = useState('');
     const [checking, setChecking] = useState(false);
     const [Sell, setSell] = useState(0);
+    const [RateData,setRateData] = useState(0)
     const [Buy, setBuy] = useState(0);
     const [checkingLoading, setCheckingLoading] = useState(false);
     const Axious = UseAxious();
@@ -37,6 +38,7 @@ const AddCurrency = () => {
             .then((res) => {
                 if (res.data?.info?.rate) {
                     setChecking(true);
+                    setRateData(res.data?.info?.rate)
                 }
             })
             .catch((err) => {
@@ -48,7 +50,7 @@ const AddCurrency = () => {
     const handleAdd = () => {
         // Logic for adding the currency to the system
         // This function can add the currency and country to your data structure or database
-        Axious.post('/AddCurrency', { label: countryName, value: currencyName, Sell: Sell, Buy: Buy })
+        Axious.post('/AddCurrency', { label: countryName, value: currencyName, Sell: Sell, Buy: Buy, Rate: RateData})
             .then((res) => {
                 toast(`Added ${currencyName} currency `);
                 setCountryName('');

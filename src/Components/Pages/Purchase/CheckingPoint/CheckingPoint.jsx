@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import emailjs from '@emailjs/browser';
 import { v4 as uuidv4 } from 'uuid';
 import { IoIosCheckbox } from "react-icons/io";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md"
@@ -9,6 +10,7 @@ import { Link } from "react-router-dom";
 
 
 const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
+  const  AddressForm = useRef()
   
     const [address , setAddress] = useState('location')
     const Axious = UseAxious()
@@ -26,19 +28,17 @@ const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
         if(dataFormLocalStorage?.length < 1){
           return toast('Please add currency item')
         }
-
        setAddressSelected(address)
       setNextForm(2)
-
     }
 
 
    const getFinishedOrder = (e)=>{
     e.preventDefault()
     try{
-const First_Name = e.target.FirstName.value
+      const First_Name = e.target.FirstName.value
       const Last_Name = e.target.LastName.value
-      const Email = e.target.Email.value
+      const Email = e.target.to_email.value
       const Confrim_Email = e.target.ConfromEmail.value
       const Phone_Number = e.target.Number.value
      if(Email !== Confrim_Email){
@@ -60,7 +60,10 @@ const First_Name = e.target.FirstName.value
      
      Axious.post('/Order',UserInformation)
      .then(res =>{
-
+      emailjs.sendForm("service_geyk8rj","template_9ag9qg6",AddressForm.current,'-IllRWDI3WXoeT7lj')
+        .then(res => {
+          console.log(res)
+        })
       setlastOrder(UserInformation)
       localStorage.clear('purchase')
 
@@ -106,10 +109,10 @@ const First_Name = e.target.FirstName.value
         
          <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Personal Details</h2>
 
-         <form onSubmit={getFinishedOrder} className="flex flex-col">
+         <form ref={AddressForm} onSubmit={getFinishedOrder} className="flex flex-col">
             <input name="FirstName" required type="text"  placeholder="Enter First Name" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
             <input name="LastName" required type="text"  placeholder="Enter Last Name" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
-            <input name="Email" required type="email"  placeholder="Enter Email" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
+            <input name="to_email" required type="email"  placeholder="Enter Email" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
             <input name="ConfromEmail" required type="email"  placeholder="Confirm Email" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
             <input name="Number" required type="tel"  placeholder="Enter Number" className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md" />
             <h2 className="gap-2 flex items-center  mt-4 text-lg">
