@@ -30,9 +30,9 @@ const CurrencyMobileItem = ({ item, num }) => {
                 <div className="flex flex-col">
                     <h2 className=" xl:hidden  text-sm">{item?.label?.slice(0, 10)}...</h2>
                     {num == 0 ? (
-                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
-                    ) : (
                         <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
+                    ) : (
+                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
                     )}
                 </div>
             </div>
@@ -42,7 +42,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                     <div className="flex  gap-2 lg:flex-row flex-col lg:items-center">
                         <button
                             onClick={() => {
-                                nav(`/purchase/${item?.value}`);
+                                nav(`/purchase/${item?.value}/Order`);
                             }}
                             className="bg-[#93C94E] text-sm hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                         >
@@ -54,7 +54,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
-                                    nav(`/purchase/${item?.value}`);
+                                    nav(`/purchase/${item?.value}/Sell`);
                                 }}
                                 className="bg-[#93C94E] text-sm flex-nowrap  hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                             >
