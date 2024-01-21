@@ -10,16 +10,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UseCurrency from '../../../../../../Hook/UseCurrency';
 
-const CalculatorTab = () => {
+const CalculatorTab = ({currencyData, setCurrencyData}) => {
     // let curenc?.info?.rate = 53
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
     const [Rate,setRate] = useState(0)
  
-    const [currencyData, setCurrencyData] = useState({
-        value: 'AED',
-        label: 'United Arab Emirates Dirham'
-    });
+   
     
     const [upbuy,setupbuy] = useState(0)
 
@@ -48,7 +45,7 @@ const CalculatorTab = () => {
 
     useEffect(()=>{
           const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
-          setupbuy(parseFloat(CurrentCurrencySelected?.Buy))
+          setupbuy(parseFloat(CurrentCurrencySelected?.Sell))
 
     },[currencyData,currency])
 
@@ -68,7 +65,7 @@ const CalculatorTab = () => {
     const handleBuying = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy, currencyTake, currencyMycurrent: 'GBP', currencyTakecurrent: currencyData.value, Id: uuidv4(), Rate: Rate };
+        const currentFull = { currencyMy, currencyTake, currencyMycurrent: 'GBP', currencyTakecurrent: currencyData.value, Id: uuidv4(), Rate: upbuy };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Order`);
             return toast('Please give correct amount');

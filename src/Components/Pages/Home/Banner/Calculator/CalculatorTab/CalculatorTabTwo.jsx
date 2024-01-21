@@ -8,14 +8,11 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import UseCurrency from '../../../../../../Hook/UseCurrency';
 
-const CalculatorTabTwo = () => {
+const CalculatorTabTwo = ({currencyData, setCurrencyData}) => {
     // let curenc?.info?.rate = 53
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
-    const [currencyData, setCurrencyData] = useState({
-        value: 'AED',
-        label: 'United Arab Emirates Dirham'
-    });
+   
     const [Rate,setRate] = useState(0)
     const [upsell,setUpsell] = useState(0)
     const [youSell, setYouSell] = useState(0);
@@ -42,7 +39,7 @@ const CalculatorTabTwo = () => {
 
     useEffect(()=>{
         const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
-        setUpsell(parseFloat(CurrentCurrencySelected.Sell))
+        setUpsell(parseFloat(CurrentCurrencySelected.Buy))
 
   },[currencyData,currency])
 
@@ -59,7 +56,7 @@ const CalculatorTabTwo = () => {
     const handleSelling = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: Rate };
+        const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: upsell };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Sell`);
             return toast('Please give correct amount');

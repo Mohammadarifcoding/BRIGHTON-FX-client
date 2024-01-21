@@ -17,6 +17,10 @@ const Calculator = () => {
           return result.data
         }
       })
+      const [currencyData, setCurrencyData] = useState({
+        value: 'AED',
+        label: 'United Arab Emirates Dirham'
+    });
    const data = [
     {
         id:0,
@@ -43,10 +47,10 @@ const Calculator = () => {
     </TabList>
 
     <TabPanel>
-      <CalculatorTab item={0}></CalculatorTab>
+      <CalculatorTab currencyData={currencyData} setCurrencyData={setCurrencyData} item={0}></CalculatorTab>
     </TabPanel>
     <TabPanel>
-    <CalculatorTabTwo   ></CalculatorTabTwo>
+    <CalculatorTabTwo currencyData={currencyData} setCurrencyData={setCurrencyData} ></CalculatorTabTwo>
     </TabPanel>
   </Tabs>
         </div>

@@ -85,10 +85,10 @@ const CurrencyItemTable = ({ item }) => {
             </td>
             <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">
                 {/* Calculate the increased sell price */}
-                {(item?.Rate * SellValue)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
+                {(item?.Rate * BuyValue)?.toFixed(3)} GBP -> {/* Use the admin-defined percentage */}
             </td>
 
-            <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">{(item?.Rate * BuyValue)?.toFixed(3)} GBP</td>
+            <td className="py-2 pl-4 md:text-base sm:text-sm text-[12px]">{(item?.Rate * SellValue)?.toFixed(3)} GBP</td>
                 </>
             }
            

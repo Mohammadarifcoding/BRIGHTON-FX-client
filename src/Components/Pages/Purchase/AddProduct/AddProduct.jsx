@@ -129,7 +129,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                 </h2>
                 <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10">
                     <div className="  w-full">
-                        <h2 className="text-gray-500 text-lg">Total money</h2>
+                        <h2 className="text-gray-500 text-lg">{currentWay == 'Sell' ? ' FX Amount':'Total Money' }</h2>
                         <input onChange={handleyouBuyamountCurrency} value={youSell} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className="  w-full">
@@ -142,7 +142,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                         </select>
                     </div>
                     <div className="  w-full">
-                        <h2 className="text-gray-500 text-lg">FX Amount</h2>
+                        <h2 className="text-gray-500 text-lg"> {currentWay == 'Order' ? ' FX Amount':'Total Money' }</h2>
                         <input type="text" onChange={handleSellamountChange} value={buyCurrency} className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className=" hidden w-full">
