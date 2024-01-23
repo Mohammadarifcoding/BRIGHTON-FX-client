@@ -13,10 +13,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     const [currency, refetchCurrency] = UseCurrency();
 
     const [currencyData, setCurrencyData] = useState('TWD');
+    const [Addproduct,setAddProduct] = useState(false)
     console.log(currentWay)
     useEffect(() => {
         const newCurrency = currency.find((item) => item.value == currencyParams);
-        setCurrencyData(newCurrency.value);
+        setCurrencyData(newCurrency?.value);
     }, []);
    
     const [youSell, setYouSell] = useState(0);
@@ -42,7 +43,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
 
 
      useEffect(()=>{
-        const findCurrency = currency.find(item => item.value == currencyData)
+        const findCurrency = currency.find(item => item?.value == currencyData)
         if(Type == 'Sell'){
             setUpvalue(parseFloat(findCurrency?.Buy))
         }
@@ -55,7 +56,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     useEffect(()=>{
         setRate(0)
         const findCurrency = currency.find(item => item.value == currencyData)
-        setRate(parseFloat(findCurrency.Rate))
+        setRate(parseFloat(findCurrency?.Rate))
     },[currency,currencyData])
 
 
@@ -106,13 +107,17 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
             setAllTheItem([...allTheitem, value]);
             setYouSell(0);
             setBuyCurrency(0);
+            setAddProduct(false)
         } else {
             const totalData = [value];
             localStorage.setItem('purchase', JSON.stringify(totalData));
             setAllTheItem([value]);
             setYouSell(0);
             setBuyCurrency(0);
+            setAddProduct(false)
+
         }
+        
     };
 
     const ChangeCurrencyData = (e) => {
@@ -127,7 +132,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                 <h2 className="text-[#4A53A4]  font-medium sm:text-2xl text-2xl  ">
                     Add Currency <span className="text-gray-400"> (maximum 4 currency)</span>
                 </h2>
-                <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10">
+                <div className={`${Addproduct ? '':'hidden'}  grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10`}>
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">{currentWay == 'Sell' ? ' FX Amount':'Total Money' }</h2>
                         <input onChange={handleyouBuyamountCurrency} value={youSell} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
@@ -157,12 +162,21 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                         <h2 className="text-gray-500 text-lg">Rate</h2>
                         <input value={(Rate  * (1 + (upvalue / 100))).toFixed(2)} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
-                    <div className=" mt-5 flex sm:justify-start justify-end">
-                        <button onClick={handleAdding} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
+                </div>
+                <div className=" mt-5 flex  justify-end">
+                    {
+                        Addproduct ? <>
+                                                <button onClick={handleAdding} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
                             Add <span> + </span>
                         </button>
+                        </> : <>
+                        <button onClick={()=>{setAddProduct(true)}} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
+                            Add Currency <span> + </span>
+                        </button>
+                        </>
+                    }
+
                     </div>
-                </div>
             </div>
             <ToastContainer></ToastContainer>
         </div>
