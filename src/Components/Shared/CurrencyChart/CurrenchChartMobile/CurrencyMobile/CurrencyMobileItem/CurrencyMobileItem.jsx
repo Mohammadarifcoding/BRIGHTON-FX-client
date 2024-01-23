@@ -38,9 +38,9 @@ const CurrencyMobileItem = ({ item, num }) => {
                     }</h2>
                     
                     {num == 0 ? (
-                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
-                    ) : (
                         <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(3)}</h2>
+                    ) : (
+                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
                     )}
                 </div>
             </div>

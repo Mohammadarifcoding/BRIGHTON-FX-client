@@ -33,7 +33,7 @@ const ChartItem = ({ item }) => {
 
             <div className="flex  lg:gap-10 gap-6 xl:gap-20">
                 <div className="flex  gap-4 xl:flex-row flex-col xl:items-center">
-                    <h2 className="xl:text-xl lg:text-lg w-fit">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
+                    <h2 className="xl:text-xl lg:text-lg w-fit">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(2)}</h2>
                     <button
                         onClick={() => {
                             nav(`/purchase/${item?.value}/Order`);
@@ -44,7 +44,7 @@ const ChartItem = ({ item }) => {
                     </button>
                 </div>
                 <div className="flex  gap-4 xl:flex-row flex-col xl:items-center ">
-                    <h2 className="xl:text-xl lg:text-lg w-[100px] xl:text-end">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(3)}</h2>
+                    <h2 className="xl:text-xl lg:text-lg w-[100px] xl:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(2)}</h2>
                     <div className="flex justify-end">
                         <button
                             onClick={() => {

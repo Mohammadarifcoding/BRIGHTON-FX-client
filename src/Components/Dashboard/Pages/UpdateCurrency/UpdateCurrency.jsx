@@ -94,7 +94,7 @@ const UpdateCurrency = () => {
                             onChange={(e) => {
                                 setSell(e.target.value);
                             }}
-                            placeholder="Sell Rate"
+                            placeholder="Buy Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
                         <input
@@ -103,7 +103,7 @@ const UpdateCurrency = () => {
                             onChange={(e) => {
                                 setBuy(e.target.value);
                             }}
-                            placeholder="Buy Rate"
+                            placeholder="Sell Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
 

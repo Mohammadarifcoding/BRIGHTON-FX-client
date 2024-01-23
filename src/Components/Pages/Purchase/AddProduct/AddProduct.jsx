@@ -44,10 +44,10 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
      useEffect(()=>{
         const findCurrency = currency.find(item => item.value == currencyData)
         if(Type == 'Sell'){
-            setUpvalue(parseFloat(findCurrency.Sell))
+            setUpvalue(parseFloat(findCurrency?.Buy))
         }
         else if(Type == 'Order'){
-            setUpvalue(parseFloat(findCurrency.Buy))
+            setUpvalue(parseFloat(findCurrency?.Sell))
         }
        
      },[Type,currencyData,currency])
@@ -88,11 +88,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         if (Type == 'Sell') {
             const currencyMy = youSell;
             const currencyTake = buyCurrency;
-            value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: Rate };
+            value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: (Rate * (1 + (upvalue /  100))).toFixed(2)};
         } else if (Type == 'Order') {
             const currencyMy = buyCurrency;
             const currencyTake = youSell;
-            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: Rate };
+            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: (Rate * (1 + (upvalue /  100))).toFixed(2) };
         }
 
         const localStorageData = JSON.parse(localStorage.getItem('purchase'));

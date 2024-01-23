@@ -88,8 +88,8 @@ const Footer = () => {
      </div>
      <div className="w-full md:w-1/2 lg:w-1/4 mb-4 md:mb-0">
        <h2 className="text-2xl font-bold mb-3">GET IN TOUCH</h2>
-       <p className="flex gap-x-4 items-center"><FaMapLocationDot/> 222 Broadway road Southall Ub11nb</p>
-       <p className="flex gap-x-4 items-center" > <FaPhoneVolume /> +44 000 0000 000</p>
+       <p className="flex gap-x-4 items-center"><FaMapLocationDot/> 123 Queens road Brighton BN1 3WB</p>
+       <p className="flex gap-x-4 items-center" > <FaPhoneVolume /> 01273 030708</p>
        <p className="flex gap-x-4 items-center" > <IoIosMail />support@brightonfx.com</p>
      </div>
    </div>

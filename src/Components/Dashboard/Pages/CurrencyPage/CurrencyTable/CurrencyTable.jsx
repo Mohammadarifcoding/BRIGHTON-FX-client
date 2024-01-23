@@ -31,10 +31,11 @@ const CurrencyTable = ({currency}) => {
                   Market Price
                 </th>
                 <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
-                  Selling Price
+                Buying Price
                 </th>
                 <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
-                  Buying Price
+
+                  Selling Price
                 </th>
                 <th className="py-3 text-start pl-4 md:text-base sm:text-sm text-[12px]">
                   Action

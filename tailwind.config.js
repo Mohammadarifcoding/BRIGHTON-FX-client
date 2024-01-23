@@ -9,7 +9,11 @@ export default {
   theme: {
     screens: {
      xsm:'420px',
-     sxm:'320px'
+     sxm:'320px',
+     sm: '480px',
+     md: '768px',
+     lg: '976px',
+     xl: '1440px',
     },
     extend: {},
   },
