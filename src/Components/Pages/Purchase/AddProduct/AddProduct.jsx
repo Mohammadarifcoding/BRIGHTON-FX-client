@@ -78,6 +78,29 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         setBuyCurrency(((Rate * (1 + (upvalue /  100))) * e.target.value).toFixed(2));
     };
 
+   const ChangeTo10Divisible = (num)=>{
+    let finalNum = 0
+    let NumWord = parseInt(num)
+    let extraItem = NumWord % 10
+   
+    if(extraItem != 0){
+        let WillAdd = 10 - extraItem
+        console.log(WillAdd)
+        finalNum = NumWord + WillAdd
+    }
+    else{
+        finalNum = NumWord
+    }
+    
+    return finalNum
+   }
+
+   const ChangeTakeCurrencyFor10Divisible = ()=>{
+    let MyCurrency = ChangeTo10Divisible(youSell)
+    let FInalTakeCurrency = MyCurrency * (Rate * (1 + (upvalue /  100)))
+    return FInalTakeCurrency.toFixed(2)
+   }
+
     const handleAdding = () => {
         let value = {};
         if (youSell <= 0) {
@@ -87,12 +110,12 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
             return toast('Please give correct amount');
         }
         if (Type == 'Sell') {
-            const currencyMy = youSell;
-            const currencyTake = buyCurrency;
+            const currencyMy = ChangeTo10Divisible(youSell);
+            const currencyTake = ChangeTakeCurrencyFor10Divisible();
             value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: (Rate * (1 + (upvalue /  100))).toFixed(2)};
         } else if (Type == 'Order') {
-            const currencyMy = buyCurrency;
-            const currencyTake = youSell;
+            const currencyMy = ChangeTakeCurrencyFor10Divisible();
+            const currencyTake = ChangeTo10Divisible(youSell);
             value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: (Rate * (1 + (upvalue /  100))).toFixed(2) };
         }
 
