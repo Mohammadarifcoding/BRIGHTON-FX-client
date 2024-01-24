@@ -21,6 +21,7 @@ import SignIn from '../Pages/SignIn/SignIn';
 import PrivateProvider from './../../Provider/PrivateProvider';
 import UserRole from '../Dashboard/Pages/User Role/UserRole';
 import Statics from '../Dashboard/Pages/Statics/Statics';
+import History from '../Dashboard/Pages/Orders/History';
 
 
 const router = createBrowserRouter([
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
             {
                 path:'Statics',
                 element:<Statics></Statics>
+            },
+            {
+                path:'history',
+                element:<History></History>
             }
         ]
     },

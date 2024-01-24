@@ -32,6 +32,9 @@ const DashBoardLayout = () => {
                     <NavLink to='/dashboard/activeOrders'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Order</button>
                     </NavLink>
+                    <NavLink to='/dashboard/history'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>History</button>
+                    </NavLink>
                     <NavLink to='/dashboard/Currency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>
                     </NavLink>
@@ -97,10 +100,13 @@ const DashBoardLayout = () => {
                 <NavLink to='/dashboard/Statics'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Statics</button>
                     </NavLink>
-                <NavLink to='/dashboard/manageOrders'>
+                    <NavLink to='/dashboard/manageOrders'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Pending Orders</button>
                     </NavLink>
                     <NavLink to='/dashboard/activeOrders'>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Orders</button>
+                    </NavLink>
+                    <NavLink to='/dashboard/history'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Orders</button>
                     </NavLink>
                     <NavLink to='/dashboard/Currency'>

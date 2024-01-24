@@ -149,7 +149,7 @@ const CheckingPoint = ({setAddressSelected,setNextForm,nextFrom}) => {
             <h2 className="sm:text-xl"> <span className="font-semibold">Order Id </span>: {Order?.Order_Id}</h2>
             <h2 className="sm:text-xl my-2"> <span className="font-semibold">Checking Point </span>: {Order?.Address}</h2>
             {
-              Order?.Orders?.map(item => <h2 className="sm:text-xl  ">You Give <span className="font-semibold">: {item?.currencyMy} {item?.currencyMycurrent}</span>  >>  You get  <span className="font-semibold">: {item?.currencyTake} {item?.currencyTakecurrent} </span>(Rate {(item?.Rate).toFixed(2)} )</h2>)
+              Order?.Orders?.map(item => <h2 className="sm:text-xl  ">You Give <span className="font-semibold">: {item?.currencyMy} {item?.currencyMycurrent}</span>  >>  You get  <span className="font-semibold">: {item?.currencyTake} {item?.currencyTakecurrent} </span>(Rate {item?.Rate} )</h2>)
             }                    
           </div>
           </div>

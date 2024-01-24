@@ -1,43 +1,18 @@
 import { Link } from "react-router-dom";
-
 import UseAxious from "../../../../Hook/UseAxious";
-import UseAcceptedOrder from "../../../../Hook/UseAcceptedOrder";
-import  emailjs  from '@emailjs/browser';
+import UseCompletedOrder from "../../../../Hook/UseCompletedOrder";
 
 
-const DoneOrders = () => {
-    const [AcceptedOrder,RefetchAcceptedOrder] = UseAcceptedOrder()
+const History  = () => {
+    const [CompletedOrder,RefetchCompletedOrder] = UseCompletedOrder()
     const Axious = UseAxious()
     
- 
-   
-      const handleAcceptOrder = (orderId,Email) => {
-        const tempForm = document.createElement('form');
-        tempForm.style.display = 'none';
-        let emailParams = {
-          Email : Email
-        }
-        Object.keys(emailParams).forEach((key) => {
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.name = key;
-          input.value = Email;
-          tempForm.appendChild(input);
-        });
-        console.log(tempForm)
+      const handleRemoveOrder = (orderId) => {
         // Logic to accept the order with orderId
-        
         // This function can update the order status or perform other actions
-          Axious.put(`/acceptedToCompleted/${orderId}`)
+          Axious.delete(`/deleteOrder/${orderId}`)
           .then(res => {
-            RefetchAcceptedOrder()
-            emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
-            .then(res=>{
-              console.log('email send')
-            })
-        .then(res => {
-          console.log(res)
-        })
+            RefetchCompletedOrder()
           })
       };
     
@@ -46,7 +21,7 @@ const DoneOrders = () => {
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col">
       <header className="bg-gray-800 py-4">
-        <h1 className="text-3xl text-center font-bold">Accepted Orders</h1>
+        <h1 className="text-3xl text-center font-bold">History</h1>
       </header>
       <main className="flex-1 p-6 mt-10">
       <div className="overflow-x-auto mt-4">
@@ -67,7 +42,7 @@ const DoneOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {AcceptedOrder?.map((order) => (
+              {CompletedOrder?.map((order) => (
                 <tr key={order?._id} className="text-start">
                   <td className="py-2 pl-4">{order?.Name}</td>
                   <td className="py-2 pl-4">{order?.Email}</td>
@@ -84,17 +59,17 @@ const DoneOrders = () => {
                   
                   </td>
                   <td className="py-2 pl-4">
-                   Accepted
+                   Completed
                    
                   </td>
                   <td className="">
                    <button
                    onClick={()=>{
-                    handleAcceptOrder(order?._id,order?.Email)
+                    handleRemoveOrder(order?._id)
                    }}
-                      className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                      className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
                     >
-                     Completed
+                     Remove
                     </button>
                    
                    
@@ -113,4 +88,4 @@ const DoneOrders = () => {
     );
 };
 
-export default DoneOrders;
+export default History;
