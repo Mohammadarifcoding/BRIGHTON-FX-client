@@ -53,10 +53,33 @@ const CalculatorTabTwo = ({currencyData, setCurrencyData}) => {
         setBuyCurrency((Rate * (1 + (upsell / 100)) * e.target.value).toFixed(2));
     };
 
+    const ChangeTo10Divisible = (num)=>{
+        let finalNum = 0
+        let NumWord = parseInt(num)
+        let extraItem = NumWord % 10
+       
+        if(extraItem != 0){
+            let WillAdd = 10 - extraItem
+            console.log(WillAdd)
+            finalNum = NumWord + WillAdd
+        }
+        else{
+            finalNum = NumWord
+        }
+        
+        return finalNum
+       }
+    
+       const ChangeTakeCurrencyFor10Divisible = ()=>{
+        let MyCurrency = ChangeTo10Divisible(youSell)
+        let FInalTakeCurrency = MyCurrency * (Rate * (1 + (upsell /  100)))
+        return FInalTakeCurrency.toFixed(2)
+       }
+
     const handleSelling = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: upsell };
+        const currentFull = { currencyMy:ChangeTo10Divisible(currencyMy), currencyTake:ChangeTakeCurrencyFor10Divisible(), currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: (Rate * (1 + (upsell / 100))).toFixed(2) };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Sell`);
             return toast('Please give correct amount');
