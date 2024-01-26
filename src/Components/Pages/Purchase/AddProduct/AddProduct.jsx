@@ -100,7 +100,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     let FInalTakeCurrency = MyCurrency * (Rate * (1 + (upvalue /  100)))
     return FInalTakeCurrency.toFixed(2)
    }
-
+   
     const handleAdding = () => {
         let value = {};
         if (youSell <= 0) {
