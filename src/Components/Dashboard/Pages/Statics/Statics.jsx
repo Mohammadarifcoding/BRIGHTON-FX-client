@@ -1,11 +1,13 @@
 import PendingOrder from "../../../../Hook/PendingOrder";
 import UseAcceptedOrder from "../../../../Hook/UseAcceptedOrder";
+import UseCompletedOrder from './../../../../Hook/UseCompletedOrder';
 
 
 
 const Statics = () => {
    const [accepted] = UseAcceptedOrder()
    const [Pending] = PendingOrder()
+   const [completed] = UseCompletedOrder()
 
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col">
@@ -20,13 +22,18 @@ const Statics = () => {
             {/* Total Orders Box */}
             <div className="bg-gray-800 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-4">Accepted Orders</h3>
-              <p className="text-4xl font-bold">{accepted.length}</p>
+              <p className="text-4xl font-bold">{accepted?.length}</p>
             </div>
 
             {/* Pending Orders Box */}
             <div className="bg-gray-800 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-4">Pending Orders</h3>
-              <p className="text-4xl font-bold">{Pending.length}</p>
+              <p className="text-4xl font-bold">{Pending?.length}</p>
+            </div>
+            {/* Total Completed order Box */}
+            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Completed Orders</h3>
+              <p className="text-4xl font-bold">{completed?.length}</p>
             </div>
           </div>
         </div>
