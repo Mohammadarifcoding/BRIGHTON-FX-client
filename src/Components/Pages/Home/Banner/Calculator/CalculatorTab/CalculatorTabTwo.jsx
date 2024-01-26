@@ -76,8 +76,8 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
         const currentFull = {
-            currencyMy: ChangeTakeCurrencyFor10Divisible(),
-            currencyTake:ChangeTo10Divisible(buyCurrency),
+            currencyMy: youSell,
+            currencyTake:buyCurrency,
             currencyTakecurrent: 'GBP',
             currencyMycurrent: currencyData.value,
             Id: uuidv4(),
