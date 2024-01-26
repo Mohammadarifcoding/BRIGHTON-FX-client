@@ -73,20 +73,20 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
     };
 
     const ChangeTakeCurrencyFor10Divisible = () => {
-        let MyCurrency = ChangeTo10Divisible(youSell);
-        let FInalTakeCurrency = MyCurrency * (Rate * (1 + upbuy / 100));
-        return FInalTakeCurrency.toFixed(4);
-    };
+        let MyCurrency = ChangeTo10Divisible(buyCurrency);
+          let FInalTakeCurrency =  MyCurrency / (Rate * (1 + (upbuy / 100))) ;
+          return FInalTakeCurrency.toFixed(4);  
+      };
     const handleBuying = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
         const currentFull = {
-            currencyMy: ChangeTo10Divisible(currencyMy),
-            currencyTake: ChangeTakeCurrencyFor10Divisible(),
+            currencyMy: ChangeTakeCurrencyFor10Divisible(),
+            currencyTake: ChangeTo10Divisible(buyCurrency),
             currencyMycurrent: 'GBP',
             currencyTakecurrent: currencyData.value,
             Id: uuidv4(),
-            Rate: (Rate * (1 + upbuy / 100)).toFixed(4)
+            Rate: (Rate * (1 + (upbuy / 100))).toFixed(4)
         };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Order`);

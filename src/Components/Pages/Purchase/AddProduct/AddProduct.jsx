@@ -101,11 +101,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
             return toast('Please give correct amount');
         }
         if (Type == 'Sell') {
-            const currencyMy = ChangeTo10Divisible(youSell);
-            const currencyTake = ChangeTakeCurrencyFor10Divisible();
+            const currencyMy = youSell;
+            const currencyTake = ChangeTo10Divisible(buyCurrency);
             value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
         } else if (Type == 'Order') {
-            const currencyMy = ChangeTakeCurrencyFor10Divisible();
+            const currencyMy = buyCurrency;
             const currencyTake = ChangeTo10Divisible(youSell);
             value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
         }

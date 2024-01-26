@@ -67,17 +67,17 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
     };
 
     const ChangeTakeCurrencyFor10Divisible = () => {
-        let MyCurrency = ChangeTo10Divisible(youSell);
-        let FInalTakeCurrency = MyCurrency * (Rate * (1 + upsell / 100));
-        return FInalTakeCurrency.toFixed(4);
+      let MyCurrency = ChangeTo10Divisible(buyCurrency);
+        let FInalTakeCurrency = MyCurrency / (Rate * (1 + upsell / 100));
+        return FInalTakeCurrency.toFixed(4);  
     };
 
     const handleSelling = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
         const currentFull = {
-            currencyMy: ChangeTo10Divisible(currencyMy),
-            currencyTake: ChangeTakeCurrencyFor10Divisible(),
+            currencyMy: ChangeTakeCurrencyFor10Divisible(),
+            currencyTake:ChangeTo10Divisible(buyCurrency),
             currencyTakecurrent: 'GBP',
             currencyMycurrent: currencyData.value,
             Id: uuidv4(),
