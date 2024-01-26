@@ -11,7 +11,7 @@ const AddCurrency = () => {
     const [countryName, setCountryName] = useState('');
     const [checking, setChecking] = useState(false);
     const [Sell, setSell] = useState(0);
-    const [RateData,setRateData] = useState(0)
+    const [RateData, setRateData] = useState(0);
     const [Buy, setBuy] = useState(0);
     const [checkingLoading, setCheckingLoading] = useState(false);
     const Axious = UseAxious();
@@ -38,7 +38,7 @@ const AddCurrency = () => {
             .then((res) => {
                 if (res.data?.info?.rate) {
                     setChecking(true);
-                    setRateData(res.data?.info?.rate)
+                    setRateData(res.data?.info?.rate);
                 }
             })
             .catch((err) => {
@@ -50,7 +50,7 @@ const AddCurrency = () => {
     const handleAdd = () => {
         // Logic for adding the currency to the system
         // This function can add the currency and country to your data structure or database
-        Axious.post('/AddCurrency', { label: countryName, value: currencyName, Sell: Sell, Buy: Buy, Rate: RateData})
+        Axious.post('/AddCurrency', { label: countryName, value: currencyName, Sell: Sell, Buy: Buy, Rate: RateData })
             .then((res) => {
                 toast(`Added ${currencyName} currency `);
                 setCountryName('');
@@ -71,6 +71,9 @@ const AddCurrency = () => {
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-2xl font-medium mb-6">Add New Currency</h2>
                     <div className="flex flex-col gap-4">
+                        <label htmlFor="currencyName" className="text-lg text-gray-200">
+                            Currency Name
+                        </label>
                         <input
                             type="text"
                             value={currencyName}
@@ -78,6 +81,9 @@ const AddCurrency = () => {
                             placeholder="Currency Name"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                         <label htmlFor="CountryName" className="text-lg text-gray-200">
+                            Country Name
+                        </label>
                         <input
                             type="text"
                             value={countryName}
@@ -85,6 +91,9 @@ const AddCurrency = () => {
                             placeholder="Country Name"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                        <label htmlFor="currencyName" className="text-lg text-gray-200">
+                            Sell Rate
+                        </label>
                         <input
                             type="number"
                             onChange={(e) => {
@@ -93,6 +102,9 @@ const AddCurrency = () => {
                             placeholder="Sell Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                         <label htmlFor="currencyName" className="text-lg text-gray-200">
+                            Buy Rate
+                        </label>
                         <input
                             type="number"
                             onChange={(e) => {
