@@ -8,7 +8,6 @@ import UseAxious from '../../../../Hook/UseAxious';
 
 const UpdateCurrency = () => {
     const CurrecnyDataFrom = useLoaderData();
-
     // const buyDataString = parseFloat(CurrecnyDataFrom?.Buy)
     // const sellDataString = parseFloat(CurrecnyDataFrom?.Sell)
     const [currencyName, setCurrencyName] = useState(CurrecnyDataFrom?.value);
@@ -74,6 +73,9 @@ const UpdateCurrency = () => {
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-2xl font-medium mb-6">Update Currency</h2>
                     <div className="flex flex-col gap-4">
+                    <label htmlFor="currencyName" className="text-lg text-gray-200">
+                            Currency Name
+                        </label>
                         <input
                             type="text"
                             value={currencyName}
@@ -81,6 +83,9 @@ const UpdateCurrency = () => {
                             placeholder="Currency Name"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                        <label htmlFor="currencyName" className="text-lg text-gray-200">
+                            Country Name
+                        </label>
                         <input
                             type="text"
                             value={countryName}
@@ -88,20 +93,26 @@ const UpdateCurrency = () => {
                             placeholder="Country Name"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                        <label htmlFor="currencyName" className="text-lg text-gray-200">
+                          Buy Rate
+                        </label>
                         <input
                             type="number"
                             defaultValue={Buy}
                             onChange={(e) => {
-                                setSell(e.target.value);
+                                setBuy(e.target.value);
                             }}
                             placeholder="Buy Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
+                         <label htmlFor="currencyName" className="text-lg text-gray-200">
+                          Sell Rate
+                        </label>
                         <input
                             type="number"
                             defaultValue={Sell}
                             onChange={(e) => {
-                                setBuy(e.target.value);
+                                setSell(e.target.value);
                             }}
                             placeholder="Sell Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"

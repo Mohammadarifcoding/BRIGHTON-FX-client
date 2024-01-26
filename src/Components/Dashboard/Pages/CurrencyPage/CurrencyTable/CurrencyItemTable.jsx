@@ -67,8 +67,8 @@ const CurrencyItemTable = ({ item }) => {
     //     }
     // });
 
-    const SellValue = item?.Sell / 100 + 1;
-    const BuyValue = item?.Buy / 100 + 1;
+    const SellValue = (item?.Sell / 100) + 1;
+    const BuyValue = (item?.Buy / 100) + 1;
 
     return (
         <tr className="text-start" key={item?.value}>
