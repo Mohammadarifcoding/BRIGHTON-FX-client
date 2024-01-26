@@ -133,6 +133,8 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     };
 
     const ChangeCurrencyData = (e) => {
+        setYouSell(0)
+        setBuyCurrency(0)
         setCurrencyData(e.target.value);
     };
 
@@ -143,9 +145,13 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                     Add Currency <span className="text-gray-400"> (maximum 4 currency)</span>
                 </h2>
                 <div className={`${Addproduct ? '' : 'hidden'}  grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10`}>
-                    <div className={`w-full`}>
-                        <h2 className="text-gray-500 text-lg">{currentWay == 'Sell' ? ' FX Amount' : 'Total Money'}</h2>
+                    <div className={`${currentWay == 'Sell' ? 'hidden ':''} w-full`}>
+                        <h2 className="text-gray-500 text-lg">Total Money</h2>
                         <input onChange={handleyouBuyamountCurrency} value={youSell} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
+                    </div>
+                    <div className={`${currentWay == 'Order' ? 'hidden ':''} w-full`}>
+                        <h2 className="text-gray-500 text-lg">Fx Amount</h2>
+                        <input onChange={handleSellamountChange} value={buyCurrency} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className="  w-full">
                         <h2 className="text-gray-500 text-lg">Select Currency</h2>
@@ -156,9 +162,13 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                             ))}
                         </select>
                     </div>
-                    <div className="  w-full">
-                        <h2 className="text-gray-500 text-lg"> {currentWay == 'Order' ? ' FX Amount' : 'Total Money'}</h2>
+                    <div className={` ${currentWay == 'Sell' ? 'hidden':''} w-full`}>
+                        <h2 className="text-gray-500 text-lg"> Fx Amount </h2>
                         <input type="text" onChange={handleSellamountChange} value={buyCurrency} className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
+                    </div>
+                    <div className={` ${currentWay == 'Order' ? 'hidden':''} w-full`}>
+                        <h2 className="text-gray-500 text-lg"> Total Money </h2>
+                        <input type="text"  onChange={handleyouBuyamountCurrency} value={youSell}  className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className=" hidden w-full">
                         <h2 className="text-gray-500 text-lg">What to do</h2>
