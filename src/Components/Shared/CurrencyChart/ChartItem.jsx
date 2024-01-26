@@ -1,14 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
-import UseAxious from '../../../Hook/UseAxious';
 
 const ChartItem = ({ item }) => {
     const nav = useNavigate();
-   
-    const totalString = `${item?.label} - ${item?.value}`
+
+    const totalString = `${item?.label} - ${item?.value}`;
 
     return (
         <div className={` bg-gray-100 justify-between items-center px-3 flex  py-5`}>
@@ -18,22 +15,12 @@ const ChartItem = ({ item }) => {
                 <h2 className="xl:text-xl lg:text-lg  lg:block hidden">
                     {item?.label}-{item?.value}
                 </h2>
-                <h2 className="xl:text-xl lg:text-lg  lg:hidden ">
-                    {
-                        totalString.length > 30 ?
-                        <>
-                        {totalString.slice(0,30)}...
-                        </>:<>
-                        {totalString}
-                        </>
-                    }
-                    
-                </h2>
+                <h2 className="xl:text-xl lg:text-lg  lg:hidden ">{totalString.length > 30 ? <>{totalString.slice(0, 30)}...</> : <>{totalString}</>}</h2>
             </div>
 
             <div className="flex  lg:gap-10 gap-6 xl:gap-20">
                 <div className="flex  gap-4 xl:flex-row flex-col xl:items-center">
-                    <h2 className="xl:text-xl lg:text-lg w-fit">{(item?.Rate * (1 + (item?.Sell / 100))).toFixed(2)}</h2>
+                    <h2 className="xl:text-xl lg:text-lg w-fit">{(item?.Rate * (1 + item?.Sell / 100)).toFixed(4)}</h2>
                     <button
                         onClick={() => {
                             nav(`/purchase/${item?.value}/Order`);
@@ -44,7 +31,7 @@ const ChartItem = ({ item }) => {
                     </button>
                 </div>
                 <div className="flex  gap-4 xl:flex-row flex-col xl:items-center ">
-                    <h2 className="xl:text-xl lg:text-lg w-[100px] xl:text-end">{(item?.Rate * (1 + (item?.Buy / 100))).toFixed(2)}</h2>
+                    <h2 className="xl:text-xl lg:text-lg w-[100px] xl:text-end">{(item?.Rate * (1 + item?.Buy / 100)).toFixed(4)}</h2>
                     <div className="flex justify-end">
                         <button
                             onClick={() => {

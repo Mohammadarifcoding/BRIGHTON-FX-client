@@ -1,20 +1,18 @@
 import Select from 'react-select';
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import UseCurrency from '../../../../../../Hook/UseCurrency';
 
-const CalculatorTabTwo = ({currencyData, setCurrencyData}) => {
+const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
     // let curenc?.info?.rate = 53
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
-   
-    const [Rate,setRate] = useState(0)
-    const [upsell,setUpsell] = useState(0)
+
+    const [Rate, setRate] = useState(0);
+    const [upsell, setUpsell] = useState(0);
     const [youSell, setYouSell] = useState(0);
 
     // const { data: curenc } = useQuery({
@@ -31,55 +29,60 @@ const CalculatorTabTwo = ({currencyData, setCurrencyData}) => {
 
     const [buyCurrency, setBuyCurrency] = useState(0);
 
-    useEffect(()=>{
-        setRate(0)
-        const findCurrency = currency.find(item => item.value == currencyData.value)
-        setRate(parseFloat(findCurrency.Rate))
-    },[currency,currencyData])
+    useEffect(() => {
+        setRate(0);
+        const findCurrency = currency.find((item) => item.value == currencyData.value);
+        setRate(parseFloat(findCurrency.Rate));
+    }, [currency, currencyData]);
 
-    useEffect(()=>{
-        const CurrentCurrencySelected = currency.find(item => item.value == currencyData.value)
-        setUpsell(parseFloat(CurrentCurrencySelected.Buy))
-
-  },[currencyData,currency])
+    useEffect(() => {
+        const CurrentCurrencySelected = currency.find((item) => item.value == currencyData.value);
+        setUpsell(parseFloat(CurrentCurrencySelected.Buy));
+    }, [currencyData, currency]);
 
     const handleSellamountChange = (e) => {
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (Rate * (1 + (upsell / 100)))).toFixed(2));
+        setYouSell((e.target.value / (Rate * (1 + upsell / 100))).toFixed(4));
     };
 
     const handleyouBuyamountCurrency = (e) => {
         setYouSell(e.target.value);
-        setBuyCurrency((Rate * (1 + (upsell / 100)) * e.target.value).toFixed(2));
+        setBuyCurrency((Rate * (1 + upsell / 100) * e.target.value).toFixed(4));
     };
 
-    const ChangeTo10Divisible = (num)=>{
-        let finalNum = 0
-        let NumWord = parseInt(num)
-        let extraItem = NumWord % 10
-       
-        if(extraItem != 0){
-            let WillAdd = 10 - extraItem
-            console.log(WillAdd)
-            finalNum = NumWord + WillAdd
+    const ChangeTo10Divisible = (num) => {
+        let finalNum = 0;
+        let NumWord = parseInt(num);
+        let extraItem = NumWord % 10;
+
+        if (extraItem != 0) {
+            let WillAdd = 10 - extraItem;
+            console.log(WillAdd);
+            finalNum = NumWord + WillAdd;
+        } else {
+            finalNum = NumWord;
         }
-        else{
-            finalNum = NumWord
-        }
-        
-        return finalNum
-       }
-    
-       const ChangeTakeCurrencyFor10Divisible = ()=>{
-        let MyCurrency = ChangeTo10Divisible(youSell)
-        let FInalTakeCurrency = MyCurrency * (Rate * (1 + (upsell /  100)))
-        return FInalTakeCurrency.toFixed(2)
-       }
+
+        return finalNum;
+    };
+
+    const ChangeTakeCurrencyFor10Divisible = () => {
+      let MyCurrency = ChangeTo10Divisible(buyCurrency);
+        let FInalTakeCurrency = MyCurrency / (Rate * (1 + upsell / 100));
+        return FInalTakeCurrency.toFixed(4);  
+    };
 
     const handleSelling = () => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
-        const currentFull = { currencyMy:ChangeTo10Divisible(currencyMy), currencyTake:ChangeTakeCurrencyFor10Divisible(), currencyTakecurrent: 'GBP', currencyMycurrent: currencyData.value, Id: uuidv4(), Rate: (Rate * (1 + (upsell / 100))).toFixed(2) };
+        const currentFull = {
+            currencyMy: ChangeTakeCurrencyFor10Divisible(),
+            currencyTake:ChangeTo10Divisible(buyCurrency),
+            currencyTakecurrent: 'GBP',
+            currencyMycurrent: currencyData.value,
+            Id: uuidv4(),
+            Rate: (Rate * (1 + upsell / 100)).toFixed(4)
+        };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Sell`);
             return toast('Please give correct amount');
@@ -162,7 +165,7 @@ const CalculatorTabTwo = ({currencyData, setCurrencyData}) => {
             <div className="mt-5 text-center font-semibold">
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
                 <h2 className="mt-3 text-lg">
-                    1 GBP = {((Rate ?? 1) * (1 + (upsell / 100))).toFixed(2)} {currencyData.value}
+                    1 GBP = {((Rate ?? 1) * (1 + upsell / 100)).toFixed(4)} {currencyData.value}
                 </h2>
             </div>
             <div className="flex mt-3">
