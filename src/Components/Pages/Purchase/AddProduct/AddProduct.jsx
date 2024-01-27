@@ -91,6 +91,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
           let FInalTakeCurrency =  MyCurrency * (Rate * (1 + (upvalue/ 100))) ;
           return FInalTakeCurrency.toFixed(4);  
       };
+      const ChangleTakeCurrencyDIffernet10Divisible = (number)=>{
+        let MyCurrency = ChangeTo10Divisible(number);
+        let FInalTakeCurrency =  MyCurrency / (Rate * (1 + (upvalue/ 100))) ;
+        return FInalTakeCurrency.toFixed(4);  
+      }
 
     const handleAdding = () => {
         let value = {};
@@ -103,11 +108,11 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         if (Type == 'Sell') {
             const currencyMy = youSell;
             const currencyTake = buyCurrency;
-            value = { currencyMy, currencyTake, currencyTakecurrent: 'GBP', currencyMycurrent: currencyData, Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
-        } else if (Type == 'Order') {
-            const currencyMy = ChangeTakeCurrencyFor10Divisible(youSell);
-            const currencyTake = ChangeTo10Divisible(youSell);
             value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
+        } else if (Type == 'Order') {
+            const currencyMy =  ChangeTo10Divisible(buyCurrency);
+            const currencyTake =ChangleTakeCurrencyDIffernet10Divisible(buyCurrency);
+            value = { currencyMy, currencyTake, currencyTakecurrent:'GBP', currencyMycurrent:  currencyData, Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
         }
 
         const localStorageData = JSON.parse(localStorage.getItem('purchase'));

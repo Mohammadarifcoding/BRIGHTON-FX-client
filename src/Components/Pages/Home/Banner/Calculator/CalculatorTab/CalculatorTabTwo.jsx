@@ -78,8 +78,8 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
         const currentFull = {
             currencyMy: youSell,
             currencyTake:buyCurrency,
-            currencyTakecurrent: 'GBP',
-            currencyMycurrent: currencyData.value,
+            currencyTakecurrent:currencyData.value ,
+            currencyMycurrent: 'GBP',
             Id: uuidv4(),
             Rate: (Rate * (1 + upsell / 100)).toFixed(4)
         };
