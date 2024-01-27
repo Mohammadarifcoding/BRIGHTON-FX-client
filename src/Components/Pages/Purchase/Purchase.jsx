@@ -44,10 +44,10 @@ const Purchase = () => {
         {/* Add Currency */}
         { nextFrom == 1 ? <>
           <AddProduct currentWay={currentWay} currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
-        <ul className="flex flex-col mt-10 list-disc ml-6">
-           <li>We Believe in trust of our customer</li>
-           <li>We give best suppor for our reliable customers</li>
-           <li>Our vision is to make the currency swap easier</li>
+        <ul className="flex flex-col font-medium mt-10 text-lg list-disc ml-6">
+           <li className=" ">Bring you ID for collection</li>
+           <li >Order online, pay in-store</li>
+           <li>24-hour rate guarantee upon order arrival in the store</li>
         </ul>
         </>  :''
       

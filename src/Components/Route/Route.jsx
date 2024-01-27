@@ -50,10 +50,6 @@ const router = createBrowserRouter([
                 element: <SendMoney></SendMoney>
             },
             {
-                path: '/travleMoney',
-                element: <TravelMoney></TravelMoney>
-            },
-            {
                 path: '/exchangeRates',
                 element: <ExchangeRates></ExchangeRates>
             },

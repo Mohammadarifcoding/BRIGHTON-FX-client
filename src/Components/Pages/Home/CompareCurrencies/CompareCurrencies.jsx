@@ -4,19 +4,19 @@ import Container from '../../../Shared/Container/Container';
 const CompareCurrencies = () => {
   const data = [
     {
-      currency:509.72 ,
+      currency:'0.00',
       place:'BRIGHTON FX'
     },
     {
-      currency:507.28,
-      place:'Tesko'
+      currency:'0.00',
+      place:'Tesco'
     },
     {
-      currency:500.45  ,
+      currency:'0.00'  ,
       place:'Post Office'
     },
     {
-      currency:495.41  ,
+      currency:'0.00' ,
       place:'Barclays'
     }
   ]
