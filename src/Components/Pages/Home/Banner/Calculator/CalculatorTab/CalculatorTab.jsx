@@ -81,10 +81,10 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
         const currencyMy = youSell;
         const currencyTake = buyCurrency;
         const currentFull = {
-            currencyMy: ChangeTakeCurrencyFor10Divisible(),
-            currencyTake: ChangeTo10Divisible(buyCurrency),
-            currencyMycurrent: 'GBP',
-            currencyTakecurrent: currencyData.value,
+            currencyMy: ChangeTo10Divisible(buyCurrency),
+            currencyTake: ChangeTakeCurrencyFor10Divisible(),
+            currencyMycurrent:  currencyData.value,
+            currencyTakecurrent:'GBP',
             Id: uuidv4(),
             Rate: (Rate * (1 + (upbuy / 100))).toFixed(4)
         };
