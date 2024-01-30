@@ -28,9 +28,9 @@ const CurrencyMobileItem = ({ item, num }) => {
                     <h2 className="xsm:hidden sxm:block block  text-sm">{totalString.length > 15 ? <>{totalString.slice(0, 12)}...</> : <>{totalString}</>}</h2>
 
                     {num == 0 ? (
-                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + item?.Buy / 100)).toFixed(4)}</h2>
-                    ) : (
                         <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + item?.Sell / 100)).toFixed(4)}</h2>
+                    ) : (
+                        <h2 className=" w-[100px] lg:text-end">{(item?.Rate * (1 + item?.Buy / 100)).toFixed(4)}</h2>
                     )}
                 </div>
             </div>

@@ -7,6 +7,7 @@ const OrderDetails = () => {
         window.history.back();
     };
 
+    console.log(Data)
     return (
         <div className="bg-gray-900  min-h-screen flex flex-col">
             <header className="bg-gray-800 py-4">
@@ -53,7 +54,7 @@ const OrderDetails = () => {
                                     <span className="font-semibold">
                                         : {item?.currencyTake} {item?.currencyTakecurrent}
                                     </span>{' '}
-                                    (Rate {(item?.Rate).toFixed(4)})
+                                    (Rate {(parseFloat(item?.Rate)).toFixed(4)})
                                 </h2>
                             ))}
                         </div>
