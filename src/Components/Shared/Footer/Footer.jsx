@@ -95,7 +95,8 @@ const Footer = () => {
    </div>
  </div >
  {/* copyright Section */}
- <div className="border-t-2 mt-16 ">
+ <h2 className="text-white text-[15px] mt-16  mb-3 ">BRIGHTONFX IS A TRADING NAME OF WORTHING FX SERVICES LTD,REGISTERED IN ENGLAND AND WALES UNDER NUMBER 10874304,REGISTERED ADDRESS:123 QUEENS ROAD, BRIGHTHON, BN1 3WB. </h2>
+ <div className="border-t-2">
  <div className=" px-20 py-4 flex justify-between ">
    <p>Copyright © 2024 Brighton FX All rights reserved.</p>
    <div>

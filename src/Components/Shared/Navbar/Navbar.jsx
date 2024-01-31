@@ -1,14 +1,14 @@
-import { Link, NavLink } from 'react-router-dom';
-import Container from '../Container/Container';
-import { FaBars } from 'react-icons/fa';
 import { useContext, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { FaBars } from 'react-icons/fa';
+import { RxCross1 } from 'react-icons/rx';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
-import { RxCross1 } from 'react-icons/rx';
-import { AuthContext } from '../../../Provider/AuthProvider';
+import { Link, NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import UseAdminCheck from '../../../Hook/UseAdminCheck';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import Container from '../Container/Container';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +37,7 @@ const Navbar = () => {
                     </Link>
 
                     <div className="lg:flex hidden gap-[12px] list-none lg:text-sm md:text-base xl:text-base text-base  bigScreen-navitem items-center">
-                        <NavLink to={'/travleMoney'} className=" pb-2">
+                        <NavLink to={'/'} className=" pb-2">
                             <li>Travel Money </li>
                         </NavLink>
                         <NavLink to={'/exchangeRates'} className=" pb-2">
@@ -97,7 +97,7 @@ const Navbar = () => {
                             </div>
 
                             <div className="flex flex-col list-none gap-4 mt-4 text-white">
-                                <NavLink to={'/travleMoney'} className=" pb-2 px-4 border-b border-white">
+                                <NavLink to={'/'} className=" pb-2 px-4 border-b border-white">
                                     <li>Travel Money </li>
                                 </NavLink>
                                 <NavLink to={'/exchangeRates'} className=" pb-2 px-4 border-b border-white">

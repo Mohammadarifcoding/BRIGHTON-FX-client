@@ -42,7 +42,7 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
 
     const handleSellamountChange = (e) => {
         setBuyCurrency(e.target.value);
-        setYouSell((e.target.value / (Rate * (1 + upsell / 100))).toFixed(4));
+        setYouSell((e.target.value / (Rate * (1 + upsell / 100))).toFixed(2));
     };
 
     const handleyouBuyamountCurrency = (e) => {
