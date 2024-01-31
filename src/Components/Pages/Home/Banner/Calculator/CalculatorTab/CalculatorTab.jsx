@@ -178,7 +178,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                         </>
                     ) : (
                         <>
-                            1 GBP = {((Rate ?? 1) * (1 + upbuy / 100)).toFixed(2)} {currencyData.value}
+                            1 GBP = {((Rate ?? 1) * (1 + upbuy / 100)).toFixed(4)} {currencyData.value}
                         </>
                     )}
                 </h2>
