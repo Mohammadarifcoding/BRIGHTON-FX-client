@@ -67,7 +67,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
         console.log(CurrencySelected.Sell);
         console.log(CurrencySelected.Buy);
         setYouSell(e.target.value);
-        setBuyCurrency((Rate * (1 + upvalue / 100) * e.target.value).toFixed(4));
+        setBuyCurrency((Rate * (1 + upvalue / 100) * e.target.value).toFixed(2));
     };
 
     const ChangeTo10Divisible = (num) => {
@@ -94,7 +94,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
       const ChangleTakeCurrencyDIffernet10Divisible = (number)=>{
         let MyCurrency = ChangeTo10Divisible(number);
         let FInalTakeCurrency =  MyCurrency / (Rate * (1 + (upvalue/ 100))) ;
-        return FInalTakeCurrency.toFixed(4);  
+        return FInalTakeCurrency.toFixed(2);  
       }
 
     const handleAdding = () => {

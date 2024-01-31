@@ -48,11 +48,12 @@ const OrderDetails = () => {
                                 <h2 key={index} className="sm:text-xl mt-2">
                                     Customer Give{' '}
                                     <span className="font-semibold">
-                                        : {item?.currencyMy} {item?.currencyMycurrent}
+                                    : {item?.currencyTake} {item?.currencyTakecurrent}
                                     </span>
                                     >> Customer get{' '}
                                     <span className="font-semibold">
-                                        : {item?.currencyTake} {item?.currencyTakecurrent}
+
+                                        : {item?.currencyMy} {item?.currencyMycurrent}
                                     </span>{' '}
                                     (Rate {(parseFloat(item?.Rate)).toFixed(4)})
                                 </h2>

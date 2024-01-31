@@ -75,7 +75,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
     const ChangeTakeCurrencyFor10Divisible = () => {
         let MyCurrency = ChangeTo10Divisible(buyCurrency);
           let FInalTakeCurrency =  MyCurrency / (Rate * (1 + (upbuy / 100))) ;
-          return FInalTakeCurrency.toFixed(4);  
+          return FInalTakeCurrency.toFixed(2);  
       };
     const handleBuying = () => {
         const currencyMy = youSell;
@@ -178,7 +178,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                         </>
                     ) : (
                         <>
-                            1 GBP = {((Rate ?? 1) * (1 + upbuy / 100)).toFixed(4)} {currencyData.value}
+                            1 GBP = {((Rate ?? 1) * (1 + upbuy / 100)).toFixed(2)} {currencyData.value}
                         </>
                     )}
                 </h2>
