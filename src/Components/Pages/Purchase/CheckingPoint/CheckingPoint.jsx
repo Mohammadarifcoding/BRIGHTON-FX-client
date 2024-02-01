@@ -138,7 +138,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
                             name="Number"
                             required
                             type="tel"
-                            placeholder="Enter Number"
+                            placeholder="Enter Phone Number"
                             className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
                         />
                         <h2 className="gap-2 flex items-center  mt-4 text-lg">
@@ -157,7 +157,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
                                     className="text-2xl"
                                 ></MdOutlineCheckBoxOutlineBlank>
                             )}
-                            I accept all the rules
+                            I accept all the <Link className='text-blue-600 hover:underline' to={'/termsCoditition'}>Terms and condition</Link>
                         </h2>
 
                         <div className="flex  mt-3 md:max-w-[500px] sm:w-full justify-end">
