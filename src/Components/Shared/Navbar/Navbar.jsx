@@ -49,6 +49,9 @@ const Navbar = () => {
                         <NavLink to={'/termsCoditition'} className=" pb-2">
                             <li>Terms & Condition </li>
                         </NavLink>
+                        <NavLink to={'/privacyPolicy'} className=" pb-2">
+                            <li>Privacy & Policy </li>
+                        </NavLink>
                         <NavLink to={'/contact'} className=" pb-2">
                             <li>Contact Us </li>
                         </NavLink>
@@ -108,6 +111,9 @@ const Navbar = () => {
                                 </NavLink>
                                 <NavLink to={'/termsCoditition'} className=" pb-2 px-4 border-b border-white">
                                     <li>Terms & Condition </li>
+                                </NavLink>
+                                <NavLink to={'/privacyPolicy'} className=" pb-2 px-4 border-b border-white">
+                                    <li>Privacy & Policy </li>
                                 </NavLink>
                                 <NavLink to={'/contact'} className=" pb-2 px-4 border-b border-white">
                                     <li>Contact Us </li>
