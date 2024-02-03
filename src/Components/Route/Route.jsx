@@ -22,6 +22,7 @@ import PrivateProvider from './../../Provider/PrivateProvider';
 import UserRole from '../Dashboard/Pages/User Role/UserRole';
 import Statics from '../Dashboard/Pages/Statics/Statics';
 import History from '../Dashboard/Pages/Orders/History';
+import Privacy from './../Pages/Privacy/Privacy';
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path:'/signIn',
                 element:<SignIn></SignIn>
+            },
+            {
+                path:'/privacyPolicy',
+                element:<Privacy></Privacy>
             }
         ]
     },
