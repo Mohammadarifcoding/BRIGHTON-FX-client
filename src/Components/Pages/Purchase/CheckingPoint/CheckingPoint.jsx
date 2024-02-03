@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
     const AddressForm = useRef();
-
+    let OrdersData = JSON.parse(localStorage.getItem('purchase'))
     const [address, setAddress] = useState('location');
     const Axious = UseAxious();
     const [Order, setlastOrder] = useState({});
@@ -44,18 +44,37 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
             if (!selected) {
                 return toast('Please select the rules');
             }
+            
+      
             const UserInformation = {
                 Order_Id: uuidv4(),
                 Name: First_Name + ' ' + Last_Name,
                 Email: Email,
                 Phone_Number: Phone_Number,
                 Address: address,
-                Orders: JSON.parse(localStorage.getItem('purchase')),
+                Orders:JSON.parse(localStorage.getItem('purchase')),
+                CurrencyName:OrdersData[0].currencyMycurrent,
+                FxAmount:`${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`,
+                Rate : OrdersData[0].Rate,
+                TotalMoney : `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`,
                 Status: 'Pending'
             };
+          
+            console.log(UserInformation.Orders.currencyMycurrent)
+            const tempForm = document.createElement('form');
+            tempForm.style.display = 'none';
+            
+            // Loop through the keys of the UserInformation object and create input fields
+            for (const key in UserInformation) {
+              const input = document.createElement('input');
+              input.type = 'text';
+              input.name = key;
+              input.value = UserInformation[key];
+              tempForm.appendChild(input);
+            }
 
             Axious.post('/Order', UserInformation).then((res) => {
-                emailjs.sendForm('service_geyk8rj', 'template_9ag9qg6', AddressForm.current, '-IllRWDI3WXoeT7lj').then((res) => {
+                emailjs.sendForm('service_geyk8rj', 'template_9ag9qg6', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
                     console.log(res);
                 });
                 setlastOrder(UserInformation);
