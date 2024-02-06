@@ -74,7 +74,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
             }
 
             Axious.post('/Order', UserInformation).then((res) => {
-                emailjs.sendForm('service_geyk8rj', 'template_9ag9qg6', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
+                emailjs.sendForm('service_geyk8rj', 'template_gt16753', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
                     console.log(res);
                 });
                 setlastOrder(UserInformation);

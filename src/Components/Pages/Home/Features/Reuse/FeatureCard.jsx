@@ -24,7 +24,7 @@ const FeatureCard = ({data}) => {
 
         </div>
         <div className="flex justify-center mt-3">
-          <button className="btn text-white rounded hover:bg-[#1d2f51] bg-[#1E4A9A] w-full">Buy Currency <IoIosArrowForward></IoIosArrowForward></button>
+          <button className="btn text-white rounded hover:bg-[#1d2f51] bg-[#1E4A9A] w-full">{data.vision} <IoIosArrowForward></IoIosArrowForward></button>
         </div>
         </div>
        
