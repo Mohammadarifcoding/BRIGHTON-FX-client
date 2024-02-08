@@ -107,7 +107,7 @@ const DashBoardLayout = () => {
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Orders</button>
                     </NavLink>
                     <NavLink to='/dashboard/history'>
-                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Accepted Orders</button>
+                    <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>History</button>
                     </NavLink>
                     <NavLink to='/dashboard/Currency'>
                     <button className='flex p-[20px] w-full  text-white gap-3 text-lg font-medium border-b border-white'>Currency</button>

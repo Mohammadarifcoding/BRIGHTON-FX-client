@@ -18,7 +18,7 @@ const Home = () => {
             <Banner></Banner>
             <Commitment></Commitment>
             <CurrencyChart currency={currency}></CurrencyChart>
-            <Features></Features>
+            {/* <Features></Features> */}
             <StoreFind></StoreFind>
             <CompareCurrencies></CompareCurrencies> 
             <Accordin></Accordin>          
