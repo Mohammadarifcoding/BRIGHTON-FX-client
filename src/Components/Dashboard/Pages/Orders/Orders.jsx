@@ -3,6 +3,7 @@ import PendingOrder from "../../../../Hook/PendingOrder";
 import UseAxious from "../../../../Hook/UseAxious";
 import { v4 as uuidv4 } from 'uuid';
 import  emailjs  from '@emailjs/browser';
+import Swal from "sweetalert2";
 
 
 const Orders = () => {
@@ -37,16 +38,44 @@ const Orders = () => {
         tempForm.appendChild(input);
       }
         console.log(tempForm)
+
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Aceept!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Axious.get(`/pendingToAceept/${orderId}`)
+            .then(res => {
+              RefetchPendingOrder()
+              emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
+              .then(res=>{
+                console.log('email send')
+                Swal.fire({
+                  title: "Accepted!",
+                  text: "This order has been accepted.",
+                  icon: "success"
+                });
+              })
+            })
+         
+          }
+        });
         // Logic to accept the order with orderId
         // This function can update the order status or perform other actions
-          Axious.get(`/pendingToAceept/${orderId}`)
-          .then(res => {
-            RefetchPendingOrder()
-            emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
-            .then(res=>{
-              console.log('email send')
-            })
-          })
+          // Axious.get(`/pendingToAceept/${orderId}`)
+          // .then(res => {
+          //   RefetchPendingOrder()
+          //   emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
+          //   .then(res=>{
+          //     console.log('email send')
+          //   })
+          // })
       };
     
    

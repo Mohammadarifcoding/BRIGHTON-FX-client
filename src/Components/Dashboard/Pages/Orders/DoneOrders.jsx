@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import UseAxious from "../../../../Hook/UseAxious";
 import UseAcceptedOrder from "../../../../Hook/UseAcceptedOrder";
 import  emailjs  from '@emailjs/browser';
+import Swal from "sweetalert2";
 
 
 const DoneOrders = () => {
@@ -12,17 +13,35 @@ const DoneOrders = () => {
  
    
       const handleAcceptOrder = (orderId) => {
-
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Complete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Axious.put(`/acceptedToCompleted/${orderId}`)
+            .then(res => {
+              RefetchAcceptedOrder()
+              Swal.fire({
+                title: "Completed!",
+                text: "This order has been completed.",
+                icon: "success"
+              });
+         
+            console.log(res)
+        
+            })
+ 
+          }
+        });
         // Logic to accept the order with orderId
         
         // This function can update the order status or perform other actions
-          Axious.put(`/acceptedToCompleted/${orderId}`)
-          .then(res => {
-            RefetchAcceptedOrder()
-        .then(res => {
-          console.log(res)
-        })
-          })
+
       };
     
    
