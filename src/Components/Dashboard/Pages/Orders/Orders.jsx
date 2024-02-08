@@ -1,17 +1,51 @@
 import { Link } from "react-router-dom";
 import PendingOrder from "../../../../Hook/PendingOrder";
 import UseAxious from "../../../../Hook/UseAxious";
+import { v4 as uuidv4 } from 'uuid';
+import  emailjs  from '@emailjs/browser';
+
 
 const Orders = () => {
     const [pendingOrders,RefetchPendingOrder] = PendingOrder()
     const Axious = UseAxious()
     
-      const handleAcceptOrder = (orderId) => {
+      const handleAcceptOrder = (orderId,Email,order) => {
+        const UserInformation = {
+          Order_Id: uuidv4(),
+          Name: order?.Name,
+          Email: Email,
+          Phone_Number:order?.Phone_Number,
+          Address: order?.Address,
+          Orders:order?.Orders,
+          CurrencyName:order?.Orders[0].currencyMycurrent,
+          FxAmount:`${order?.Orders[0].currencyMy} ${order?.Orders[0].currencyMycurrent}`,
+          Rate : order?.Orders[0].Rate,
+          TotalMoney : `${order?.Orders[0].currencyTake} ${order?.Orders[0].currencyTakecurrent}`,
+          Status: 'Pending'
+      };
+
+      console.log(UserInformation)
+      const tempForm = document.createElement('form');
+      tempForm.style.display = 'none';
+      
+      // Loop through the keys of the UserInformation object and create input fields
+      for (const key in UserInformation) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = key;
+        input.value = UserInformation[key];
+        tempForm.appendChild(input);
+      }
+        console.log(tempForm)
         // Logic to accept the order with orderId
         // This function can update the order status or perform other actions
           Axious.get(`/pendingToAceept/${orderId}`)
           .then(res => {
             RefetchPendingOrder()
+            emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
+            .then(res=>{
+              console.log('email send')
+            })
           })
       };
     
@@ -47,7 +81,7 @@ const Orders = () => {
                   <td className="py-2 pl-4">{order?.Phone_Number}</td>
                   <td className="py-2 pl-4">
                     <button
-                      onClick={() => handleAcceptOrder(order?._id)}
+                      onClick={() => handleAcceptOrder(order?._id,order?.Email,order)}
                       className="bg-green-500 text-white py-1 px-3 rounded-md mr-2 hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
                     >
                       Accept Order

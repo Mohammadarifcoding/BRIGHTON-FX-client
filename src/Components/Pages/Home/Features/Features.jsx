@@ -10,14 +10,16 @@ const Features = () => {
       'Reserve online, pay and collect in store',
       'Enhanced web rates',
       '0% commission'
-    ]
+    ],
+    vision:'Buy Currency'
   },{
     icon : '/Images/deal.png',
     feature : [
       'Order online and we’ll deliver  to your door',
       'FREE delivery on all orders £800 or more',
       '0% commission'
-    ]
+    ],
+    vision:'Sell Currency'
   }]
 
 

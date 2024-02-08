@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { v4 as uuidv4 } from 'uuid';
 import UseAxious from "../../../../Hook/UseAxious";
 import UseAcceptedOrder from "../../../../Hook/UseAcceptedOrder";
 import  emailjs  from '@emailjs/browser';
@@ -11,30 +11,14 @@ const DoneOrders = () => {
     
  
    
-      const handleAcceptOrder = (orderId,Email) => {
-        const tempForm = document.createElement('form');
-        tempForm.style.display = 'none';
-        let emailParams = {
-          Email : Email
-        }
-        Object.keys(emailParams).forEach((key) => {
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.name = key;
-          input.value = Email;
-          tempForm.appendChild(input);
-        });
-        console.log(tempForm)
+      const handleAcceptOrder = (orderId) => {
+
         // Logic to accept the order with orderId
         
         // This function can update the order status or perform other actions
           Axious.put(`/acceptedToCompleted/${orderId}`)
           .then(res => {
             RefetchAcceptedOrder()
-            emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
-            .then(res=>{
-              console.log('email send')
-            })
         .then(res => {
           console.log(res)
         })
@@ -90,7 +74,7 @@ const DoneOrders = () => {
                   <td className="">
                    <button
                    onClick={()=>{
-                    handleAcceptOrder(order?._id,order?.Email)
+                    handleAcceptOrder(order?._id)
                    }}
                       className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
                     >
