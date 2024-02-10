@@ -8,14 +8,14 @@ import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import UseAxious from '../../../../Hook/UseAxious';
 import { Link } from 'react-router-dom';
 
-const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
+const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }) => {
     const AddressForm = useRef();
-    let OrdersData = JSON.parse(localStorage.getItem('purchase'))
+    let OrdersData = JSON.parse(localStorage.getItem('purchase'));
     const [address, setAddress] = useState('location');
     const Axious = UseAxious();
     const [Order, setlastOrder] = useState({});
     const [selected, setSelected] = useState(false);
-
+    console.log(currentWay);
     const GetAddress = () => {
         if (address == 'location') {
             return toast('Select the checking point');
@@ -44,33 +44,50 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
             if (!selected) {
                 return toast('Please select the rules');
             }
-            
-      
+
             const UserInformation = {
                 Order_Id: uuidv4(),
                 Name: First_Name + ' ' + Last_Name,
                 Email: Email,
                 Phone_Number: Phone_Number,
                 Address: address,
-                Orders:JSON.parse(localStorage.getItem('purchase')),
-                CurrencyName:OrdersData[0].currencyMycurrent,
-                FxAmount:`${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`,
-                Rate : OrdersData[0].Rate,
-                TotalMoney : `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`,
-                Status: 'Pending'
+                Orders: JSON.parse(localStorage.getItem('purchase')),
+                CurrencyName: '',
+                FxAmount: ``,
+                Rate: OrdersData[0].Rate,
+                TotalMoney: ``,
+                Status: 'Pending',
+                title: '',
+                SecondRow: '',
+                FourthRow: ''
             };
-          
-            console.log(UserInformation.Orders.currencyMycurrent)
+            if (currentWay == 'Order') {
+                UserInformation.title = 'Click & Buy';
+                UserInformation.SecondRow = 'Amount';
+                UserInformation.FourthRow = 'Fx Amount';
+                UserInformation.FxAmount = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
+                UserInformation.TotalMoney = `£ ${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
+                UserInformation.CurrencyName = OrdersData[0].currencyMycurrent
+            } else if (currentWay == 'Sell') {
+                UserInformation.title = 'Click & Sell';
+                UserInformation.SecondRow = 'Fx Amount';
+                UserInformation.FourthRow = 'Amount';
+                UserInformation.FxAmount = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
+                UserInformation.TotalMoney = `£ ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
+                UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent
+            }
+
+            console.log(UserInformation.Orders.currencyMycurrent);
             const tempForm = document.createElement('form');
             tempForm.style.display = 'none';
-            
+
             // Loop through the keys of the UserInformation object and create input fields
             for (const key in UserInformation) {
-              const input = document.createElement('input');
-              input.type = 'text';
-              input.name = key;
-              input.value = UserInformation[key];
-              tempForm.appendChild(input);
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = key;
+                input.value = UserInformation[key];
+                tempForm.appendChild(input);
             }
 
             Axious.post('/Order', UserInformation).then((res) => {
@@ -103,11 +120,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
                     >
                         <option value="location">Select locaiton</option>
                         <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
-                        <option
-                            value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702"
-                        >
-                            35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702
-                        </option>
+                        <option value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702">35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702</option>
                     </select>
 
                     <div className=" mt-5 flex  justify-end">
@@ -176,7 +189,10 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
                                     className="text-2xl"
                                 ></MdOutlineCheckBoxOutlineBlank>
                             )}
-                            I accept all the <Link className='text-blue-600 hover:underline' to={'/termsCoditition'}>Terms and condition</Link>
+                            I accept all the{' '}
+                            <Link className="text-blue-600 hover:underline" to={'/termsCoditition'}>
+                                Terms and condition
+                            </Link>
                         </h2>
 
                         <div className="flex  mt-3 md:max-w-[500px] sm:w-full justify-end">
@@ -232,12 +248,11 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom }) => {
                                     <h2 className="sm:text-xl  ">
                                         You Give{' '}
                                         <span className="font-semibold">
-
                                             : {item?.currencyTake} {item?.currencyTakecurrent}{' '}
                                         </span>{' '}
                                         >> You get{' '}
                                         <span className="font-semibold">
-                                        : {item?.currencyMy} {item?.currencyMycurrent}
+                                            : {item?.currencyMy} {item?.currencyMycurrent}
                                         </span>
                                         (Rate {item?.Rate} )
                                     </h2>
