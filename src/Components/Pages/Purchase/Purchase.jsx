@@ -55,7 +55,7 @@ const Purchase = () => {
         
 
 
-        <CheckingPoint nextFrom={nextFrom} setNextForm={setNextForm} setAddressSelected={setAddressSelected}></CheckingPoint>
+        <CheckingPoint currentWay={currentWay} nextFrom={nextFrom} setNextForm={setNextForm} setAddressSelected={setAddressSelected}></CheckingPoint>
       </div>
     </Container>
   );

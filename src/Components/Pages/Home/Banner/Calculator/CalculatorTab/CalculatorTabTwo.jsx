@@ -67,9 +67,9 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
     };
 
     const ChangeTakeCurrencyFor10Divisible = () => {
-      let MyCurrency = ChangeTo10Divisible(buyCurrency);
+        let MyCurrency = ChangeTo10Divisible(buyCurrency);
         let FInalTakeCurrency = MyCurrency / (Rate * (1 + upsell / 100));
-        return FInalTakeCurrency.toFixed(4);  
+        return FInalTakeCurrency.toFixed(4);
     };
 
     const handleSelling = () => {
@@ -77,8 +77,8 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
         const currencyTake = buyCurrency;
         const currentFull = {
             currencyMy: youSell,
-            currencyTake:buyCurrency,
-            currencyTakecurrent:currencyData.value ,
+            currencyTake: buyCurrency,
+            currencyTakecurrent: currencyData.value,
             currencyMycurrent: 'GBP',
             Id: uuidv4(),
             Rate: (Rate * (1 + upsell / 100)).toFixed(4)
@@ -169,7 +169,7 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
                 </h2>
             </div>
             <div className="flex mt-3">
-                <button onClick={handleSelling} className="btn w-full">
+                <button onClick={handleSelling} className="btn w-full bg-[#1E4A9A] text-white hover:bg-[#1b2b49]">
                     Sell Money
                 </button>
             </div>

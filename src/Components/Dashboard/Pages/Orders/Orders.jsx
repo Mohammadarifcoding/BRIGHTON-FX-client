@@ -11,30 +11,32 @@ const Orders = () => {
     const Axious = UseAxious()
     
       const handleAcceptOrder = (orderId,Email,order) => {
-        const UserInformation = {
-          Order_Id: uuidv4(),
-          Name: order?.Name,
-          Email: Email,
-          Phone_Number:order?.Phone_Number,
-          Address: order?.Address,
-          Orders:order?.Orders,
-          CurrencyName:order?.Orders[0].currencyMycurrent,
-          FxAmount:`${order?.Orders[0].currencyMy} ${order?.Orders[0].currencyMycurrent}`,
-          Rate : order?.Orders[0].Rate,
-          TotalMoney : `${order?.Orders[0].currencyTake} ${order?.Orders[0].currencyTakecurrent}`,
-          Status: 'Pending'
-      };
+        console.log(order)
 
-      console.log(UserInformation)
+      //   const UserInformation = {
+      //     Order_Id: uuidv4(),
+      //     Name: order?.Name,
+      //     Email: Email,
+      //     Phone_Number:order?.Phone_Number,
+      //     Address: order?.Address,
+      //     Orders:order?.Orders,
+      //     CurrencyName:order?.Orders[0].currencyMycurrent,
+      //     FxAmount:`${order?.Orders[0].currencyMy} ${order?.Orders[0].currencyMycurrent}`,
+      //     Rate : order?.Orders[0].Rate,
+      //     TotalMoney : `${order?.Orders[0].currencyTake} ${order?.Orders[0].currencyTakecurrent}`,
+      //     Status: 'Pending'
+      // };
+
+      // console.log(UserInformation)
       const tempForm = document.createElement('form');
       tempForm.style.display = 'none';
       
       // Loop through the keys of the UserInformation object and create input fields
-      for (const key in UserInformation) {
+      for (const key in order) {
         const input = document.createElement('input');
         input.type = 'text';
         input.name = key;
-        input.value = UserInformation[key];
+        input.value = order[key];
         tempForm.appendChild(input);
       }
         console.log(tempForm)
