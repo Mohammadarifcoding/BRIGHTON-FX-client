@@ -52,6 +52,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 Phone_Number: Phone_Number,
                 Address: address,
                 Orders: JSON.parse(localStorage.getItem('purchase')),
+                status: '',
                 CurrencyName: '',
                 FxAmount: ``,
                 Rate: OrdersData[0].Rate,
@@ -67,14 +68,16 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 UserInformation.FourthRow = 'Fx Amount';
                 UserInformation.FxAmount = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
                 UserInformation.TotalMoney = `£ ${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
-                UserInformation.CurrencyName = OrdersData[0].currencyMycurrent
+                UserInformation.CurrencyName = OrdersData[0].currencyMycurrent;
+                UserInformation.status = 'buy';
             } else if (currentWay == 'Sell') {
                 UserInformation.title = 'Click & Sell';
                 UserInformation.SecondRow = 'Fx Amount';
                 UserInformation.FourthRow = 'Amount';
-                UserInformation.FxAmount = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
-                UserInformation.TotalMoney = `£ ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
-                UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent
+                UserInformation.FxAmount = `£ ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
+                UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
+                UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent;
+                UserInformation.status = 'sell';
             }
 
             console.log(UserInformation.Orders.currencyMycurrent);
