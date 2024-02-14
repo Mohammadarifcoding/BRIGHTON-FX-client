@@ -60,7 +60,9 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 Status: 'Pending',
                 title: '',
                 SecondRow: '',
-                FourthRow: ''
+                FourthRow: '',
+                firstMessege: '',
+                time : new Date()
             };
             if (currentWay == 'Order') {
                 UserInformation.title = 'Click & Buy';
@@ -70,6 +72,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 UserInformation.TotalMoney = `£ ${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
                 UserInformation.CurrencyName = OrdersData[0].currencyMycurrent;
                 UserInformation.status = 'buy';
+                UserInformation.firstMessege = `Thank you for your order. When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`;
             } else if (currentWay == 'Sell') {
                 UserInformation.title = 'Click & Sell';
                 UserInformation.SecondRow = 'Fx Amount';
@@ -78,6 +81,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
                 UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent;
                 UserInformation.status = 'sell';
+                UserInformation.firstMessege = 'Thank you for your order. Please bring this email with you to your selected location to sell your foreign currency.';
             }
 
             console.log(UserInformation.Orders.currencyMycurrent);
