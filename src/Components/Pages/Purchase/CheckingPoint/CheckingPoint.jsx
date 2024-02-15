@@ -7,6 +7,7 @@ import { IoIosCheckbox } from 'react-icons/io';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import UseAxious from '../../../../Hook/UseAxious';
 import { Link } from 'react-router-dom';
+import generateRandomAlphabet from './../../../ExtraFuntion/GenerateUniqueId';
 
 const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }) => {
     const AddressForm = useRef();
@@ -46,7 +47,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
             }
 
             const UserInformation = {
-                Order_Id: uuidv4(),
+                Order_Id: generateRandomAlphabet(),
                 Name: First_Name + ' ' + Last_Name,
                 Email: Email,
                 Phone_Number: Phone_Number,
@@ -61,18 +62,19 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 title: '',
                 SecondRow: '',
                 FourthRow: '',
-                firstMessege: '',
-                time : new Date()
+                time: new Date()
             };
             if (currentWay == 'Order') {
-                UserInformation.title = 'Click & Buy';
+                UserInformation.title = 'Click & Collect';
                 UserInformation.SecondRow = 'Amount';
                 UserInformation.FourthRow = 'Fx Amount';
                 UserInformation.FxAmount = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
                 UserInformation.TotalMoney = `£ ${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
                 UserInformation.CurrencyName = OrdersData[0].currencyMycurrent;
                 UserInformation.status = 'buy';
-                UserInformation.firstMessege = `Thank you for your order. When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`;
+                UserInformation.secondTitle = `Collecting your order :`;
+                (UserInformation.secondMessege = `When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`),
+                    (UserInformation.firstMessege = `Your order ${UserInformation.Order_Id} is currently being processed, and we will notify you when it is ready for collection from our Branch - ${UserInformation.Address}.`);
             } else if (currentWay == 'Sell') {
                 UserInformation.title = 'Click & Sell';
                 UserInformation.SecondRow = 'Fx Amount';
