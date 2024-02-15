@@ -47,6 +47,7 @@ const History = () => {
                         <table className="bg-gray-800 p-4 w-full rounded-lg">
                             <thead>
                                 <tr className="text-start">
+                                <th className="py-3 pl-4 text-start">Order Id</th>
                                     <th className="py-3 pl-4 text-start">Name</th>
                                     <th className="py-3 pl-4 text-start">Phone Number</th>
                                     <th className="py-3 pl-4 text-start">Way</th>
@@ -61,6 +62,7 @@ const History = () => {
                             <tbody>
                                 {CompletedOrder?.map((order) => (
                                     <tr key={order?._id} className="text-start">
+                                        <td className="py-2 pl-4">{order?.Order_Id}</td>
                                         <td className="py-2 pl-4">{order?.Name}</td>
                                         <td className="py-2 pl-4">{order?.Phone_Number}</td>
                                         <td className="py-2 pl-4">{order?.title}</td>
