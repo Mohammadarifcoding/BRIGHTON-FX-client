@@ -4,6 +4,7 @@ import UseAxious from '../../../../Hook/UseAxious';
 import UseAcceptedOrder from '../../../../Hook/UseAcceptedOrder';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const DoneOrders = () => {
     const [AcceptedOrder, RefetchAcceptedOrder] = UseAcceptedOrder();
@@ -51,12 +52,13 @@ const DoneOrders = () => {
                         <table className="bg-gray-800 p-4 w-full rounded-lg">
                             <thead>
                                 <tr className="text-start">
+                                <th className="py-3 pl-4 text-start">Order Id</th>
                                     <th className="py-3 pl-4 text-start">Name</th>
-                                    <th className="py-3 pl-4 text-start">Email</th>
                                     <th className="py-3 pl-4 text-start">Phone Number</th>
                                     <th className="py-3 pl-4 text-start">Way</th>
                                     <th className="py-3 pl-4 text-start">Amount</th>
                                     <th className="py-3 pl-4 text-start">FX Amount</th>
+                                    <th className="py-3 pl-4 text-start">Time</th>
                                     <th className="py-3 pl-4 text-start">Details</th>
                                     <th className="py-3 pl-4 text-start">Status</th>
                                     <th className="py-3 pl-4 text-start">Action</th>
@@ -65,12 +67,13 @@ const DoneOrders = () => {
                             <tbody>
                                 {AcceptedOrder?.map((order) => (
                                     <tr key={order?._id} className="text-start">
+                                        <td className="py-2 pl-4">{order?.Order_Id}</td>
                                         <td className="py-2 pl-4">{order?.Name}</td>
-                                        <td className="py-2 pl-4">{order?.Email}</td>
                                         <td className="py-2 pl-4">{order?.Phone_Number}</td>
                                         <td className="py-2 pl-4">{order?.title}</td>
                                         <td className="py-2 pl-4">{order?.TotalMoney}</td>
                                         <td className="py-2 pl-4">{order?.FxAmount}</td>
+                                        <td className="py-2 pl-4">{moment(order?.time).format('MMMM Do YYYY')}</td>
                                         <td>
                                             <Link to={`/dashboard/orderDetails/${order?._id}`}>
                                                 <button className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Details</button>
