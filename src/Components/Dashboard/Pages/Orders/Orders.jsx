@@ -3,8 +3,12 @@ import PendingOrder from '../../../../Hook/PendingOrder';
 import UseAxious from '../../../../Hook/UseAxious';
 import { v4 as uuidv4 } from 'uuid';
 import emailjs from '@emailjs/browser';
+import { BsInfoCircleFill } from 'react-icons/bs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import { FaInfoCircle } from 'react-icons/fa';
+import { IoMdDoneAll } from 'react-icons/io';
+import { MdDeleteForever } from 'react-icons/md';
 
 const Orders = () => {
     const [pendingOrders, RefetchPendingOrder] = PendingOrder();
@@ -76,6 +80,31 @@ const Orders = () => {
         // })
     };
 
+    const handleRemoveOrder = (orderId) => {
+        // Logic to accept the order with orderId
+        // This function can update the order status or perform other actions
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Axious.delete(`/deleteOrder/${orderId}`).then((res) => {
+                    RefetchPendingOrder();
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Your file has been deleted.',
+                        icon: 'success'
+                    });
+                });
+            }
+        });
+    };
+
     return (
         <div className="bg-gray-900 text-white min-h-screen flex flex-col">
             <header className="bg-gray-800 py-4">
@@ -98,7 +127,6 @@ const Orders = () => {
                                     <th className="py-3 pl-4 text-start">FX Amount</th>
                                     <th className="py-3 pl-4 text-start">Time</th>
                                     <th className="py-3 pl-4 text-start">Action</th>
-                                    <th className="py-3 pl-4 text-start">Details</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,15 +142,25 @@ const Orders = () => {
                                         <td className="py-2 pl-4">
                                             <button
                                                 onClick={() => handleAcceptOrder(order?._id, order?.Email, order)}
-                                                className="bg-green-500 text-white py-1 px-3 rounded-md mr-2 hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
+                                                className="bg-green-500 text-white py-2 px-3 rounded-md mr-2 hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
                                             >
-                                                Accept Order
+                                                <IoMdDoneAll></IoMdDoneAll>
                                             </button>
                                         </td>
                                         <td>
                                             <Link to={`/dashboard/orderDetails/${order?._id}`}>
-                                                <button className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Details</button>
+                                                <button className="bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                                                    <FaInfoCircle></FaInfoCircle>
+                                                </button>
                                             </Link>
+                                        </td>
+                                        <td className="py-2 pl-4">
+                                            <button
+                                                onClick={() => handleRemoveOrder(order?._id, order?.Email, order)}
+                                                className="bg-red-500 text-white py-2 px-3 rounded-md mr-2 hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
+                                            >
+                                                <MdDeleteForever />
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
