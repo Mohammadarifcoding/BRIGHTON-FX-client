@@ -3,6 +3,8 @@ import UseAxious from '../../../../Hook/UseAxious';
 import UseCompletedOrder from '../../../../Hook/UseCompletedOrder';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaInfoCircle } from 'react-icons/fa';
 
 const History = () => {
     const [CompletedOrder, RefetchCompletedOrder] = UseCompletedOrder();
@@ -47,15 +49,14 @@ const History = () => {
                         <table className="bg-gray-800 p-4 w-full rounded-lg">
                             <thead>
                                 <tr className="text-start">
-                                <th className="py-3 pl-4 text-start">Order Id</th>
+                                    <th className="py-3 pl-4 text-start">Order Id</th>
                                     <th className="py-3 pl-4 text-start">Name</th>
                                     <th className="py-3 pl-4 text-start">Phone Number</th>
                                     <th className="py-3 pl-4 text-start">Way</th>
                                     <th className="py-3 pl-4 text-start">Amount</th>
                                     <th className="py-3 pl-4 text-start">FX Amount</th>
-                                    <th className="py-3 pl-4 text-start">Time</th>                              
-                                    <th className="py-3 pl-4 text-start">Details</th>
-                                    <th className="py-3 pl-4 text-start">Status</th>
+                                    <th className="py-3 pl-4 text-start">Time</th>
+
                                     <th className="py-3 pl-4 text-start">Action</th>
                                 </tr>
                             </thead>
@@ -69,22 +70,26 @@ const History = () => {
                                         <td className="py-2 pl-4">{order?.TotalMoney}</td>
                                         <td className="py-2 pl-4">{order?.FxAmount}</td>
                                         <td className="py-2 pl-4">{moment(order?.time).format('MMMM Do YYYY')}</td>
+                                        <div className='flex gap-3 mx-2'>
                                         <td>
                                             <Link to={`/dashboard/orderDetails/${order?._id}`}>
-                                                <button className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Details</button>
+                                                <button className="bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                                                    <FaInfoCircle></FaInfoCircle>
+                                                </button>
                                             </Link>
                                         </td>
-                                        <td className="py-2 pl-4">Completed</td>
                                         <td className="">
                                             <button
                                                 onClick={() => {
                                                     handleRemoveOrder(order?._id);
                                                 }}
-                                                className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
+                                                className="bg-red-500 text-white py-2 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
                                             >
-                                                Remove
+                                                <MdDeleteForever />
                                             </button>
                                         </td>
+                                        </div>
+
                                     </tr>
                                 ))}
                             </tbody>
