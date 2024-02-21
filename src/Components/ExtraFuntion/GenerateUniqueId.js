@@ -1,10 +1,10 @@
 function generateRandomAlphabet() {
-    const randomId =
-        generateRandomCapitalAlphabet() +
-        generateRandomCapitalAlphabet() +
-        generateRandomCapitalAlphabet() +
-        generateRandomSmallAlphabet() +
-        generateRandomSmallAlphabet() +
+    const randomId = '' +
+        generateRandomNumber() +
+        generateRandomNumber() +
+        generateRandomNumber() +
+        generateRandomNumber() +
+        generateRandomNumber() +
         generateRandomNumber() +
         generateRandomNumber() +
         generateRandomNumber();

@@ -69,21 +69,23 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 UserInformation.SecondRow = 'Amount';
                 UserInformation.FourthRow = 'Fx Amount';
                 UserInformation.FxAmount = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
-                UserInformation.TotalMoney = `£ ${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
+                UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
                 UserInformation.CurrencyName = OrdersData[0].currencyMycurrent;
                 UserInformation.status = 'buy';
                 UserInformation.secondTitle = `Collecting your order :`;
-                (UserInformation.secondMessege = `When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`),
-                    (UserInformation.firstMessege = `Your order ${UserInformation.Order_Id} is currently being processed, and we will notify you when it is ready for collection from our Branch - ${UserInformation.Address}.`);
+                UserInformation.secondMessege = `When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`,
+               UserInformation.firstMessege = `Your order ${UserInformation.Order_Id} is currently being processed, and we will notify you when it is ready for collection from our Branch - ${UserInformation.Address}.`;
+               
             } else if (currentWay == 'Sell') {
                 UserInformation.title = 'Click & Sell';
                 UserInformation.SecondRow = 'Fx Amount';
                 UserInformation.FourthRow = 'Amount';
-                UserInformation.FxAmount = `£ ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
+                UserInformation.FxAmount = ` ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
                 UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
                 UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent;
                 UserInformation.status = 'sell';
-                UserInformation.firstMessege = 'Thank you for your order. Please bring this email with you to your selected location to sell your foreign currency.';
+                UserInformation.firstMessege = `Thank you for your order. Please bring this email or order number ${UserInformation.Order_Id} with you to your selected location to sell your foreign currency.`;
+                UserInformation.note = 'Note: Click & Sell rates are subject to verification of all banknotes at the premises. We may decline to accept notes which are found to be counterfeited, out of date, torn or damaged or insignificant in value. We do not accept foreign coins. Our Click & Sell rate does not apply to large denomination notes such as Euro 500. Different rates will apply for those denominations. For full terms and conditions, visit our website.'
             }
 
             console.log(UserInformation.Orders.currencyMycurrent);
