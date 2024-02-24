@@ -1,6 +1,6 @@
-import React from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const CurrencyMobileItem = ({ item, num }) => {
     const nav = useNavigate();
@@ -45,7 +45,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                             className="bg-[#93C94E] text-sm hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                         >
                             CLICK & <br />
-                            COLLECT <IoIosArrowForward></IoIosArrowForward>{' '}
+                            COLLECT <IoIosArrowForward></IoIosArrowForward>{" "}
                         </button>
                     </div>
                 ) : (
@@ -57,7 +57,7 @@ const CurrencyMobileItem = ({ item, num }) => {
                                 }}
                                 className="bg-[#93C94E] text-sm flex-nowrap  hover:bg-[#6c923a] hover:text-white  px-3 py-1 rounded-lg flex items-center gap-2"
                             >
-                                CLICK & <br /> SELL <IoIosArrowForward></IoIosArrowForward>{' '}
+                                CLICK & <br /> SELL <IoIosArrowForward></IoIosArrowForward>{" "}
                             </button>
                         </div>
                     </div>
