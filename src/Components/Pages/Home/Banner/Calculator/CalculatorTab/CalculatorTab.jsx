@@ -182,6 +182,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                         </>
                     )}
                 </h2>
+                <p className='text-[10px] font-normal '>Online rate only - rates in branch will diffe</p>
             </div>
             <div onClick={handleBuying} className="flex mt-3">
                 <button className="btn w-full bg-[#1E4A9A] text-white hover:bg-[#1b2b49]">Buy travel Money</button>
