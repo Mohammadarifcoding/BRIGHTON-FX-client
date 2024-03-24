@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "../../../Shared/Container/Container";
 
 const Accordin = () => {
+  const [isOpen, setIsOpen] = useState(null);
+  const accordionsData = [{ title: 'How do I create an account?', description: 'To create an account, click on the "Sign Up" button and fill out the required information. Once done, you can enjoy the benefits of being a registered member.'},{ title: 'What is your return policy?', description: 'Our return policy allows you to return items within 30 days of purchase. Please visit our returns page for detailed instructions and to initiate a return.'},{ title: 'Can I change my shipping address?', description: 'Yes, you can change your shipping address before your order is shipped. Go to your account settings and update the shipping information accordingly.'},{ title: 'Are there any discounts for loyal customers?', description: 'We appreciate our loyal customers! Stay tuned for exclusive discounts, promotions, and special offers available to members of our loyalty program.'}];
+
+  const toggle = (idx) => {
+    setIsOpen((prevIdx) => (prevIdx === idx ? null : idx));
+  };
   return (
     <Container>
     <div>
@@ -17,73 +23,24 @@ const Accordin = () => {
         </div>
         {/* Faq */}
         <div className="flex-1 ">
-          <div className="collapse collapse-plus mb-8 border-2">
-            <input type="radio" name="my-accordion-3" checked="checked" />
-            <div className="collapse-title text-xl font-medium">
-              How do I send money if I have cash?
-            </div>
-            <div className="collapse-content">
-              <p>
-                Brighton FX Services LTD is an online portal so that you can
-                send money online - Cash is not being facilitated at all.
-              </p>
-            </div>
+        <div className="rounded-lg font-sans">
+      {accordionsData.map((PerAccordion, idx) => (
+        <div key={idx} className="border-b border-gray-500 last-of-type:border-none">
+          <button onClick={() => toggle(idx)} className="flex h-full w-full justify-between py-4 text-left font-medium text-black ">
+            <span className="sm:text-lg md:text-xl text-sm">{PerAccordion.title}</span>
+            <span className="rounded-full p-2 ">
+              <svg className="ml-8 mr-7 shrink-0 fill-black " width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                <rect y="7" width="16" height="2" rx="1" className={`origin-center transform transition duration-200 ease-out ${isOpen === idx && '!rotate-180'}`} />
+                <rect y="7" width="16" height="2" rx="1" className={`origin-center rotate-90 transform transition duration-200 ease-out ${isOpen === idx && '!rotate-180'}`} />
+              </svg>
+            </span>
+          </button>
+          <div className={`grid overflow-hidden lg:text-base md:text-sm text-[12px] text-gray-800 transition-all duration-300 ease-in-out  ${isOpen === idx ? 'grid-rows-[1fr] pb-3 opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+            <div className="overflow-hidden pr-4">{PerAccordion.description}</div>
           </div>
-          <div className="collapse collapse-plus mb-8 border-2">
-            <input type="radio" name="my-accordion-3" />
-            <div className="collapse-title text-xl font-medium">
-              How do i send money online with Brighton FX?
-            </div>
-            <div className="collapse-content">
-              <p>
-                Brighton FX Services LTD has made Sending Money easier for your
-                complete peace of mind. Just follow the simple steps as below:
-                Create an account using our app or web portal. Complete your
-                profile with basic details and identification documents. Choose
-                the destination country, desired payout option, and enter the
-                receiver’s details. Pay for the transaction using your
-                Debit/Credit Card or your Bank Account
-              </p>
-            </div>
-          </div>
-          <div className="collapse collapse-plus mb-8 border-2">
-            <input type="radio" name="my-accordion-3" />
-            <div className="collapse-title text-xl font-medium">
-              What are Sending Methods?
-            </div>
-            <div className="collapse-content">
-              <p>
-                You can pay for your online transactions using: Debit/Credit
-                Card. Online Bank Transfer.
-              </p>
-            </div>
-          </div>
-
-          <div className="collapse collapse-plus mb-8 border-2">
-            <input type="radio" name="my-accordion-4" />
-            <div className="collapse-title text-xl font-medium">
-              What are Sending Methods?
-            </div>
-            <div className="collapse-content">
-              <p>
-                You can pay for your online transactions using: Debit/Credit
-                Card. Online Bank Transfer.
-              </p>
-            </div>
-          </div>
-
-          <div className="collapse collapse-plus mb-8 border-2">
-            <input type="radio" name="my-accordion-5" />
-            <div className="collapse-title text-xl font-medium">
-              What are Sending Methods?
-            </div>
-            <div className="collapse-content">
-              <p>
-                You can pay for your online transactions using: Debit/Credit
-                Card. Online Bank Transfer.
-              </p>
-            </div>
-          </div>
+        </div>
+      ))}
+    </div>
         </div>
       </div>
     </div>    

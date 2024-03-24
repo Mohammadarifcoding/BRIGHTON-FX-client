@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Home from "../Components/Pages/Home/Home";
 import Navbar from "../Components/Shared/Navbar/Navbar";
 import Footer from "../Components/Shared/Footer/Footer";
+import { Helmet } from "react-helmet";
 
 
 const Layout = () => {
@@ -25,11 +26,17 @@ const Layout = () => {
     //       })
     //    }
     // },[NotGettingCurrency,item.value,Axious])
+
     return (
         <div className="overflow-hidden ">
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>
+            <Helmet>
+        <meta name="description" content="Zero commission, competitive rates, and the convenience of click
+& collect at Brighton FX. Choose from over 70 currencies for your
+next adventure." />
+      </Helmet>
         </div>
     );
 };
