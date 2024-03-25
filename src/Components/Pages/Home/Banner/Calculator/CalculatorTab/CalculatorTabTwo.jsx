@@ -167,7 +167,7 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
                 <h2 className="mt-3 text-lg">
                     1 GBP = {((Rate ?? 1) * (1 + upsell / 100)).toFixed(4)} {currencyData.value}
                 </h2>
-                <p className='text-[10px] font-normal '>Online rate only - rates in branch will diffe</p>
+                <p className='text-[10px] font-normal '>Online rate only - rates in branch will differ</p>
             </div>
             <div className="flex mt-3">
                 <button onClick={handleSelling} className="btn w-full bg-[#1E4A9A] text-white hover:bg-[#1b2b49]">
