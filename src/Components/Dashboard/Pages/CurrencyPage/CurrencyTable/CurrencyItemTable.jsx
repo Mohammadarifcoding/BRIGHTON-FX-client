@@ -30,7 +30,7 @@ const CurrencyItemTable = ({ item }) => {
         queryFn: async () => {
             const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${item.value}&from=GBP&amount=1`, {
                 headers: {
-                    apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+                    apikey: 'FTMCi9un31A9SYY3OeyG6sIifN9Y1Mu9'
                 }
             });
             const updateData = await Axious.put(`/UpdateCurrencyPrice/${item?.value}`, { Rate: fetchData.data?.info?.rate });

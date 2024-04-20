@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrencyChart from '../../Shared/CurrencyChart/CurrencyChart';
 import UseCurrency from '../../../Hook/UseCurrency';
+import Info from '../../Shared/Info/Info';
 
 const ExchangeRates = () => {
     const [Currecny,refetchCurrency] = UseCurrency()
@@ -16,6 +17,7 @@ const ExchangeRates = () => {
             </div>
         </div>
        <CurrencyChart currency={Currecny}></CurrencyChart>
+       <Info></Info>
     </div>
     );
 };
