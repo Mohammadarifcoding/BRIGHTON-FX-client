@@ -27,15 +27,21 @@ const Purchase = () => {
 
   return (
     <Container>
-      <div className="lg:mt-20 mt-10 pb-40">
-        <h2 className="lg:text-3xl text-2xl font-medium md:text-start text-center">
+      <div className="pb-40 mt-10 lg:mt-20">
+      <h2 className={`lg:text-3xl text-2xl font-medium md:text-start text-center ${nextFrom == 3 && 'hidden'}`}>
           {
             currentWay == 'Sell' ? <>Sell travel money</>:<>Order travel money</>
           }
           
         </h2>
+        <h2 className={`lg:text-3xl text-2xl font-medium md:text-start text-center ${nextFrom !== 3 && 'hidden'}`}>
+              Order Confirmation
+          </h2>
       
-        <Process no={nextFrom}></Process>
+          {
+          nextFrom !== 3 && <Process no={nextFrom}></Process>
+        }
+        
          {
           nextFrom == 3 ? '':<OrderSummary allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData}></OrderSummary>
          }
@@ -44,8 +50,8 @@ const Purchase = () => {
         {/* Add Currency */}
         { nextFrom == 1 ? <>
           <AddProduct currentWay={currentWay} currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
-        <ul className="flex flex-col font-medium mt-10 text-lg list-disc ml-6">
-           <li className=" ">Bring you ID for collection</li>
+        <ul className="flex flex-col mt-10 ml-6 text-lg font-medium list-disc">
+           <li className="">Bring you ID for collection</li>
            <li >Order online, pay in-store</li>
            <li>24-hour rate guarantee upon order arrival in the store</li>
         </ul>
