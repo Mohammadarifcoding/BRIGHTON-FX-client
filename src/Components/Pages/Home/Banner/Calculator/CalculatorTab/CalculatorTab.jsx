@@ -132,12 +132,12 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                 className="text-[12px] mt-4 w-full max-w-[350px]"
                 options={currency}
             />
-            <div className="flex sm:flex-row flex-col justify-between">
+            <div className="flex flex-col justify-between sm:flex-row">
                 <div className="flex-1">
-                    <div className="flex flex-col  mt-3  w-ull">
+                    <div className="flex flex-col mt-3 w-ull">
                         <h2 className="text-sm">I have</h2>
                         <div className="flex  text-[12px] mt-2">
-                            <h2 className="px-3 bg-gray-200 py-2 rounded-l-lg">GBP</h2>
+                            <h2 className="px-3 py-2 bg-gray-200 rounded-l-lg">GBP</h2>
                             <input
                                 onChange={handleyouBuyamountCurrency}
                                 value={youSell}
@@ -151,10 +151,10 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                 </div>
 
                 <div className="flex-1">
-                    <div className="flex flex-col  mt-3  w-ull">
+                    <div className="flex flex-col mt-3 w-ull">
                         <h2 className="text-sm">I want to buy</h2>
                         <div className="flex  text-[12px] mt-2">
-                            <h2 className="px-3 bg-gray-200 py-2 rounded-l-lg">{currencyData.value}</h2>
+                            <h2 className="px-3 py-2 bg-gray-200 rounded-l-lg">{currencyData.value}</h2>
                             <input
                                 onChange={handleSellamountChange}
                                 value={buyCurrency}
@@ -168,7 +168,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                 </div>
             </div>
 
-            <div className="mt-5 text-center font-semibold">
+            <div className="mt-5 font-semibold text-center">
                 <h2 className="text-lg font-medium">Today's Exchange Rate</h2>
 
                 <h2 className="mt-3 text-lg">
@@ -182,7 +182,7 @@ const CalculatorTab = ({ currencyData, setCurrencyData }) => {
                         </>
                     )}
                 </h2>
-                <p className='text-[10px] font-normal '>Online rate only - rates in branch will differ</p>
+                <p className='text-[10px] font-normal '>Online rate only - rates in branch will may differ</p>
             </div>
             <div onClick={handleBuying} className="flex mt-3">
                 <button className="btn w-full bg-[#1E4A9A] text-white hover:bg-[#1b2b49]">Buy travel Money</button>

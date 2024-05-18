@@ -23,8 +23,8 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
             return toast('Select the checking point');
         }
 
-        const dataFormLocalStorage = JSON.parse(localStorage.getItem('purchase'));
-        if (dataFormLocalStorage?.length < 1) {
+        const OrderFormLocalStorage = JSON.parse(localStorage.getItem('purchase'));
+        if (OrderFormLocalStorage?.length < 1) {
             return toast('Please add currency item');
         }
         setAddressSelected(address);
@@ -54,40 +54,64 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 Phone_Number: Phone_Number,
                 Address: address,
                 Orders: JSON.parse(localStorage.getItem('purchase')),
-                status: '',
-                CurrencyName: '',
-                FxAmount: ``,
-                Rate: OrdersData[0].Rate,
-                TotalMoney: ``,
+                RateFirst: OrdersData[0].Rate,
+                status:'',
                 Status: 'Pending',
                 title: '',
-                SecondRow: '',
-                FourthRow: '',
-                time: new Date()
+                SecondRow :'Amount',
+                FourthRow : 'Fx Amount',
+                FxAmount : `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`,
+                TotalMoney : `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`,
+                time: new Date(),
+                CurrencyNameFirst : OrdersData[0].currencyMycurrent  === 'GBP' ? OrdersData[0].currencyTakecurrent : OrdersData[0].currencyMycurrent,
+                ToFirst : `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`,
+                FromFirst : `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`,
             };
             if (currentWay == 'Order') {
                 UserInformation.title = 'Click & Collect';
-                UserInformation.SecondRow = 'Amount';
-                UserInformation.FourthRow = 'Fx Amount';
-                UserInformation.FxAmount = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
-                UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
-                UserInformation.CurrencyName = OrdersData[0].currencyMycurrent;
+                // UserInformation.SecondRow = 'Amount';
+                // UserInformation.FourthRow = 'Fx Amount';
                 UserInformation.status = 'buy';
                 UserInformation.secondTitle = `Collecting your order :`;
                 UserInformation.secondMessege = `When collecting your order, you will need to provide proof of ID in the form of photographic ID (passport or driving license). Please note that proof of address, such as a utility bill or a bank/credit card statement dated within the past 90 days, may also be needed in certain circumstances.`,
-               UserInformation.firstMessege = `Your order ${UserInformation.Order_Id} is currently being processed, and we will notify you when it is ready for collection from our Branch - ${UserInformation.Address}.`;
+               UserInformation.firstMessege = `Your order ${UserInformation.Order_Id} is currently being processed, and we will notify you when it is ready for collection from our Branch - ${UserInformation.CheckingPoint}.`;
                
             } else if (currentWay == 'Sell') {
                 UserInformation.title = 'Click & Sell';
-                UserInformation.SecondRow = 'Fx Amount';
-                UserInformation.FourthRow = 'Amount';
-                UserInformation.FxAmount = ` ${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
-                UserInformation.TotalMoney = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
-                UserInformation.CurrencyName = OrdersData[0].currencyTakecurrent;
+                // UserInformation.SecondRow = 'Fx Amount';
+                // UserInformation.FourthRow = 'Amount';
                 UserInformation.status = 'sell';
                 UserInformation.firstMessege = `Thank you for your order. Please bring this email or order number ${UserInformation.Order_Id} with you to your selected location to sell your foreign currency.`;
                 UserInformation.note = 'Note: Click & Sell rates are subject to verification of all banknotes at the premises. We may decline to accept notes which are found to be counterfeited, out of date, torn or damaged or insignificant in value. We do not accept foreign coins. Our Click & Sell rate does not apply to large denomination notes such as Euro 500. Different rates will apply for those denominations. For full terms and conditions, visit our website.'
-            }
+            } 
+             if(OrdersData[1]?.currencyTake){
+              UserInformation.CurrencyNameSecond = OrdersData[1].currencyMycurrent  === 'GBP' ? OrdersData[1].currencyTakecurrent : OrdersData[1].currencyMycurrent,
+              UserInformation.FromSecond = `${OrdersData[1].currencyTake} ${OrdersData[1].currencyTakecurrent}`;
+              UserInformation.ToSecond = `${OrdersData[1].currencyMy} ${OrdersData[1].currencyMycurrent}`;
+              UserInformation.RateSecond = OrdersData[1].Rate
+             }
+             else{
+              UserInformation.SecondRowShow = 'none'
+             }
+             if(OrdersData[2]?.currencyTake){
+              UserInformation.CurrencyNameThird = OrdersData[2].currencyMycurrent  === 'GBP' ? OrdersData[2].currencyTakecurrent : OrdersData[2].currencyMycurrent,
+              UserInformation.FromThird = `${OrdersData[2].currencyTake} ${OrdersData[2].currencyTakecurrent}`;
+              UserInformation.ToThird = `${OrdersData[2].currencyMy} ${OrdersData[2].currencyMycurrent}`;
+              UserInformation.RateThird = OrdersData[2].Rate
+             }
+             else{
+              UserInformation.ThirdRowShow = 'none'
+             }
+             if(OrdersData[3]?.currencyTake){
+              UserInformation.CurrencyNameFourth = OrdersData[3].currencyMycurrent  === 'GBP' ? OrdersData[3].currencyTakecurrent : OrdersData[3].currencyMycurrent,
+              UserInformation.FromFourth = `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`;
+              UserInformation.ToFourth = `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`;
+              UserInformation.RateFourth = OrdersData[3].Rate
+             }
+             else{
+              UserInformation.FourthRowShow = 'none'
+             }
+
 
             console.log(UserInformation.Orders.currencyMycurrent);
             const tempForm = document.createElement('form');
@@ -108,12 +132,11 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 });
                 setlastOrder(UserInformation);
                 localStorage.clear('purchase');
-
+            
                 setNextForm(3);
             });
-        } catch(err) {
+        } catch {
             setNextForm(1);
-            console.log(err)
             return toast('Something went wrong');
         }
     };
@@ -132,8 +155,9 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                         className="w-full px-2 py-2 mt-5 border border-gray-500 rounded-lg outline-gray-500"
                     >
                         <option value="location">Select locaiton</option>
-                        <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
+                        
                         <option value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702">35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702</option>
+                        <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
                     </select>
 
                     <div className="flex justify-end mt-5 ">
@@ -279,7 +303,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                             </Link>
                         </div>
                     </div> */}
-                     <div className='px-3 my-10 sm:px-10'>
+                            <div className='px-3 my-10 sm:px-10'>
 
 {/* Currency Calculation */}
 <div className="overflow-auto border border-gray-400">
@@ -365,3 +389,5 @@ Pickup Location
 };
 
 export default CheckingPoint;
+
+
