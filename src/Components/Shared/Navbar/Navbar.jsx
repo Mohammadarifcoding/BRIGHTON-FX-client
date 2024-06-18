@@ -27,7 +27,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className=" bg-[#93C94E] relative">
+        <div className=" bg-[#93C94E] relative navbarDelete">
             <Container>
                 <div className="flex justify-between py-3 container mx-auto items-center">
                     <Link to={'/'}>
