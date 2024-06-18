@@ -30,3 +30,25 @@
   .rotating-icon {
     animation: rotate 2s linear infinite; /* Adjust duration or animation properties as needed */
   }
+
+
+  @media print {
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+    .navbarDelete,
+    .FutureDelete,
+    .deleteButton,
+    .deleteSection {
+        display: none;
+    }
+       .text-small{
+        font-size: 12px;
+       }
+       body {visibility:hidden;}
+.print {visibility:visible;}
+    #significant-place,
+    #significant-place * {
+        display: block !important;
+    }
+}

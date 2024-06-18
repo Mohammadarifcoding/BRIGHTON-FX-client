@@ -34,7 +34,7 @@ const Purchase = () => {
           }
           
         </h2>
-        <h2 className={`lg:text-3xl text-2xl font-medium md:text-start text-center ${nextFrom !== 3 && 'hidden'}`}>
+        <h2 className={`lg:text-3xl text-2xl font-medium md:text-start -mb-20 text-center ${nextFrom !== 3 && 'hidden'}`}>
               Order Confirmation
           </h2>
       
