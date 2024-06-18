@@ -138,194 +138,195 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
     };
     const handlePrint = () => {
         window.print(); // This triggers the browser's print dialog
-        return false
+        return false;
     };
 
     return (
-
-
-        <>        <div className="mt-28 deleteSection">
-        {nextFrom == 1 ? (
-            <>
-                <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Select a Collection Point</h2>
-
-                <select
-                    value={address}
-                    onChange={(e) => {
-                        setAddress(e.target.value);
-                    }}
-                    className="w-full px-2 py-2 mt-5 border border-gray-500 rounded-lg outline-gray-500"
-                >
-                    <option value="location">Select locaiton</option>
-
-                    <option value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702">35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702</option>
-                    <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
-                </select>
-
-                <div className="flex justify-end mt-5 ">
-                    <button onClick={GetAddress} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
-                        Next <span> + </span>
-                    </button>
-                </div>
-            </>
-        ) : (
-            ""
-        )}
-
-        {nextFrom == 2 ? (
-            <>
-                <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Personal Details</h2>
-
-                <form ref={AddressForm} onSubmit={getFinishedOrder} className="flex flex-col">
-                    <input
-                        name="FirstName"
-                        required
-                        type="text"
-                        placeholder="Enter First Name"
-                        className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
-                    />
-                    <input
-                        name="LastName"
-                        required
-                        type="text"
-                        placeholder="Enter Last Name"
-                        className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
-                    />
-                    <input
-                        name="to_email"
-                        required
-                        type="email"
-                        placeholder="Enter Email"
-                        className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
-                    />
-                    <input
-                        name="ConfromEmail"
-                        required
-                        type="email"
-                        placeholder="Confirm Email"
-                        className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
-                    />
-                    <input
-                        name="Number"
-                        required
-                        type="tel"
-                        placeholder="Enter Phone Number"
-                        className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
-                    />
-                    <h2 className="flex items-center gap-2 mt-4 text-lg">
-                        {selected ? (
-                            <IoIosCheckbox
-                                className="text-2xl"
-                                onClick={() => {
-                                    setSelected(false);
-                                }}
-                            ></IoIosCheckbox>
-                        ) : (
-                            <MdOutlineCheckBoxOutlineBlank
-                                onClick={() => {
-                                    setSelected(true);
-                                }}
-                                className="text-2xl"
-                            ></MdOutlineCheckBoxOutlineBlank>
-                        )}
-                        I accept all the{" "}
-                        <Link className="text-blue-600 hover:underline" to={"/termsCoditition"}>
-                            Terms and condition
-                        </Link>
-                    </h2>
-
-                    <div className="flex  mt-3 md:max-w-[500px] sm:w-full justify-end">
-                        <button type="submit" onClick={GetAddress} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
-                            Next +
-                        </button>
-                    </div>
-                </form>
-            </>
-        ) : (
-            ""
-        )}
-       
-        <ToastContainer></ToastContainer>
-    </div>
-     {nextFrom == 3 ? (
         <>
-            <div className="px-3 my-10 sm:px-10 print h-[700px]" >
-            <div className="flex lg:mb-20 mb-7 deleteButton justify-end ">
-                        <button onClick={handlePrint} className="px-4 py-2 bg-[#618A2C] rounded-lg text-white">
-                            Print
-                        </button>
-                    </div>
-                {/* Currency Calculation */}
-                <div className="overflow-auto border border-gray-400">
-                    <div className="px-4 py-2 border-b border-gray-400 bg-[#618a2c] text-white">
-                        <h1 className=" font-semibold">Order Number: {Order?.Order_Id}</h1>
-                    </div>
-                    <table className="min-w-full">
-                        <thead>
-                            <tr className="border-b border-gray-400">
-                                <th style={{ backgroundColor: "#[#1a0d43]" }} className="px-4 py-2  text-left bg-[#1E4A9A] border-r border-gray-400  text-white">
-                                    Currency
-                                </th>
-                                <th className="px-4 py-2  text-left  border-r border-gray-400 bg-[#1E4A9A] text-white">From</th>
-                                <th className="px-4 py-2  text-left  border-r border-gray-400 bg-[#1E4A9A] text-white">To</th>
-                                <th className="px-4 py-2  text-left  bg-[#1E4A9A] text-white">Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Order?.Orders?.map((item, index) => (
-                                <OrderList key={index} item={item}></OrderList>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+            {" "}
+            <div className="mt-28 deleteSection">
+                {nextFrom == 1 ? (
+                    <>
+                        <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Select a Collection Point</h2>
 
-                {/* User address */}
-                <div className="mt-10 overflow-hidden border border-gray-400">
-                    <div className="px-4 py-2 border-b border-gray-400 overflow-auto bg-[#618a2c] text-white">
-                        <h1 className=" font-semibold">Booking Details</h1>
-                    </div>
-                    <div className="min-w-full">
-                        <div className="flex border-b border-gray-400">
-                            <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Full Name</div>
-                            <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Name}</div>
-                        </div>
-                        <div className="flex border-b border-gray-400">
-                            <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Email</div>
-                            <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Email}</div>
-                        </div>
-                        <div className="flex border-b border-gray-400">
-                            <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Contact</div>
-                            <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Phone_Number}</div>
-                        </div>
-                        <div className="flex">
-                            <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Pickup Location</div>
-                            <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Address}</div>
-                        </div>
-                    </div>
-                </div>
+                        <select
+                            value={address}
+                            onChange={(e) => {
+                                setAddress(e.target.value);
+                            }}
+                            className="w-full px-2 py-2 mt-5 border border-gray-500 rounded-lg outline-gray-500"
+                        >
+                            <option value="location">Select locaiton</option>
 
-                <div className="mt-10 flex flex-col gap-5 bg-[#1E4A9A] p-5 text-white">
-                    <h2 className="text-base font-semibold ">Important Notification</h2>
-                    <p className="text-sm">Please read carefully before you leave for the collection.</p>
-                    <p className="text-sm">
-                        Collect your Instore Branch collection order on the same day in between office hours. Kindly read the Terms and Conditions for payments and necessary supporting
-                        documents.
-                    </p>
-                    <p className="text-sm">
-                        All orders are accepted subject to stock and denominations availability at your selected branch. A member of our team will be in touch promptly only if the currency
-                        booked is not available and advise you of an alternate collection time. Please print the order confirmation receipt and present it at the selected branch counter, or
-                        you can quote the reference number with your ID for collection.
-                    </p>
-                    <p className="text-sm">
-                        For Card Payment: Your ID must be in the form of either your valid passport or full UK or European photo driving licence, European ID, along with your payment bank
-                        card, which must match the name on the order.
-                    </p>
-                </div>
+                            <option value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702">35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702</option>
+                            <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
+                        </select>
+
+                        <div className="flex justify-end mt-5 ">
+                            <button onClick={GetAddress} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
+                                Next <span> + </span>
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    ""
+                )}
+
+                {nextFrom == 2 ? (
+                    <>
+                        <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Personal Details</h2>
+
+                        <form ref={AddressForm} onSubmit={getFinishedOrder} className="flex flex-col">
+                            <input
+                                name="FirstName"
+                                required
+                                type="text"
+                                placeholder="Enter First Name"
+                                className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
+                            />
+                            <input
+                                name="LastName"
+                                required
+                                type="text"
+                                placeholder="Enter Last Name"
+                                className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
+                            />
+                            <input
+                                name="to_email"
+                                required
+                                type="email"
+                                placeholder="Enter Email"
+                                className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
+                            />
+                            <input
+                                name="ConfromEmail"
+                                required
+                                type="email"
+                                placeholder="Confirm Email"
+                                className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
+                            />
+                            <input
+                                name="Number"
+                                required
+                                type="tel"
+                                placeholder="Enter Phone Number"
+                                className=" border mt-4 md:max-w-[500px] sm:w-full px-3 py-2 text-lg border-gray-400 focus:outline-none  rounded-md"
+                            />
+                            <h2 className="flex items-center gap-2 mt-4 text-lg">
+                                {selected ? (
+                                    <IoIosCheckbox
+                                        className="text-2xl"
+                                        onClick={() => {
+                                            setSelected(false);
+                                        }}
+                                    ></IoIosCheckbox>
+                                ) : (
+                                    <MdOutlineCheckBoxOutlineBlank
+                                        onClick={() => {
+                                            setSelected(true);
+                                        }}
+                                        className="text-2xl"
+                                    ></MdOutlineCheckBoxOutlineBlank>
+                                )}
+                                I accept all the{" "}
+                                <Link className="text-blue-600 hover:underline" to={"/termsCoditition"}>
+                                    Terms and condition
+                                </Link>
+                            </h2>
+
+                            <div className="flex  mt-3 md:max-w-[500px] sm:w-full justify-end">
+                                <button type="submit" onClick={GetAddress} className="flex bg-[#93C94E] px-5 py-3 hover:bg-[#678c36] hover:text-white gap-2">
+                                    Next +
+                                </button>
+                            </div>
+                        </form>
+                    </>
+                ) : (
+                    ""
+                )}
+
+                <ToastContainer></ToastContainer>
             </div>
+            {nextFrom == 3 ? (
+                <>
+                    <div className="px-3 my-10 sm:px-10 print h-[700px]">
+                        <div className="flex lg:mb-20 mb-7 deleteButton justify-end ">
+                            <button onClick={handlePrint} className="px-4 py-2 bg-[#618A2C] rounded-lg text-white">
+                                Print
+                            </button>
+                        </div>
+                        {/* Currency Calculation */}
+                        <div className="overflow-auto border border-gray-400">
+                            <div className="px-4 py-2 border-b border-gray-400 bg-[#618a2c] text-white">
+                                <h1 className=" font-semibold">Order Number: {Order?.Order_Id}</h1>
+                            </div>
+                            <table className="min-w-full">
+                                <thead>
+                                    <tr className="border-b border-gray-400">
+                                        <th style={{ backgroundColor: "#[#1a0d43]" }} className="px-4 py-2  text-left bg-[#1E4A9A] border-r border-gray-400  text-white">
+                                            Currency
+                                        </th>
+                                        <th className="px-4 py-2  text-left  border-r border-gray-400 bg-[#1E4A9A] text-white">From</th>
+                                        <th className="px-4 py-2  text-left  border-r border-gray-400 bg-[#1E4A9A] text-white">To</th>
+                                        <th className="px-4 py-2  text-left  bg-[#1E4A9A] text-white">Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Order?.Orders?.map((item, index) => (
+                                        <OrderList key={index} item={item}></OrderList>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* User address */}
+                        <div className="mt-10 overflow-hidden border border-gray-400">
+                            <div className="px-4 py-2 border-b border-gray-400 overflow-auto bg-[#618a2c] text-white">
+                                <h1 className=" font-semibold">Booking Details</h1>
+                            </div>
+                            <div className="min-w-full">
+                                <div className="flex border-b border-gray-400">
+                                    <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Full Name</div>
+                                    <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Name}</div>
+                                </div>
+                                <div className="flex border-b border-gray-400">
+                                    <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Email</div>
+                                    <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Email}</div>
+                                </div>
+                                <div className="flex border-b border-gray-400">
+                                    <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Contact</div>
+                                    <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Phone_Number}</div>
+                                </div>
+                                <div className="flex">
+                                    <div className="py-3 border-r border-gray-400 font-semibold md:w-[20%] w-[30%] text-center bg-[#1E4A9A] text-white">Pickup Location</div>
+                                    <div className="border-gray-400 bg-gray-200 py-3 px-4 w-[80%] text-start">{Order?.Address}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-10 flex flex-col gap-5 bg-[#1E4A9A] p-5 text-white">
+                            <h2 className="text-base font-semibold ">Important Notification</h2>
+                            <p className="text-sm">Please read carefully before you leave for the collection.</p>
+                            <p className="text-sm">
+                                Collect your Instore Branch collection order on the same day in between office hours. Kindly read the Terms and Conditions for payments and necessary supporting
+                                documents.
+                            </p>
+                            <p className="text-sm">
+                                All orders are accepted subject to stock and denominations availability at your selected branch. A member of our team will be in touch promptly only if the currency
+                                booked is not available and advise you of an alternate collection time. Please print the order confirmation receipt and present it at the selected branch counter, or
+                                you can quote the reference number with your ID for collection.
+                            </p>
+                            <p className="text-sm">
+                                For Card Payment: Your ID must be in the form of either your valid passport or full UK or European photo driving licence, European ID, along with your payment bank
+                                card, which must match the name on the order.
+                            </p>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                ""
+            )}
         </>
-    ) : (
-        ""
-    )}</>
     );
 };
 
