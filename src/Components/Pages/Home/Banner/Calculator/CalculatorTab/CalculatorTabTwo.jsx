@@ -1,10 +1,10 @@
-import Select from 'react-select';
+import Select from "react-select";
 
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
-import UseCurrency from '../../../../../../Hook/UseCurrency';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+import UseCurrency from "../../../../../../Hook/UseCurrency";
 
 const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
     // let curenc?.info?.rate = 53
@@ -20,7 +20,7 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
     //     queryFn: async () => {
     //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData.value}&from=GBP&amount=1`, {
     //             headers: {
-    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //                 apikey: 'BDt8QXZtz5eTn302pdVvS3zjfRcMBWE0'
     //             }
     //         });
     //         return fetchData.data;
@@ -79,35 +79,40 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
             currencyMy: youSell,
             currencyTake: buyCurrency,
             currencyTakecurrent: currencyData.value,
-            currencyMycurrent: 'GBP',
+            currencyMycurrent: "GBP",
             Id: uuidv4(),
-            Rate: (Rate * (1 + upsell / 100)).toFixed(4)
+            Rate: (Rate * (1 + upsell / 100)).toFixed(4),
+            date:new Date(),
         };
         if (currencyMy <= 0) {
             nav(`/purchase/${currencyData.value}/Sell`);
-            return toast('Please give correct amount');
+            return toast("Please give correct amount");
         }
         if (currencyTake <= 0) {
             nav(`/purchase/${currencyData.value}/Sell`);
-            return toast('Please give correct amount');
+            return toast("Please give correct amount");
         }
 
-        const localStorageData = JSON.parse(localStorage.getItem('purchase'));
+        const localStorageData = JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+            const itemDate = new Date(item.date);
+            const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+            return diff >= 0 && diff <= 30 * 60 * 1000;
+          });
         if (localStorageData) {
             if (localStorageData?.length >= 4) {
                 nav(`/purchase/${currencyData.value}/Sell`);
-                return toast('Please clear your cart');
+                return toast("Please clear your cart");
             }
 
             const totalData = [...localStorageData, currentFull];
-            localStorage.setItem('purchase', JSON.stringify(totalData));
+            localStorage.setItem("purchase", JSON.stringify(totalData));
             setYouSell(0);
             setBuyCurrency(0);
             nav(`/purchase/${currencyData.value}/Sell`);
         } else {
             const totalData = [currentFull];
 
-            localStorage.setItem('purchase', JSON.stringify(totalData));
+            localStorage.setItem("purchase", JSON.stringify(totalData));
             setYouSell(0);
             setBuyCurrency(0);
             nav(`/purchase/${currencyData.value}/Sell`);
@@ -167,7 +172,7 @@ const CalculatorTabTwo = ({ currencyData, setCurrencyData }) => {
                 <h2 className="mt-3 text-lg">
                     1 GBP = {((Rate ?? 1) * (1 + upsell / 100)).toFixed(4)} {currencyData.value}
                 </h2>
-                <p className='text-[10px] font-normal '>Online rate only - rates in branch may differ</p>
+                <p className="text-[10px] font-normal ">Online rate only - rates in branch may differ</p>
             </div>
             <div className="flex mt-3">
                 <button onClick={handleSelling} className="btn w-full bg-[#1E4A9A] text-white hover:bg-[#1b2b49]">
