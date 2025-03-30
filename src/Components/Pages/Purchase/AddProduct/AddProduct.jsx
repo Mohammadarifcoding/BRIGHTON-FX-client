@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { v4 as uuidv4 } from 'uuid';
-import UseCurrency from '../../../../Hook/UseCurrency';
-import CurrencyInput from './CurrencyInput';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { v4 as uuidv4 } from "uuid";
+import UseCurrency from "../../../../Hook/UseCurrency";
+import CurrencyInput from "./CurrencyInput";
 
 const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem, currencyParams, currentWay }) => {
     const nav = useNavigate();
     const [currency, refetchCurrency] = UseCurrency();
 
-    const [currencyData, setCurrencyData] = useState('TWD');
+    const [currencyData, setCurrencyData] = useState("TWD");
     const [Addproduct, setAddProduct] = useState(false);
     console.log(currentWay);
     useEffect(() => {
@@ -30,7 +30,7 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     //     queryFn: async () => {
     //         const fetchData = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyData}&from=GBP&amount=1`, {
     //             headers: {
-    //                 apikey: 'T2xiIiLGT74lpNubi61MkKWOR0qu2s46'
+    //                 apikey: 'BDt8QXZtz5eTn302pdVvS3zjfRcMBWE0'
     //             }
     //         });
     //         return fetchData.data;
@@ -41,9 +41,9 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
 
     useEffect(() => {
         const findCurrency = currency.find((item) => item?.value == currencyData);
-        if (Type == 'Sell') {
+        if (Type == "Sell") {
             setUpvalue(parseFloat(findCurrency?.Buy));
-        } else if (Type == 'Order') {
+        } else if (Type == "Order") {
             setUpvalue(parseFloat(findCurrency?.Sell));
         }
     }, [Type, currencyData, currency]);
@@ -88,48 +88,52 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
 
     const ChangeTakeCurrencyFor10Divisible = (number) => {
         let MyCurrency = ChangeTo10Divisible(number);
-          let FInalTakeCurrency =  MyCurrency * (Rate * (1 + (upvalue/ 100))) ;
-          return FInalTakeCurrency.toFixed(4);  
-      };
-      const ChangleTakeCurrencyDIffernet10Divisible = (number)=>{
+        let FInalTakeCurrency = MyCurrency * (Rate * (1 + upvalue / 100));
+        return FInalTakeCurrency.toFixed(4);
+    };
+    const ChangleTakeCurrencyDIffernet10Divisible = (number) => {
         let MyCurrency = ChangeTo10Divisible(number);
-        let FInalTakeCurrency =  MyCurrency / (Rate * (1 + (upvalue/ 100))) ;
-        return FInalTakeCurrency.toFixed(2);  
-      }
+        let FInalTakeCurrency = MyCurrency / (Rate * (1 + upvalue / 100));
+        return FInalTakeCurrency.toFixed(2);
+    };
 
     const handleAdding = () => {
         let value = {};
         if (youSell <= 0) {
-            return toast('Please give correct amount');
+            return toast("Please give correct amount");
         }
         if (buyCurrency <= 0) {
-            return toast('Please give correct amount');
+            return toast("Please give correct amount");
         }
-        if (Type == 'Sell') {
+        if (Type == "Sell") {
             const currencyMy = youSell;
             const currencyTake = buyCurrency;
-            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: 'GBP', Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
-        } else if (Type == 'Order') {
-            const currencyMy =  ChangeTo10Divisible(buyCurrency);
-            const currencyTake =ChangleTakeCurrencyDIffernet10Divisible(buyCurrency);
-            value = { currencyMy, currencyTake, currencyTakecurrent:'GBP', currencyMycurrent:  currencyData, Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4) };
+            value = { currencyMy, currencyTake, currencyTakecurrent: currencyData, currencyMycurrent: "GBP", Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4),date:new Date(), };
+        } else if (Type == "Order") {
+            const currencyMy = ChangeTo10Divisible(buyCurrency);
+            const currencyTake = ChangleTakeCurrencyDIffernet10Divisible(buyCurrency);
+            value = { currencyMy, currencyTake, currencyTakecurrent: "GBP", currencyMycurrent: currencyData, Id: uuidv4(), Rate: (Rate * (1 + upvalue / 100)).toFixed(4),date:new Date(), };
         }
 
-        const localStorageData = JSON.parse(localStorage.getItem('purchase'));
+        const localStorageData = JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+            const itemDate = new Date(item.date);
+            const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+            return diff >= 0 && diff <= 30 * 60 * 1000;
+          });
         if (localStorageData) {
             if (localStorageData?.length >= 4) {
-                return toast('Please clear your cart');
+                return toast("Please clear your cart");
             }
 
             const totalData = [...localStorageData, value];
-            localStorage.setItem('purchase', JSON.stringify(totalData));
+            localStorage.setItem("purchase", JSON.stringify(totalData));
             setAllTheItem([...allTheitem, value]);
             setYouSell(0);
             setBuyCurrency(0);
             setAddProduct(false);
         } else {
             const totalData = [value];
-            localStorage.setItem('purchase', JSON.stringify(totalData));
+            localStorage.setItem("purchase", JSON.stringify(totalData));
             setAllTheItem([value]);
             setYouSell(0);
             setBuyCurrency(0);
@@ -138,8 +142,8 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
     };
 
     const ChangeCurrencyData = (e) => {
-        setYouSell(0)
-        setBuyCurrency(0)
+        setYouSell(0);
+        setBuyCurrency(0);
         setCurrencyData(e.target.value);
     };
 
@@ -149,12 +153,12 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                 <h2 className="text-[#4A53A4]  font-medium sm:text-2xl text-2xl  ">
                     Add Currency <span className="text-gray-400"> (maximum 4 currency)</span>
                 </h2>
-                <div className={`${Addproduct ? '' : 'hidden'}  grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10`}>
-                    <div className={`${currentWay == 'Sell' ? 'hidden ':''} w-full`}>
+                <div className={`${Addproduct ? "" : "hidden"}  grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 items-center mt-10 gap-10`}>
+                    <div className={`${currentWay == "Sell" ? "hidden " : ""} w-full`}>
                         <h2 className="text-gray-500 text-lg">Total Money</h2>
                         <input onChange={handleyouBuyamountCurrency} value={youSell} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
-                    <div className={`${currentWay == 'Order' ? 'hidden ':''} w-full`}>
+                    <div className={`${currentWay == "Order" ? "hidden " : ""} w-full`}>
                         <h2 className="text-gray-500 text-lg">Fx Amount</h2>
                         <input onChange={handleSellamountChange} value={buyCurrency} type="text" className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
@@ -167,13 +171,13 @@ const AddProduct = ({ setPurchaseeData, purchaseData, allTheitem, setAllTheItem,
                             ))}
                         </select>
                     </div>
-                    <div className={` ${currentWay == 'Sell' ? 'hidden':''} w-full`}>
+                    <div className={` ${currentWay == "Sell" ? "hidden" : ""} w-full`}>
                         <h2 className="text-gray-500 text-lg"> Fx Amount </h2>
                         <input type="text" onChange={handleSellamountChange} value={buyCurrency} className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
-                    <div className={` ${currentWay == 'Order' ? 'hidden':''} w-full`}>
+                    <div className={` ${currentWay == "Order" ? "hidden" : ""} w-full`}>
                         <h2 className="text-gray-500 text-lg"> Total Money </h2>
-                        <input type="text"  onChange={handleyouBuyamountCurrency} value={youSell}  className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
+                        <input type="text" onChange={handleyouBuyamountCurrency} value={youSell} className=" mt-2 w-full border-gray-500 border px-2 py-2 rounded-lg outline-gray-500" />
                     </div>
                     <div className=" hidden w-full">
                         <h2 className="text-gray-500 text-lg">What to do</h2>
