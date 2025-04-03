@@ -57,14 +57,12 @@ const Orders = () => {
             if (result.isConfirmed) {
                 Axious.get(`/pendingToAceept/${orderId}`).then((res) => {
                     RefetchPendingOrder();
-                    emailjs.sendForm('service_geyk8rj', 'template_gt16753', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
-                        console.log('email send');
+                  
                         Swal.fire({
                             title: 'Accepted!',
                             text: 'This order has been accepted.',
                             icon: 'success'
                         });
-                    });
                 });
             }
         });
